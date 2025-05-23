@@ -11,8 +11,4 @@ public class MainController {
 		return "index.html";
 	}
 	
-	@GetMapping("/politics")
-	public piliticsPost() {
-		
-	}
 }

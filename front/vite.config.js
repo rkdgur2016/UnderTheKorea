@@ -1,19 +1,22 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import tailwindcss from '@tailwindcss/vite'
-import { fileURLToPath, URL } from 'node:url';
+import { fileURLToPath, URL } from 'node:url'
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [vue(), tailwindcss(),],
+  plugins: [vue()],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),  // @ 별칭 추가
-    },
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
   },
-  transpileDependencies: true,
-  outputDir: '../src/main/resources/static', // Build Directory
-	devServer: {
-		proxy: 'http://localhost' // Spring Boot Server
-	}
+  build: {
+    outDir: '../src/main/resources/static', // ✅ 빌드 출력 디렉토리
+    emptyOutDir: true // ✅ 기존 파일 자동 삭제
+  },
+  server: {
+    proxy: {
+      // ✅ Spring Boot 서버에 API 요청 프록시
+      '/api': 'http://localhost:80'
+    }
+  }
 })
