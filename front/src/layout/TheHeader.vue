@@ -1,129 +1,213 @@
 <template>
-    <header>
-        <div class="nav">
-            <div class="heading">
-            <h1 class="title">Under the Korea</h1>    
-            <h3 class="subtitle">Citizen Journalism</h3>
-            </div>
-            <hr class="divider">
-            <div class="button_nav">
-            <nav>
-                <router-link class="nav_button" to="/philosophy">philosophy</router-link> |
-                <router-link class="nav_button" to="/politics">politics</router-link> |
-                <router-link class="nav_button" to="/suggest">suggest</router-link> |
-                <router-link class="nav_button" to="/motto">motto</router-link>
-                <input type="text" class="search" placeholder="search">
-            </nav>
-            <router-view/>
-            </div>
-            <hr class="divider">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-area">
+        <span class="logo-under">Under</span>
+        <span class="logo-main">The Korea</span>
+        <span class="modern-agora">대한민국의 현재, 대한민국의 미래</span>
+      </div>
+      <div class="header-right">
+        <div class="search-container">
+          <input type="text" class="search" placeholder="검색" />
+          <span class="search-icon"><i class="fas fa-search"></i></span>
         </div>
-    </header>
+        <nav class="main-nav">
+          <router-link class="nav_button" to="/philosophy" exact-active-class="active">철학</router-link>
+          <router-link class="nav_button" to="/politics" exact-active-class="active">정치</router-link>
+          <router-link class="nav_button" to="/social" exact-active-class="active">사회문제</router-link>
+          <router-link class="nav_button" to="/suggest" exact-active-class="active">제안</router-link>
+          <router-link class="nav_button" to="/motto" exact-active-class="active">좌우명</router-link>
+        </nav>
+      </div>
+    </div>
+  </header>
 </template>
 
-<script>
-    export default {
-        
-    }
-</script>
-
 <style scoped>
-@font-face {
-  font-family: 'Italianno-Regular';
-  src: url('@/assets/fonts/Italianno-Regular.ttf') format('truetype');
+@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap');
+
+.site-header {
+  background: #22272b;
+  border-bottom: 1.5px solid #363b40;
+  width: 100vw;
+  min-width: 360px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0;
 }
 
-#app {
-  font-family: 'Italianno-Regular', Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-html, body header {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-.main, .nav {
-  margin: 0;
-  background-color: #f4f4f4;
-  min-height: 100vh;
-}
-.container {
-  max-width: 100%;
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2% 1.5%;
+  padding: 0 2vw;
+  gap: 2vw;
 }
-.heading {
-  padding-top : 1%;
-  text-align: center;
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem; /* 로고-슬로건 간격 좁게 */
+  font-family: 'Pretendard', 'Noto Sans KR', Arial, sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #f8f8f8;
+  letter-spacing: 1.2px;
+  white-space: nowrap;
 }
-.title {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 3rem;
-  font-style: italic;
-  margin: 0;
+.logo-under {
+  color: #3ea6ff;
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin-right: 0.15rem;
 }
-.subtitle {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 1.8rem;
-  font-style: italic;
-  margin: 0;
+.logo-main {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.45rem;
+  margin-right: 0.5rem;
 }
-.divider {
-  border: none;
-  border-top: 0.2vw solid #222;
-  margin: 1.5% 0;
+.modern-agora {
+  font-family: 'Pretendard', 'Noto Sans KR', Arial, sans-serif;
+  color: #bdbdbd;
+  font-size: 1.02rem;
+  font-weight: 400;
+  margin-left: 0.5rem; /* 로고와 슬로건 사이 좁게 */
+  letter-spacing: 0.5px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.4vw;
+  min-width: 0;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 1vw;
+}
+.search {
+  background: #181c20;
+  border: 1.5px solid #363b40;
+  border-radius: 16px;
+  padding: 5px 40px 5px 16px;
+  font-size: 1.05rem;
+  color: #e0e0e0;
+  outline: none;
+  transition: border 0.2s;
+  width: 220px; /* 검색바 길게! */
+  max-width: 30vw;
+}
+.search:focus {
+  border: 1.5px solid #3ea6ff;
+}
+.search-icon {
+  position: absolute;
+  right: 14px;
+  color: #3ea6ff;
+  font-size: 1.15rem;
+  pointer-events: none;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: none;
 }
 .nav_button {
+  color: #d4e1f5;
   background: transparent;
-  border: none;
-  color: #222;
-  font-family: 'Times New Roman', serif;
-  font-style: italic;
-  font-size: 1.1rem;
-  padding: 0.7% 0;
-  cursor: pointer;
-  transition: 
-    color 0.5s cubic-bezier(.4,0,.2,1),
-    transform 0.5s cubic-bezier(.4,0,.2,1),
-    background 0.5s cubic-bezier(.4,0,.2,1);
-  outline: none;
-  min-width: 8%;
-  width: 9%;
-  max-width: 13%;
-  margin: 0 2%;
+  padding: 3px 16px;
+  border-radius: 12px;
+  font-size: 1.02rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.17s, color 0.17s;
+  display: flex;
+  align-items: center;
+  height: 32px;
+  line-height: 32px;
+}
+.nav_button.active,
+.nav_button.router-link-exact-active,
+.nav_button:hover {
+  background: #3ea6ff;
+  color: #fff;
+  font-weight: 800;
 }
 
-.nav_button:hover,
-.nav_button:focus {
-  color: #7a5c20;
-  transform: translateY(-4%);
-}
-
-.search {
-  flex: 1 1 30%;
-  border: 0.15vw solid gray;
-  border-radius: 20px;
-  padding: 0.7% 1.5%;
-  font-size: 1.2rem;
-  font-family: 'Times New Roman', Times, serif;
-  font-style: italic;
-  outline: none;
-  margin-left: 1%;
-}
-  @media (max-width: 800px) {
-  .button_nav {
+@media (max-width: 900px) {
+  .header-inner {
     flex-direction: column;
-    gap: 2%;
-    align-items: stretch;
+    align-items: flex-start;
+    height: auto;
+    padding: 0.5rem 3vw;
+    gap: 0.5rem;
   }
-  .nav_button,
-  .search {
+  .header-right {
     width: 100%;
-    flex: unset;
-    margin: 0;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    justify-content: flex-start;
+  }
+  .main-nav {
+    gap: 0.2rem;
+  }
+  .search {
+    width: 120px;
+    font-size: 0.93rem;
+  }
+  .logo-area {
+    font-size: 1.1rem;
+    gap: 0.2rem;
+  }
+  .logo-under, .logo-main {
+    font-size: 1.1rem;
+  }
+  .modern-agora {
+    font-size: 0.8rem;
+    margin-left: 0.3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+    padding: 0.4rem 2vw;
+  }
+  .logo-area {
+    font-size: 0.95rem;
+    gap: 0.13rem;
+  }
+  .logo-under, .logo-main {
+    font-size: 0.95rem;
+  }
+  .modern-agora {
+    font-size: 0.65rem;
+    margin-left: 0.12rem;
+  }
+  .search {
+    width: 40%;
+    font-size: 0.9rem;
+  }
+  .main-nav .nav_button {
+    font-size: 0.91rem;
+    padding: 2px 9px;
+    height: 26px;
+    line-height: 26px;
   }
 }
 </style>
