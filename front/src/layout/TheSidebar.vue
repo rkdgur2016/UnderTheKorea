@@ -9,10 +9,17 @@
         </div>
         <button @click="logout" class="logout-btn">로그아웃</button>
       </div>
-      <div v-else class="login-prompt">
-        <p>로그인하여 더 많은 기능을 이용해보세요!</p>
-        <button @click="login" class="login-btn">로그인</button>
-        <button @click="register" class="register-btn">회원가입</button>
+
+      <div v-else class="login-form-area">
+        <p class="login-prompt-text">로그인하여 더 많은 기능을 이용해보세요!</p>
+        <div class="input-group">
+          <input type="text" v-model="loginForm.id" placeholder="아이디" class="login-input" />
+        </div>
+        <div class="input-group">
+          <input type="password" v-model="loginForm.password" placeholder="비밀번호" class="login-input" />
+        </div>
+        <button @click="handleLogin" class="login-submit-btn">로그인</button>
+        <button @click="goToRegister" class="register-btn-in-sidebar">회원가입</button>
       </div>
 
       <nav class="sidebar-nav">
@@ -33,6 +40,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router'; // Vue Router 사용을 위해 import
+
+const router = useRouter(); // useRouter 훅으로 라우터 인스턴스 가져오기
 
 // 세션 데이터를 관리할 반응형 변수
 const userSession = ref({
@@ -42,36 +52,56 @@ const userSession = ref({
   avatar: ''
 });
 
-// 실제 환경에서는 서버 API를 통해 세션 정보를 가져와야 합니다.
-// 여기서는 더미 데이터를 사용합니다.
-onMounted(() => {
-  // 예시: 로그인된 사용자 세션 (실제로는 API 호출)
-  // userSession.value = {
-  //   isLoggedIn: true,
-  //   nickname: '김철수',
-  //   email: 'kimchulsoo@example.com',
-  //   avatar: 'https://via.placeholder.com/60'
-  // };
+// 로그인 폼 데이터를 관리할 반응형 변수
+const loginForm = ref({
+  id: '',
+  password: ''
+});
 
-  // 예시: 로그인되지 않은 사용자 세션
+onMounted(() => {
+  // 실제 환경에서는 서버 API를 통해 세션 정보를 가져와야 합니다.
+  // 여기서는 초기 상태를 '로그인되지 않음'으로 설정합니다.
   userSession.value = {
     isLoggedIn: false,
     nickname: '',
     email: '',
     avatar: ''
   };
+
+  // 테스트를 위해 로그인된 상태를 시뮬레이션하고 싶다면 아래 주석을 풀고 사용:
+  // userSession.value = {
+  //   isLoggedIn: true,
+  //   nickname: '김철수',
+  //   email: 'kimchulsoo@example.com',
+  //   avatar: 'https://via.placeholder.com/60'
+  // };
 });
 
-const login = () => {
-  alert('로그인 페이지로 이동합니다.');
-  // 실제 로그인 로직 (예: router.push('/login'))
+// 로그인 처리 함수
+const handleLogin = () => {
+  // 실제 로그인 로직: 서버에 ID와 비밀번호를 전송하고 응답 처리
+  if (loginForm.value.id === 'test' && loginForm.value.password === '1234') {
+    alert(`환영합니다, ${loginForm.value.id}님!`);
+    userSession.value = {
+      isLoggedIn: true,
+      nickname: loginForm.value.id,
+      email: `${loginForm.value.id}@example.com`,
+      avatar: 'https://via.placeholder.com/60' // 임시 아바타
+    };
+    // 로그인 폼 초기화
+    loginForm.value.id = '';
+    loginForm.value.password = '';
+  } else {
+    alert('아이디 또는 비밀번호가 올바르지 않습니다.');
+  }
 };
 
-const register = () => {
-  alert('회원가입 페이지로 이동합니다.');
-  // 실제 회원가입 로직 (예: router.push('/register'))
+// 회원가입 페이지로 이동 함수
+const goToRegister = () => {
+  router.push('/register'); // /register 경로로 이동
 };
 
+// 로그아웃 처리 함수
 const logout = () => {
   alert('로그아웃 되었습니다.');
   userSession.value = {
@@ -109,6 +139,7 @@ const logout = () => {
   gap: 1.5rem;
 }
 
+/* 사용자 프로필 섹션 (로그인 시) */
 .user-profile {
   display: flex;
   flex-direction: column;
@@ -160,46 +191,78 @@ const logout = () => {
   background: #3a75e0;
 }
 
-.login-prompt {
+/* 로그인 폼 섹션 (로그아웃 시) */
+.login-form-area {
   text-align: center;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid #e3e6ea;
 }
 
-.login-prompt p {
+.login-prompt-text {
   color: #354052;
   margin-bottom: 1rem;
   line-height: 1.5;
+  font-size: 0.95rem;
 }
 
-.login-btn, .register-btn {
+.input-group {
+  margin-bottom: 0.8rem;
+}
+
+.login-input {
+  width: calc(100% - 20px); /* 패딩 고려 */
+  padding: 0.7rem 10px;
+  border: 1px solid #d0dbe9;
+  border-radius: 0.28rem;
+  font-size: 0.9rem;
+  box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: #4f8cff;
+  box-shadow: 0 0 0 2px rgba(79, 140, 255, 0.2);
+}
+
+.login-submit-btn {
+  background: #4f8cff;
+  color: #fff;
+  border: none;
+  border-radius: 0.28rem;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 0.95rem;
+  width: calc(100% - 20px);
+  max-width: 200px; /* 버튼 최대 너비 */
+  margin-bottom: 0.8rem;
+}
+
+.login-submit-btn:hover {
+  background: #3a75e0;
+}
+
+.register-btn-in-sidebar {
   background: #e9eff7;
   color: #4f8cff;
   border: 1px solid #d0dbe9;
   border-radius: 0.28rem;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1rem;
   cursor: pointer;
   transition: all 0.2s;
-  font-size: 0.9rem;
-  margin: 0.3rem;
-  width: 45%;
-  max-width: 120px;
-  display: inline-block;
+  font-size: 0.95rem;
+  width: calc(100% - 20px);
+  max-width: 200px; /* 버튼 최대 너비 */
 }
 
-.login-btn:hover {
-  background: #4f8cff;
-  color: #fff;
-  border-color: #4f8cff;
-}
-
-.register-btn:hover {
+.register-btn-in-sidebar:hover {
   background: #4f8cff;
   color: #fff;
   border-color: #4f8cff;
 }
 
 
+/* 사이드바 네비게이션 */
 .sidebar-nav ul {
   list-style: none;
   padding: 0;
@@ -226,6 +289,7 @@ const logout = () => {
   color: #4f8cff;
 }
 
+/* 사이드바 푸터 */
 .sidebar-footer {
   margin-top: auto; /* 하단에 고정 */
   padding-top: 1.5rem;

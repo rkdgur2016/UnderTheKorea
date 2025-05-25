@@ -158,6 +158,7 @@ watch(() => props.postId, (newId) => {
 }, { immediate: true });
 </script>
 
+
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap');
 
@@ -167,7 +168,7 @@ watch(() => props.postId, (newId) => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4); /* 어둡게 처리 */
+  background: rgba(0, 0, 0, 0.5); /* 어둡게 처리 */
   display: flex;
   justify-content: flex-end; /* 오른쪽으로 붙여서 표시 */
   z-index: 1000; /* 헤더보다 위에 오도록 */
@@ -175,12 +176,10 @@ watch(() => props.postId, (newId) => {
 
 .post-detail-card {
   background: #f7f9fb; /* PoliticsView 배경색과 유사 */
-  width: 50%; /* 오른쪽 공백에 띄울 너비 */
+  width: 100%; /* 오른쪽 공백에 띄울 너비 */
   max-width: 700px; /* 최대 너비 제한 */
   height: 100%;
   overflow-y: auto; /* 내용이 길어지면 스크롤 */
-  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-  padding: 2rem;
   box-sizing: border-box;
   transform: translateX(100%); /* 초기에는 화면 밖에 위치 */
   transition: transform 0.3s ease-out; /* 슬라이드 인 애니메이션 */
@@ -195,7 +194,7 @@ watch(() => props.postId, (newId) => {
 .close-btn {
   position: absolute;
   top: 1.5rem;
-  left: 1.5rem; /* 왼쪽 상단으로 이동 */
+  right: 1.5rem; /* 오른쪽 상단으로 이동 */
   background: none;
   border: none;
   font-size: 1.5rem;
@@ -211,11 +210,11 @@ watch(() => props.postId, (newId) => {
 .detail-content {
   /* PoliticsView와 유사한 스타일 재사용 */
   background: #fff;
-  border-radius: 0.66rem; /* 0.875rem x 0.75 */ 
-  box-shadow: 0 0.094rem 0.75rem rgba(60, 100, 170, 0.08); /* 0.125rem 1rem x 0.75 */ 
-  border: 0.07rem solid #e3e6ea; /* 0.094rem x 0.75 */ 
   padding: 1.5rem; /* 2rem x 0.75 */ 
   margin-bottom: 2rem; /* 댓글 섹션과 간격 */
+  border-radius: 0.66rem;
+  box-shadow: 0 0.094rem 0.75rem rgba(60, 100, 170, 0.08);
+  border: 0.07rem solid #e3e6ea;  
 }
 
 /* PoliticsView의 스타일을 복사하거나, 전역 CSS로 관리하여 재사용 */

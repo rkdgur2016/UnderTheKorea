@@ -10,12 +10,12 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: '../src/main/resources/static', // ✅ 빌드 출력 디렉토리
-    emptyOutDir: true // ✅ 기존 파일 자동 삭제
+    outDir: '../src/main/resources/static', // 빌드하면 파일 저장되는 경로
+    emptyOutDir: true // 기존 파일 자동 삭제
   },
   server: {
     proxy: {
-      // ✅ Spring Boot 서버에 API 요청 프록시
+      // Spring Boot 서버에 API 요청 프록시
       '/api': 'http://localhost:80'
     }
   }

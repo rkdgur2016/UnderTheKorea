@@ -8,6 +8,7 @@ const routes = [
   {path: '/social', name: 'social', component: () => import('../views/SocialView.vue')},
   {path: '/suggest', name: 'suggest', component: () => import('../views/SuggestView.vue')},
   {path: '/motto', name: 'main', component: () => import('../views/MottoView.vue')},
+  {path: '/register', name: 'Register', component: () => import('../views/RegisterPage.vue')},
 ]
 
 const router = createRouter({
