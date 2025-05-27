@@ -4,8 +4,14 @@
     <form @submit.prevent="handleSignup" class="signup-form">
       <div class="form-group">
         <label for="userId">아이디</label>
-        <input type="text" id="userId" v-model="form.userId" required minlength="4" maxlength="20">
+        <div class="input-with-button">
+          <input type="text" id="userId" v-model="form.userId" required minlength="4" maxlength="20">
+          <button type="button" @click="checkUserId" :disabled="isCheckingId">중복 확인</button>
+        </div>
         <p v-if="errors.userId" class="error-message">{{ errors.userId }}</p>
+        <p v-if="userIdCheckMessage" :class="{ 'success': isUserIdAvailable, 'error': !isUserIdAvailable }" class="check-message">
+          {{ userIdCheckMessage }}
+        </p>
       </div>
 
       <div class="form-group">
@@ -25,15 +31,7 @@
         <input type="text" id="username" v-model="form.username" required maxlength="50">
         <p v-if="errors.username" class="error-message">{{ errors.username }}</p>
       </div>
-
-      <div class="form-group">
-        <label for="email">이메일</label>
-        <input type="email" id="email" v-model="form.email" required maxlength="100">
-        <p v-if="errors.email" class="error-message">{{ errors.email }}</p>
-      </div>
-
       <button type="submit" :disabled="isSubmitting">회원가입</button>
-
       <p v-if="signupMessage" :class="{ 'success': isSignupSuccess, 'error': !isSignupSuccess }" class="signup-message">
         {{ signupMessage }}
       </p>
@@ -43,7 +41,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
-import axios from 'axios'; // npm install axios 필요
+import axios from 'axios';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
@@ -53,7 +51,6 @@ const form = reactive({
   password: '',
   confirmPassword: '',
   username: '',
-  email: ''
 });
 
 const errors = reactive({
@@ -61,16 +58,18 @@ const errors = reactive({
   password: '',
   confirmPassword: '',
   username: '',
-  email: ''
 });
 
 const isSubmitting = ref(false);
 const signupMessage = ref('');
 const isSignupSuccess = ref(false);
 
+const isCheckingId = ref(false);
+const userIdCheckMessage = ref('');
+const isUserIdAvailable = ref(false);
+
 const validateForm = () => {
   let isValid = true;
-  // 모든 에러 메시지 초기화
   Object.keys(errors).forEach(key => errors[key] = '');
 
   if (!form.userId) {
@@ -102,19 +101,53 @@ const validateForm = () => {
     isValid = false;
   }
 
-  if (!form.email) {
-    errors.email = '이메일을 입력해주세요.';
-    isValid = false;
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-    errors.email = '유효한 이메일 주소를 입력해주세요.';
-    isValid = false;
-  } else if (form.email.length > 100) {
-    errors.email = '이메일은 100자를 초과할 수 없습니다.';
-    isValid = false;
-  }
-
   return isValid;
 };
+
+const checkUserId = async () => {
+  errors.userId = '';
+  userIdCheckMessage.value = '';
+  isUserIdAvailable.value = false;
+
+  if (!form.userId) {
+    errors.userId = '아이디를 입력해주세요.';
+    return;
+  }
+  if (form.userId.length < 4 || form.userId.length > 20) {
+    errors.userId = '아이디는 4자 이상 20자 이하로 입력해주세요.';
+    return;
+  }
+
+  isCheckingId.value = true;
+  try {
+    const response = await axios.get(`/api/users/check-userId?userId=${form.userId}`);
+    if (response.data.success) {
+      userIdCheckMessage.value = response.data.message;
+      isUserIdAvailable.value = true;
+    } else {
+      userIdCheckMessage.value = response.data.message;
+      isUserIdAvailable.value = false;
+    }
+  } catch (error) {
+    console.error('아이디 중복 확인 실패:', error);
+    userIdCheckMessage.value = '아이디 확인 중 오류가 발생했습니다.';
+    isUserIdAvailable.value = false;
+    if (error.response && error.response.status === 400 && error.response.data.data) {
+      const errorFields = error.response.data.data;
+      errorFields.forEach(err => {
+        if (err.field === 'userId') {
+          errors.userId = err.defaultMessage;
+        }
+      });
+      userIdCheckMessage.value = '';
+    } else if (error.response && error.response.data && error.response.data.message) {
+      userIdCheckMessage.value = error.response.data.message;
+    }
+  } finally {
+    isCheckingId.value = false;
+  }
+};
+
 
 const handleSignup = async () => {
   if (!validateForm()) {
@@ -125,48 +158,49 @@ const handleSignup = async () => {
 
   isSubmitting.value = true;
   signupMessage.value = '';
+  userIdCheckMessage.value = '';
+  isUserIdAvailable.value = false;
 
   try {
     const response = await axios.post('/api/users', {
       userId: form.userId,
       password: form.password,
       username: form.username,
-      email: form.email
     });
 
-    if (response.status === 201) { // HttpStatus.CREATED
-      signupMessage.value = '회원가입이 성공적으로 완료되었습니다! 로그인 페이지로 이동합니다.';
+    if (response.data.success) {
+      signupMessage.value = response.data.message;
       isSignupSuccess.value = true;
-      // 성공 후 2초 뒤 로그인 페이지로 리다이렉트
       setTimeout(() => {
-        router.push('/login'); // 로그인 페이지 경로로 변경 (예: /login)
+        router.push('/login');
       }, 2000);
+    } else {
+      signupMessage.value = response.data.message || '회원가입에 실패했습니다.';
+      isSignupSuccess.value = false;
     }
   } catch (error) {
     console.error('회원가입 실패:', error);
     isSignupSuccess.value = false;
+
     if (error.response) {
-      // 백엔드에서 전달된 에러 메시지가 있다면 사용
-      if (error.response.data && error.response.data.message) {
-        signupMessage.value = '회원가입 실패: ' + error.response.data.message;
-      } else if (error.response.status === 409) { // 예를 들어, 아이디/이메일 중복 시 409 Conflict
-          signupMessage.value = '회원가입 실패: 이미 존재하는 아이디 또는 이메일입니다.';
-      } else if (error.response.status === 400) { // 유효성 검사 실패 등
-          signupMessage.value = '회원가입 실패: 유효하지 않은 입력값이 있습니다.';
-          // 백엔드에서 상세 에러 메시지를 제공하는 경우 처리 (예: Spring의 @Valid 에러)
-          if (error.response.data.errors) {
-              error.response.data.errors.forEach(err => {
-                  if (errors[err.field]) {
-                      errors[err.field] = err.defaultMessage;
-                  }
-              });
+      const errorData = error.response.data;
+      signupMessage.value = errorData.message || '회원가입에 실패했습니다.';
+
+      if (error.response.status === 400 && errorData.data && Array.isArray(errorData.data)) {
+        errorData.data.forEach(err => {
+          if (errors[err.field]) {
+            errors[err.field] = err.defaultMessage;
           }
-      }
-      else {
-        signupMessage.value = '회원가입 실패: ' + error.response.statusText;
+        });
+        signupMessage.value = '입력값을 확인해주세요.';
+      } else if (error.response.status === 409) {
+        errors.userId = errorData.message;
+        signupMessage.value = '회원가입 실패: ' + errorData.message;
+      } else if (errorData.message) {
+        signupMessage.value = '회원가입 실패: ' + errorData.message;
       }
     } else if (error.request) {
-      signupMessage.value = '회원가입 실패: 서버 응답이 없습니다.';
+      signupMessage.value = '회원가입 실패: 서버 응답이 없습니다. 네트워크 연결을 확인해주세요.';
     } else {
       signupMessage.value = '회원가입 실패: 요청을 보내는 중 오류가 발생했습니다.';
     }
@@ -205,10 +239,24 @@ h2 {
   font-weight: 500;
 }
 
+.input-with-button {
+  display: flex;
+  gap: 10px; /* 입력 필드와 버튼 사이 간격 */
+  align-items: center;
+}
+
+/* 아이디 입력 필드의 폭을 조절 */
+.input-with-button input[type="text"]#userId {
+  flex-grow: 1; /* 남은 공간을 유연하게 채움 */
+  width: auto; /* 기본 flex 동작을 위해 auto로 설정 */
+  /* 필요하다면 max-width를 줘서 아이디 입력 필드의 최대 폭을 제한할 수 있습니다. */
+  /* max-width: calc(100% - 110px); */ /* 버튼 폭 + gap을 고려한 예시 */
+}
+
+
 .signup-form input[type="text"],
-.signup-form input[type="password"],
-.signup-form input[type="email"] {
-  width: 100%;
+.signup-form input[type="password"] {
+  /* width: 100%; 이 규칙을 제거하거나 하위 선택자에서 오버라이드 */
   padding: 12px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -217,33 +265,49 @@ h2 {
   transition: border-color 0.3s ease;
 }
 
+/* 비밀번호, 비밀번호 확인, 사용자 이름 입력 필드의 폭을 100%로 유지 */
+.signup-form input[type="password"],
+.signup-form input[type="text"]#username { /* username input도 100% */
+  width: 100%;
+}
+
+
 .signup-form input[type="text"]:focus,
-.signup-form input[type="password"]:focus,
-.signup-form input[type="email"]:focus {
+.signup-form input[type="password"]:focus {
   border-color: #007bff;
   outline: none;
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
-.signup-form button[type="submit"] {
-  width: 100%;
-  padding: 12px 20px;
+.signup-form button[type="submit"],
+.signup-form button[type="button"] {
+  padding: 10px 15px;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 15px;
+  white-space: nowrap;
 }
 
-.signup-form button[type="submit"]:hover:not(:disabled) {
+.signup-form button[type="submit"] {
+  width: 100%;
+  margin-top: 15px;
+  font-size: 1.1rem;
+  padding: 12px 20px;
+}
+
+
+.signup-form button[type="submit"]:hover:not(:disabled),
+.signup-form button[type="button"]:hover:not(:disabled) {
   background-color: #0056b3;
 }
 
-.signup-form button[type="submit"]:disabled {
+.signup-form button[type="submit"]:disabled,
+.signup-form button[type="button"]:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
 }
@@ -252,6 +316,20 @@ h2 {
   color: #dc3545;
   font-size: 0.85em;
   margin-top: 5px;
+}
+
+.check-message {
+  font-size: 0.85em;
+  margin-top: 5px;
+  padding: 0 5px;
+}
+
+.check-message.success {
+  color: #28a745;
+}
+
+.check-message.error {
+  color: #dc3545;
 }
 
 .signup-message {

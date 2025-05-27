@@ -2,9 +2,11 @@
 
 package com.UnderTheKorea.web.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.UnderTheKorea.web.domain.Users;
@@ -26,4 +28,24 @@ public class UserController {
         										loginRequest.getPassword());
         return outVO;
     }
+	
+	@PostMapping("/register")
+	public int register(@RequestBody Users registerRequest) {
+		
+		int outVO = userServiceImpl.register(registerRequest.getUserId(),
+				registerRequest.getPassword(),
+				registerRequest.getUserName());
+		
+		return outVO;
+	}
+	
+	@GetMapping("/idConfirm")
+    public int idConfirm(@RequestParam("userId") String userId) {
+		
+		int outVO = userServiceImpl.idConfirm(userId);
+		
+		System.out.println("outVO : " + outVO);
+        return outVO;
+    }
+	
 }

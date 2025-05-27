@@ -64,5 +64,35 @@ public class UserServiceImpl implements UserService, Logging{
 		return outVO;
 	}
 
+	@Override
+	public int register(String userId, String password, String userName) {
+		log.debug("┌───────────────────────────────────");
+		log.debug("│ UserServiceImpl() : register ");
+		log.debug("└───────────────────────────────────");
+		
+		log.debug("┌ 1. id : " + userId); 
+		log.debug("│ 2. pw : " + password);
+		log.debug("│ 3. userName : " + userName);
+		
+		int outVO = userMapper.register(userId, password, userName);
+		log.debug("└ 3. outVO : " + outVO + " - 성공(1)/실패(0)");
+		
+		return outVO;
+	}
+
+	@Override
+	public int idConfirm(String userId) {
+		log.debug("┌───────────────────────────────────");
+		log.debug("│ UserServiceImpl() : idConfirm ");
+		log.debug("└───────────────────────────────────");
+		
+		log.debug("┌ 1. id : " + userId);
+		
+		int outVO = userMapper.idConfirm(userId);
+		log.debug("└ 2. outVO : " + outVO + " - 성공(1)/실패(0)");
+		
+		return outVO;
+	}
+
 
 }

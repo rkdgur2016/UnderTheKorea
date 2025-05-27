@@ -10,6 +10,7 @@
 	
 	<typeAliases>
         <typeAlias alias="Users" type="com.UnderTheKorea.web.domain.Users"/>
+        <typeAlias alias="Posts" type="com.UnderTheKorea.web.domain.Posts"/>
     </typeAliases>
     
 </configuration>

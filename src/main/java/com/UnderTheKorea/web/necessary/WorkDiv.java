@@ -3,6 +3,8 @@ package com.UnderTheKorea.web.necessary;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.UnderTheKorea.web.domain.Users;
+
 public interface WorkDiv<T> {
 	
 	/**
@@ -24,5 +26,6 @@ public interface WorkDiv<T> {
 	 * 회원 정보 단건 조회
 	 */
 	T doSelectOne(T inVO) throws SQLException, NullPointerException;
+
  
 }
