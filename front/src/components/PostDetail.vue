@@ -11,8 +11,7 @@
         <h1 class="post-title">{{ post.title }}</h1>
         <div v-if="post.youtube" class="post-media">
           <iframe
-            :src="`https://www.youtube.com/embed/$${post.youtube}`"
-            frameborder="0"
+            :src="`http://www.youtube.com/embed/${post.youtube}`" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
             title="YouTube video player"
@@ -24,8 +23,7 @@
         <div class="post-body">{{ post.body }}</div>
         <div class="post-actions">
           <button class="action-btn">👍 {{ post.likes }}</button>
-          <button class="action-btn">💬 {{ post.comments }}</button>
-          <button class="action-btn">🔗 공유</button>
+          <button class="action-btn">💬 {{ post.commentsCount }}</button> <button class="action-btn">🔗 공유</button>
         </div>
 
         <div class="comments-section">
@@ -71,73 +69,68 @@
 import { ref, watch, defineProps, defineEmits } from 'vue';
 
 const props = defineProps({
+  // postId는 댓글을 위한 데이터 fetching에 필요할 수 있습니다.
   postId: {
     type: Number,
+    default: null
+  },
+  // PostView에서 넘겨받을 게시물 데이터 (핵심)
+  post: {
+    type: Object,
     default: null
   }
 });
 
 const emit = defineEmits(['close']);
 
-const post = ref(null);
+// 이제 post ref는 props.post를 직접 참조하거나 초기화합니다.
+const post = ref(props.post); 
 const comments = ref([]);
 const showDetail = ref(false);
 
-const fetchPostDetail = async (id) => {
+const fetchCommentsForPost = async (id) => {
   // 실제 API 호출 로직을 여기에 구현합니다.
-  // 여기서는 더미 데이터를 사용합니다.
-  const allPosts = [
-    {
-      id: 1,
-      category: '정치',
-      time: '1시간 전',
-      title: '국회 본회의, 쟁점 법안 표결 현장 중계',
-      body: '오늘 국회에서는 주요 쟁점 법안이 표결에 부쳐졌습니다. 여야의 치열한 논쟁과 현장 분위기를 영상으로 확인하세요.',
-      likes: '1.1K',
-      comments: '320',
-      youtube: 'i97Gkcecqd0'
-    },
-    {
-      id: 2,
-      category: '정치',
-      time: '3시간 전',
-      title: '대통령 기자회견, 주요 발언 정리',
-      body: '대통령이 오늘 오전 기자회견을 열고 경제 정책과 외교 현안에 대해 입장을 밝혔습니다. 주요 발언을 영상으로 확인하세요.',
-      likes: '2.3K',
-      comments: '410',
-      youtube: 'lwCJOC9HWds'
-    },
-    // ...PoliticsView.vue의 posts 데이터를 여기에 모두 포함하거나,
-    // 실제 백엔드에서 해당 ID의 게시물을 가져오도록 구현합니다.
-  ];
-  post.value = allPosts.find(p => p.id === id);
+  // 여기서는 postId에 맞는 더미 댓글 데이터를 사용합니다.
+  // 실제 백엔드에서는 해당 ID의 게시물 댓글만 가져오도록 구현합니다.
+  // 예: const response = await fetch(`/api/posts/${id}/comments`);
+  // const data = await response.json();
+  // comments.value = data.comments;
 
-  // 더미 댓글 데이터
-  comments.value = [
-    {
-      id: 1,
-      author: '익명1',
-      time: '5분 전',
-      body: '정말 중요한 내용이네요. 시청 잘 했습니다.',
-      likes: 15,
-      replies: [
-        { id: 1.1, author: '관리자', time: '2분 전', body: '관심 가져주셔서 감사합니다.', likes: 3 }
-      ]
-    },
-    {
-      id: 2,
-      author: '궁금러',
-      time: '10분 전',
-      body: '다음 논의는 언제쯤 진행될까요?',
-      likes: 8,
-      replies: []
-    }
-  ];
-
-  // 애니메이션을 위한 타이머
-  setTimeout(() => {
-    showDetail.value = true;
-  }, 50); // 약간의 딜레이 후 슬라이드 인
+  if (id === 1) { // 예시: postId가 1일 때의 댓글
+    comments.value = [
+      {
+        id: 1,
+        author: '익명1',
+        time: '5분 전',
+        body: '정말 중요한 내용이네요. 시청 잘 했습니다.',
+        likes: 15,
+        replies: [
+          { id: 1.1, author: '관리자', time: '2분 전', body: '관심 가져주셔서 감사합니다.', likes: 3 }
+        ]
+      },
+      {
+        id: 2,
+        author: '궁금러',
+        time: '10분 전',
+        body: '다음 논의는 언제쯤 진행될까요?',
+        likes: 8,
+        replies: []
+      }
+    ];
+  } else if (id === 2) { // 예시: postId가 2일 때의 댓글
+    comments.value = [
+      {
+        id: 3,
+        author: '시민123',
+        time: '1시간 전',
+        body: '정책 방향이 명확해서 좋네요.',
+        likes: 22,
+        replies: []
+      }
+    ];
+  } else {
+    comments.value = [];
+  }
 };
 
 const closeDetail = () => {
@@ -147,15 +140,21 @@ const closeDetail = () => {
   }, 300); // 애니메이션 시간과 맞춰서 컴포넌트 언마운트
 };
 
-watch(() => props.postId, (newId) => {
-  if (newId) {
-    fetchPostDetail(newId);
+// props.post가 변경될 때 post.value를 업데이트하고 애니메이션 시작
+watch(() => props.post, (newPost) => {
+  post.value = newPost;
+  if (newPost) {
+    // 게시물 데이터가 있을 때만 댓글을 가져오고 애니메이션 시작
+    fetchCommentsForPost(newPost.id); // 게시물 ID로 댓글 가져오기
+    setTimeout(() => {
+      showDetail.value = true;
+    }, 50);
   } else {
-    post.value = null;
+    // 게시물 데이터가 null이 되면 댓글도 초기화하고 애니메이션 비활성화
     comments.value = [];
     showDetail.value = false;
   }
-}, { immediate: true });
+}, { immediate: true }); // 컴포넌트가 처음 마운트될 때도 실행
 </script>
 
 
@@ -185,6 +184,7 @@ watch(() => props.postId, (newId) => {
   transition: transform 0.3s ease-out; /* 슬라이드 인 애니메이션 */
   font-family: 'Pretendard', 'Noto Sans KR', Arial, sans-serif;
   position: relative;
+  padding: 2rem; /* 추가 */
 }
 
 .post-detail-card.slide-in {
@@ -214,7 +214,7 @@ watch(() => props.postId, (newId) => {
   margin-bottom: 2rem; /* 댓글 섹션과 간격 */
   border-radius: 0.66rem;
   box-shadow: 0 0.094rem 0.75rem rgba(60, 100, 170, 0.08);
-  border: 0.07rem solid #e3e6ea;  
+  border: 0.07rem solid #e3e6ea; 
 }
 
 /* PoliticsView의 스타일을 복사하거나, 전역 CSS로 관리하여 재사용 */

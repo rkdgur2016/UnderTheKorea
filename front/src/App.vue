@@ -10,7 +10,7 @@ const selectedPostId = ref(null);
 
 const openPostDetail = (postId) => {
   selectedPostId.value = postId;
-  console.log("App.vue: PostDetail open with ID:", postId);
+  console.log("게시글 아이디 :", postId);
 };
 
 const closePostDetail = () => {
@@ -109,15 +109,31 @@ watch(() => route.path, () => {
   .content-wrapper.detail-open .main-content {
     margin-right: 0;
   }
+  /* 디테일 페이지가 열렸을 때 모바일에서 */
+  .content-wrapper.detail-open .post-detail {
+    transform: translateY(0); /* 화면 안으로 완전히 들어오도록 */
+  }
+
+  /* 디테일 페이지가 열렸을 때 메인 콘텐츠 스크롤 방지 (선택 사항) */
+  .content-wrapper.detail-open {
+    overflow: hidden; /* 배경 콘텐츠 스크롤 방지 */
+  }
   .post-detail {
     width: 100%;
-    position: static; /* 스크롤 시 고정 해제 */
-    height: auto;
+    /* 모바일에서는 fixed로 상단에 고정합니다. */
+    position: fixed;
+    top: 56px; /* 헤더 아래에 위치 */
+    left: 0;
+    height: calc(100vh - 56px); /* 헤더를 제외한 전체 높이 */
     border-left: none;
-    box-shadow: none;
-    transform: translateX(0);
-    margin-top: 1rem;
-    padding: 1.5rem;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1); /* 약간의 그림자 추가 */
+    background: #fff; /* 배경색을 흰색으로 변경하여 콘텐츠를 가리도록 */
+    transform: translateY(100%); /* 아래에서 위로 올라오도록 초기 위치 설정 */
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000; /* 헤더(999)보다 높은 z-index로 최상단에 오게 합니다. */
+    padding: 1.5rem; /* 모바일 패딩 조정 */
+    box-sizing: border-box;
   }
+
 }
 </style>

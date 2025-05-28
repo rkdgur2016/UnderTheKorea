@@ -37,11 +37,11 @@
     </div>
 
     <nav class="header-bottom-nav">
-      <router-link to="/philosophy" class="nav-link">철학</router-link>
-      <router-link to="/politics" class="nav-link">정치</router-link>
-      <router-link to="/social" class="nav-link">사회문제</router-link>
-      <router-link to="/suggest" class="nav-link">제안</router-link>
-      <router-link to="/motto" class="nav-link">좌우명</router-link>
+      <router-link :to="{ path: '/philosophy', query: { category: '철학' } }" class="nav-link">철학</router-link>
+      <router-link :to="{ path: '/politics', query: { category: '정치' } }" class="nav-link">정치</router-link>
+      <router-link :to="{ path: '/social', query: { category: '사회문제' } }" class="nav-link">사회문제</router-link>
+      <router-link :to="{ path: '/suggest', query: { category: '제안' } }" class="nav-link">제안</router-link>
+      <router-link :to="{ path: '/motto', query: { category: '좌우명' } }" class="nav-link">좌우명</router-link>
     </nav>
   </header>
 </template>

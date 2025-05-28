@@ -11,15 +11,15 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Posts {
 	
-	private int post_id;
-	private int author_id;
+	private int postId;
+	private int authorId;
 	private String title;
 	private String category;
 	private String content;
-	private String image_url;
-	private String video_url;
-	private String created_at;
-	private String updated_at;
-	private int view_count;
+	private String imageUrl;
+	private String videoUrl;
+	private String createdAt;
+	private String updatedAt;
+	private int viewCount;
 	
 }

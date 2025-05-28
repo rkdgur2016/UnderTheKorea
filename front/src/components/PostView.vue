@@ -1,57 +1,138 @@
 <template>
   <main class="kr-social-issue">
     <section
-      v-for="post in posts"
-      :key="post.id"
+      v-for="postItem in posts" :key="postItem.id"
       class="post-card"
-      @click="openDetail(post.id)"
-    >
+      @click="openDetail(postItem)" >
       <div class="post-header">
-        <span class="category">{{ post.category }}</span>
+        <span class="category">{{ postItem.category }}</span>
         <span class="dot">·</span>
-        <span class="time">{{ post.time }}</span>
+        <span class="time">{{ postItem.time }}</span>
       </div>
-      <h1 class="post-title">{{ post.title }}</h1>
-      <div v-if="post.youtube" class="post-media">
+      <h1 class="post-title">{{ postItem.title }}</h1>
+      <div v-if="postItem.youtube" class="post-media">
         <iframe
-          :src="`https://www.youtube.com/embed/${post.youtube}`"
-          frameborder="0"
+          :src="`http://www.youtube.com/embed/${postItem.youtube}`" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
           title="YouTube video player"
         ></iframe>
       </div>
-      <div v-else-if="post.img" class="post-img">
-        <img :src="post.img" :alt="post.title" />
+      <div v-else-if="postItem.img" class="post-img">
+        <img :src="postItem.img" :alt="postItem.title" />
       </div>
-      <div class="post-body">{{ post.body }}</div>
+      <div class="post-body">{{ postItem.body }}</div>
       <div class="post-actions">
-        <button class="action-btn">👍 {{ post.likes }}</button>
-        <button class="action-btn">💬 {{ post.comments }}</button>
+        <button class="action-btn">👍 {{ postItem.likes }}</button>
+        <button class="action-btn">💬 {{ postItem.comments }}</button>
         <button class="action-btn">🔗 공유</button>
       </div>
     </section>
+
+    <PostDetail
+      v-if="showPostDetail"
+      :postId="selectedPostId"
+      :post="selectedPost" @close="closePostDetail"
+    />
+
+    <div v-if="loading" class="loading-message">게시물을 불러오는 중...</div>
+    <div v-if="error" class="error-message">{{ error }}</div>
+    <div v-if="!loading && !error && posts.length === 0" class="no-posts-message">
+      선택된 카테고리에 게시물이 없습니다.
+    </div>
   </main>
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from 'vue';
+import { ref, watch, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import axios from 'axios';
+import PostDetail from './PostDetail.vue';
 
-// 부모 컴포넌트로부터 posts 데이터를 props로 받습니다.
-const props = defineProps({
-  posts: {
-    type: Array,
-    required: true
+const route = useRoute();
+const posts = ref([]); // 백엔드에서 받아와서 매핑된 게시물 데이터를 저장할 반응형 변수
+const loading = ref(false);
+const error = ref(null);
+const currentCategory = ref('');
+
+// PostDetail 관련 상태 추가
+const showPostDetail = ref(false);
+const selectedPostId = ref(null);
+const selectedPost = ref(null); // 클릭된 게시물 전체 객체를 저장할 ref
+
+// 시간 포맷팅 함수 (템플릿의 post.time에 매핑)
+const formatTime = (isoString) => {
+  if (!isoString) return '';
+  const date = new Date(isoString);
+  const now = new Date();
+  const diffMinutes = Math.floor((now - date) / (1000 * 60));
+  const diffHours = Math.floor(diffMinutes / 60);
+  const diffDays = Math.floor(diffHours / 24);
+
+  if (diffMinutes < 1) return '방금 전';
+  if (diffMinutes < 60) return `${diffMinutes}분 전`;
+  if (diffHours < 24) return `${diffHours}시간 전`;
+  if (diffDays < 7) return `${diffDays}일 전`;
+
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return `${year}년 ${month}월 ${day}일`;
+};
+
+// 게시물 데이터를 백엔드에서 가져오고 템플릿 형식에 맞게 매핑하는 함수
+const fetchPosts = async (category) => {
+  loading.value = true;
+  error.value = null;
+  currentCategory.value = category;
+
+  try {
+    const response = await axios.get('/post/loadPosts', {
+      params: {
+        category: category
+      }
+    });
+
+    // 받은 데이터를 템플릿이 사용하는 이름으로 매핑합니다.
+    posts.value = response.data.map(item => {
+      
+      return {
+        id: item.postId, // postid -> post.id (클릭 이벤트 및 key)
+        category: item.category, // category -> post.category
+        time: formatTime(item.createdAt), // createdat -> post.time (포맷팅 적용)
+        title: item.title, // title -> post.title
+        youtube: item.videoUrl, // videourl -> post.youtube (YouTube 비디오 ID만 있다고 가정)
+        img: item.imageUrl, // imageurl -> post.img (이미지 경로 조정 필요)
+        body: item.content, // content -> post.body
+        likes: item.likes || 0, // DB에 likes 컬럼이 없으므로 임의로 0, 백엔드에서 전달되면 해당 값 사용
+        comments: item.comments || 0, // DB에 comments 컬럼이 없으므로 임의로 0, 백엔드에서 전달되면 해당 값 사용
+        viewcount: item.viewCount || 0 // viewcount는 기존 컬럼이므로 그대로 사용
+      };
+    });
+    console.log('게시물 데이터:', posts.value); // 디버깅용 로그
+
+  } catch (err) {
+    console.error('게시물 로드 중 오류 발생:', err);
+    error.value = '게시물을 불러오는데 실패했습니다. 서버 상태를 확인해주세요.';
+  } finally {
+    loading.value = false;
   }
+};
+
+onMounted(() => {
+  const initialCategory = route.query.category || '철학';
+  fetchPosts(initialCategory);
 });
 
-// 게시물 클릭 시 App.vue로 이벤트를 전달하기 위한 defineEmits
-const emit = defineEmits(['open-detail']);
+watch(() => route.query.category, (newCategory, oldCategory) => {
+  if (newCategory && newCategory !== oldCategory) {
+    fetchPosts(newCategory);
+  } else if (!newCategory && oldCategory) {
+    fetchPosts('철학');
+  }
+}, { immediate: true });
 
-const openDetail = (postId) => {
-  emit('open-detail', postId); // 클릭된 게시물의 ID를 상위 컴포넌트로 전달
-  console.log('PostList: Emitting open-detail with ID:', postId);
-};
+// --- 데이터 로딩 관련 스크립트 끝 ---
 </script>
 
 <style scoped>
@@ -182,5 +263,17 @@ const openDetail = (postId) => {
   .post-body {
     font-size: 0.73rem;
   }
+}
+
+/* 로딩 및 에러 메시지 스타일 (선택 사항) */
+.loading-message, .error-message, .no-posts-message {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.error-message {
+  color: #d9534f;
 }
 </style>
