@@ -7,7 +7,7 @@ const routes = [
   {path: '/politics', name: 'politics', component: () => import('../views/PoliticsView.vue')},
   {path: '/social', name: 'social', component: () => import('../views/SocialView.vue')},
   {path: '/suggest', name: 'suggest', component: () => import('../views/SuggestView.vue')},
-  {path: '/motto', name: 'main', component: () => import('../views/MottoView.vue')},
+  {path: '/motto', name: 'motto', component: () => import('../views/MottoView.vue')},
   {path: '/register', name: 'Register', component: () => import('../views/RegisterPage.vue')},
 ]
 

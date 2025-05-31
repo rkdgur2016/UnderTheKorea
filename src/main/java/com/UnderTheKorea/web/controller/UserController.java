@@ -1,4 +1,3 @@
-// src/main/java/com/example/yourprojectname/controller/UserController.java
 
 package com.UnderTheKorea.web.controller;
 
@@ -19,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor 
 public class UserController {
     
-	private final UserServiceImpl userServiceImpl; // UserService 주입 (생성자 주입)
+	private final UserServiceImpl userServiceImpl;// UserService 주입 (생성자 주입)
     
 	@PostMapping("/login")
     public Users login(@RequestBody Users loginRequest) {

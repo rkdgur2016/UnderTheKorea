@@ -1,51 +1,9 @@
-<template>
-  <main class="kr-social-issue">
-    <section
-      v-for="postItem in posts" :key="postItem.id"
-      class="post-card"
-      @click="openDetail(postItem)" >
-      <div class="post-header">
-        <span class="category">{{ postItem.category }}</span>
-        <span class="dot">·</span>
-        <span class="time">{{ postItem.time }}</span>
-      </div>
-      <h1 class="post-title">{{ postItem.title }}</h1>
-      <div v-if="postItem.youtube" class="post-media">
-        <iframe
-          :src="`http://www.youtube.com/embed/${postItem.youtube}`" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          title="YouTube video player"
-        ></iframe>
-      </div>
-      <div v-else-if="postItem.img" class="post-img">
-        <img :src="postItem.img" :alt="postItem.title" />
-      </div>
-      <div class="post-body">{{ postItem.body }}</div>
-      <div class="post-actions">
-        <button class="action-btn">👍 {{ postItem.likes }}</button>
-        <button class="action-btn">💬 {{ postItem.comments }}</button>
-        <button class="action-btn">🔗 공유</button>
-      </div>
-    </section>
-
-    <PostDetail
-      v-if="showPostDetail"
-      :postId="selectedPostId"
-      :post="selectedPost" @close="closePostDetail"
-    />
-
-    <div v-if="loading" class="loading-message">게시물을 불러오는 중...</div>
-    <div v-if="error" class="error-message">{{ error }}</div>
-    <div v-if="!loading && !error && posts.length === 0" class="no-posts-message">
-      선택된 카테고리에 게시물이 없습니다.
-    </div>
-  </main>
-</template>
-
+// PostView.txt
 <script setup>
 import { ref, watch, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import { defineEmits } from 'vue';
+
 import axios from 'axios';
 import PostDetail from './PostDetail.vue';
 
@@ -58,7 +16,15 @@ const currentCategory = ref('');
 // PostDetail 관련 상태 추가
 const showPostDetail = ref(false);
 const selectedPostId = ref(null);
-const selectedPost = ref(null); // 클릭된 게시물 전체 객체를 저장할 ref
+const selectedPost = ref(null);
+// 클릭된 게시물 전체 객체를 저장할 ref
+
+
+const emit = defineEmits(['open-detail']);
+
+const openDetail = (postItem) => {
+  emit('open-detail', postItem); // 부모에게 postItem 전체를 전달
+};
 
 // 시간 포맷팅 함수 (템플릿의 post.time에 매핑)
 const formatTime = (isoString) => {
@@ -92,7 +58,6 @@ const fetchPosts = async (category) => {
         category: category
       }
     });
-
     // 받은 데이터를 템플릿이 사용하는 이름으로 매핑합니다.
     posts.value = response.data.map(item => {
       
@@ -101,13 +66,14 @@ const fetchPosts = async (category) => {
         category: item.category, // category -> post.category
         time: formatTime(item.createdAt), // createdat -> post.time (포맷팅 적용)
         title: item.title, // title -> post.title
-        youtube: item.videoUrl, // videourl -> post.youtube (YouTube 비디오 ID만 있다고 가정)
+        youtube: item.videoUrl, // videourl -> post.youtube (YouTube 비디오 ID만 있다고
         img: item.imageUrl, // imageurl -> post.img (이미지 경로 조정 필요)
         body: item.content, // content -> post.body
         likes: item.likes || 0, // DB에 likes 컬럼이 없으므로 임의로 0, 백엔드에서 전달되면 해당 값 사용
         comments: item.comments || 0, // DB에 comments 컬럼이 없으므로 임의로 0, 백엔드에서 전달되면 해당 값 사용
         viewcount: item.viewCount || 0 // viewcount는 기존 컬럼이므로 그대로 사용
       };
+ 
     });
     console.log('게시물 데이터:', posts.value); // 디버깅용 로그
 
@@ -118,12 +84,10 @@ const fetchPosts = async (category) => {
     loading.value = false;
   }
 };
-
 onMounted(() => {
   const initialCategory = route.query.category || '철학';
   fetchPosts(initialCategory);
 });
-
 watch(() => route.query.category, (newCategory, oldCategory) => {
   if (newCategory && newCategory !== oldCategory) {
     fetchPosts(newCategory);
@@ -131,9 +95,47 @@ watch(() => route.query.category, (newCategory, oldCategory) => {
     fetchPosts('철학');
   }
 }, { immediate: true });
-
 // --- 데이터 로딩 관련 스크립트 끝 ---
 </script>
+
+<template>
+  <main class="kr-social-issue">
+    <section
+      v-for="postItem in posts" :key="postItem.id"
+      class="post-card"
+      @click="openDetail(postItem)" >
+      <div class="post-header">
+        <span class="category">{{ postItem.category }}</span>
+        <span class="dot">·</span>
+        <span class="time">{{ postItem.time }}</span>
+      </div>
+      <h1 class="post-title">{{ postItem.title }}</h1>
+      <div v-if="postItem.youtube" class="post-media">
+        <iframe
+          :src="`http://www.youtube.com/embed/${postItem.youtube}`" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          title="YouTube video player"
+        ></iframe>
+      </div>
+      <div v-else-if="postItem.img" class="post-img">
+        <img :src="postItem.img" :alt="postItem.title" />
+      </div>
+      <div class="post-body">{{ postItem.body }}</div>
+      <div class="post-actions">
+        <button class="action-btn">👍 {{ postItem.likes }}</button>
+        <button class="action-btn">💬 {{ postItem.comments }}</button>
+        <button class="action-btn">🔗 공유</button>
+      </div>
+    </section>
+
+    <div v-if="loading" class="loading-message">게시물을 불러오는 중...</div>
+    <div v-if="error" class="error-message">{{ error }}</div>
+    <div v-if="!loading && !error && posts.length === 0" class="no-posts-message">
+      선택된 카테고리에 게시물이 없습니다.
+    </div>
+  </main>
+</template>
 
 <style scoped>
 /* PoliticsView.txt 에 있던 모든 스타일 코드를 여기에 복사합니다. */

@@ -1,20 +1,23 @@
+// app.txt
 <script setup>
 import { ref, watch } from 'vue'; // watch를 임포트
 import { useRoute } from 'vue-router'; // useRoute를 임포트
 
 import TheHeader from '@/layout/TheHeader.vue';
-import LoginLayer from '@/layout/TheSidebar.vue'; // LoginLayer가 TheSidebar로 변경된 것 반영
+import LoginLayer from '@/layout/TheSidebar.vue';
 import PostDetail from '@/components/PostDetail.vue';
 
 const selectedPostId = ref(null);
+const selectedPost = ref(null); // Add this line to store the entire post object
 
-const openPostDetail = (postId) => {
-  selectedPostId.value = postId;
-  console.log("게시글 아이디 :", postId);
+const openPostDetail = (postItem) => { // Change postId to postItem
+  selectedPostId.value = postItem.id;
+  selectedPost.value = postItem; // Store the entire post object
+  console.log("게시글 아이디 :", postItem.id);
 };
-
 const closePostDetail = () => {
   selectedPostId.value = null;
+  selectedPost.value = null; // Also clear the selected post object
   console.log("App.vue: PostDetail closed");
 };
 
@@ -25,6 +28,7 @@ const route = useRoute();
 watch(() => route.path, () => {
   if (selectedPostId.value !== null) { // 디테일 페이지가 열려있을 경우에만 초기화
     selectedPostId.value = null;
+    selectedPost.value = null; // Clear on route change as well
     console.log("App.vue: Router path changed, PostDetail closed.");
   }
 });
@@ -41,6 +45,7 @@ watch(() => route.path, () => {
       <PostDetail
         v-if="selectedPostId !== null"
         :post-id="selectedPostId"
+        :post="selectedPost" 
         @close="closePostDetail"
         class="post-detail"
       />
@@ -48,8 +53,10 @@ watch(() => route.path, () => {
   </div>
 </template>
 
+
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap');
+@import 
+url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap');
 
 .app-container {
   display: flex;
@@ -111,7 +118,7 @@ watch(() => route.path, () => {
   }
   /* 디테일 페이지가 열렸을 때 모바일에서 */
   .content-wrapper.detail-open .post-detail {
-    transform: translateY(0); /* 화면 안으로 완전히 들어오도록 */
+    transform: translateX(0); /* 화면 안으로 완전히 들어오도록 (오른쪽에서 슬라이드인) */
   }
 
   /* 디테일 페이지가 열렸을 때 메인 콘텐츠 스크롤 방지 (선택 사항) */
@@ -119,8 +126,7 @@ watch(() => route.path, () => {
     overflow: hidden; /* 배경 콘텐츠 스크롤 방지 */
   }
   .post-detail {
-    width: 100%;
-    /* 모바일에서는 fixed로 상단에 고정합니다. */
+    width: 100%; /* 모바일에서는 fixed로 상단에 고정합니다. */
     position: fixed;
     top: 56px; /* 헤더 아래에 위치 */
     left: 0;
@@ -128,7 +134,7 @@ watch(() => route.path, () => {
     border-left: none;
     box-shadow: 0 -2px 10px rgba(0,0,0,0.1); /* 약간의 그림자 추가 */
     background: #fff; /* 배경색을 흰색으로 변경하여 콘텐츠를 가리도록 */
-    transform: translateY(100%); /* 아래에서 위로 올라오도록 초기 위치 설정 */
+    transform: translateX(100%); /* 아래에서 위로 올라오도록 초기 위치 설정 -> 오른쪽에서 슬라이드인으로 변경 */
     transition: transform 0.3s ease-in-out;
     z-index: 1000; /* 헤더(999)보다 높은 z-index로 최상단에 오게 합니다. */
     padding: 1.5rem; /* 모바일 패딩 조정 */
