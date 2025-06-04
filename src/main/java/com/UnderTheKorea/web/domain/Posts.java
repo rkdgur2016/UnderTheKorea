@@ -12,7 +12,7 @@ import lombok.Setter;
 public class Posts {
 	
 	private int postId;
-	private int authorId;
+	private String authorId;
 	private String title;
 	private String category;
 	private String content;

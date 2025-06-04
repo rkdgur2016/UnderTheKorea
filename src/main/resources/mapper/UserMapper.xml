@@ -21,8 +21,7 @@
     </select>
     
 	<select id="login" parameterType="String" resultType="Users">
-		SELECT                                            
-            serial_no as serialNo,
+		SELECT                       
             grade as grade,
             user_id as userId,
             password as password,

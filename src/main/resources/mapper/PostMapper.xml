@@ -18,9 +18,9 @@
 		FROM
 		    posts p
 		LEFT JOIN
-		    likes l ON p.post_id = l.target_id
+		    likes l ON p.post_id = l.post_id
 		WHERE
-		    p.category = '#{category}'
+		    p.category = '${category}'
 		GROUP BY
 		    p.post_id, p.author_id, p.title, p.category, p.content, p.image_url, p.video_url, p.created_at, p.updated_at, p.view_count
 		ORDER BY

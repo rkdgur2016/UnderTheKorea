@@ -1,145 +1,86 @@
-// app.txt
 <script setup>
-import { ref, watch } from 'vue'; // watch를 임포트
-import { useRoute } from 'vue-router'; // useRoute를 임포트
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
-import TheHeader from '@/layout/TheHeader.vue';
-import LoginLayer from '@/layout/TheSidebar.vue';
-import PostDetail from '@/components/PostDetail.vue';
+import TheHeader from '@/layout/TheHeader.vue'; 
+import LoginLayer from '@/layout/TheSidebar.vue'; // TheSidebar.vue로 임포트된 LoginLayer 
+import PostDetail from '@/components/PostDetail.vue'; 
 
-const selectedPostId = ref(null);
-const selectedPost = ref(null); // Add this line to store the entire post object
+const selectedPostId = ref(null); 
+const selectedPost = ref(null);  // Add this line to store the entire post object
 
-const openPostDetail = (postItem) => { // Change postId to postItem
-  selectedPostId.value = postItem.id;
-  selectedPost.value = postItem; // Store the entire post object
-  console.log("게시글 아이디 :", postItem.id);
+const openPostDetail = (postItem) => {
+  selectedPostId.value = postItem.id; 
+  selectedPost.value = postItem; 
+  console.log("게시글 아이디 :", postItem.id); 
 };
 const closePostDetail = () => {
-  selectedPostId.value = null;
-  selectedPost.value = null; // Also clear the selected post object
-  console.log("App.vue: PostDetail closed");
+  selectedPostId.value = null; 
+  selectedPost.value = null; 
+  console.log("App.vue: PostDetail closed"); 
 };
 
-// Vue Router의 현재 경로를 가져옵니다.
-const route = useRoute();
+const route = useRoute(); 
 
-// route.path (경로)가 변경될 때 selectedPostId를 초기화합니다.
 watch(() => route.path, () => {
-  if (selectedPostId.value !== null) { // 디테일 페이지가 열려있을 경우에만 초기화
-    selectedPostId.value = null;
-    selectedPost.value = null; // Clear on route change as well
-    console.log("App.vue: Router path changed, PostDetail closed.");
+  if (selectedPostId.value !== null) {
+    selectedPostId.value = null; 
+    selectedPost.value = null; 
+    console.log("App.vue: Router path changed, PostDetail closed."); 
   }
 });
-</script>
+</script> 
 
 <template>
-  <div class="app-container">
+  <div class="flex flex-col min-h-screen font-pretendard">
     <TheHeader></TheHeader>
-    <div class="content-wrapper" :class="{ 'detail-open': selectedPostId !== null }">
-      <LoginLayer></LoginLayer>
-      <div class="main-content">
+    <div
+      class="flex flex-1 w-full gap-6 pr-6 bg-[#f7f9fb] relative
+             transition-all duration-300 ease-in-out
+             lg:flex-row lg:pr-6
+             "
+      :class="{ 'pr-0': selectedPostId !== null }"
+    >
+      <LoginLayer class="
+        hidden md:block
+        lg:w-64 xl:w-72
+        sticky top-14 h-[calc(100vh-56px)] overflow-y-auto
+        flex-shrink-0 bg-white p-6 shadow-md rounded-lg
+
+        /* 모바일/태블릿 반응형: sticky 해제 및 너비/높이 조정 */
+        md:static md:w-full md:h-auto md:mb-4
+        lg:sticky lg:top-14 lg:h-[calc(100vh-56px)]
+      "></LoginLayer>
+
+      <div class="flex-grow min-w-0 bg-[#f7f9fb] pb-8 transition-all duration-300 ease-in-out">
         <router-view @open-detail="openPostDetail"></router-view>
       </div>
+
       <PostDetail
         v-if="selectedPostId !== null"
         :post-id="selectedPostId"
-        :post="selectedPost" 
+        :post="selectedPost"
         @close="closePostDetail"
-        class="post-detail"
+        class="
+          w-full max-w-[700px] bg-transparent overflow-y-auto p-8 box-border
+          fixed top-0 right-0 h-full 
+          transform -translate-x-full transition-transform duration-300 ease-in-out
+          z-40 lg:z-30  
+
+          /* 모바일 반응형: 헤더 아래부터 시작하도록 top-14 설정 및 오른쪽 정렬 유지 */
+          lg:fixed lg:top-14 lg:left-0 lg:h-[calc(100vh-56px)] lg:border-none =
+          lg:shadow-lg lg:bg-white lg:p-6 lg:z-50 /* 모바일에서 최상단으로 */
+        "
+        :class="{ '!translate-x-0': selectedPostId !== null }"
       />
     </div>
   </div>
 </template>
 
-
-<style scoped>
-@import 
-url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap');
-
-.app-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.content-wrapper {
-  display: flex;
-  flex: 1; /* 남은 공간을 차지하도록 설정 */
-  width: 100%;
-  gap: 1.5rem; /* 사이드바와 메인 콘텐츠 사이의 간격 */
-  padding-right: 1.5rem; /* 오른쪽 여백 */
-  transition: padding-right 0.3s ease-in-out;
-  background: #f7f9fb;
-  position: relative; /* 자식 요소인 post-detail의 sticky 기준을 위해 */
-}
-
-.content-wrapper.detail-open {
-  padding-right: 0; /* 디테일 페이지 열렸을 때 오른쪽 여백 제거 */
-}
-
-.main-content {
-  flex-grow: 1; /* 남은 공간을 모두 차지 */
-  transition: margin-right 0.3s ease-in-out;
-  min-width: 0; /* flex 아이템의 최소 너비 설정 (스크롤 방지) */
-  background: #f7f9fb; /* 메인 콘텐츠 배경색 설정 */
-  padding-bottom: 2rem; /* 하단 여백 추가 */
-}
-
-.post-detail {
-  width: 100%; /* 디테일 페이지의 너비 */
-  max-width: 700px; /* 최대 너비 */
-  background: transparent;
-  overflow-y: auto; /* 내용이 길어지면 스크롤바 생성 */
-  padding: 2rem;
-  box-sizing: border-box;
-  position: sticky; /* 스크롤 시 상단에 고정 */
-  top: 56px; /* 헤더 높이만큼 아래로 */
-  height: calc(100vh - 56px); /* 전체 뷰포트 높이 - 헤더 높이 */
-  transform: translateX(100%); /* 기본적으로 오른쪽으로 숨겨져 있음 */
-  transition: transform 0.3s ease-in-out;
-  z-index: 999; /* 헤더보다 낮은 z-index */
-}
-
-.content-wrapper.detail-open .post-detail {
-  transform: translateX(0); /* 디테일 페이지 열리면 화면 안으로 이동 */
-}
-
-/* 반응형 디자인 */
-@media (max-width: 1024px) {
-  .content-wrapper {
-    flex-direction: column; /* 화면이 작아지면 세로로 정렬 */
-    gap: 1rem;
-    padding-right: 0;
-  }
-  .content-wrapper.detail-open .main-content {
-    margin-right: 0;
-  }
-  /* 디테일 페이지가 열렸을 때 모바일에서 */
-  .content-wrapper.detail-open .post-detail {
-    transform: translateX(0); /* 화면 안으로 완전히 들어오도록 (오른쪽에서 슬라이드인) */
-  }
-
-  /* 디테일 페이지가 열렸을 때 메인 콘텐츠 스크롤 방지 (선택 사항) */
-  .content-wrapper.detail-open {
-    overflow: hidden; /* 배경 콘텐츠 스크롤 방지 */
-  }
-  .post-detail {
-    width: 100%; /* 모바일에서는 fixed로 상단에 고정합니다. */
-    position: fixed;
-    top: 56px; /* 헤더 아래에 위치 */
-    left: 0;
-    height: calc(100vh - 56px); /* 헤더를 제외한 전체 높이 */
-    border-left: none;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.1); /* 약간의 그림자 추가 */
-    background: #fff; /* 배경색을 흰색으로 변경하여 콘텐츠를 가리도록 */
-    transform: translateX(100%); /* 아래에서 위로 올라오도록 초기 위치 설정 -> 오른쪽에서 슬라이드인으로 변경 */
-    transition: transform 0.3s ease-in-out;
-    z-index: 1000; /* 헤더(999)보다 높은 z-index로 최상단에 오게 합니다. */
-    padding: 1.5rem; /* 모바일 패딩 조정 */
-    box-sizing: border-box;
-  }
-
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap'); 
+/* HTML, body에 Pretenard 폰트 적용 (선택 사항) */ 
+html, body {
+  font-family: 'Pretendard', 'Noto Sans KR', sans-serif; 
 }
 </style>

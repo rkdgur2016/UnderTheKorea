@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import PhilosophyView from '@/views/PhilosophyView.vue'
+import MainView from '@/layout/TheView.vue'
 
 const routes = [
-  {path: '/', name: 'home', component: PhilosophyView},
+  {path: '/', name: 'home', component: MainView},
   {path: '/philosophy', name: 'philosophy', component: () => import('../views/PhilosophyView.vue')},
   {path: '/politics', name: 'politics', component: () => import('../views/PoliticsView.vue')},
   {path: '/social', name: 'social', component: () => import('../views/SocialView.vue')},
