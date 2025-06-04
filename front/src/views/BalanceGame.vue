@@ -1,23 +1,4 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
-    <!-- Header -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
-      <div class="max-w-6xl mx-auto px-6 py-4">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <TrendingUp class="w-5 h-5 text-rose-500" />
-            <h1 class="text-xl font-medium text-gray-900">인기 투표</h1>
-            <span class="text-sm text-rose-500 font-medium">실시간</span>
-          </div>
-          <button v-if="currentView === 'detail'" 
-                  @click="currentView = 'main'" 
-                  class="text-sm text-gray-600 hover:text-gray-900 transition-colors">
-            ← 목록으로
-          </button>
-        </div>
-      </div>
-    </header>
-
     <!-- Main View -->
     <main v-if="currentView === 'main'" class="max-w-6xl mx-auto px-6 py-8">
       <!-- Popular Polls Section (깔끔한 슬라이드) -->
@@ -26,6 +7,7 @@
           <!-- Header -->
           <div class="flex items-center justify-between mb-6">
             <div class="flex items-center gap-3">
+              <TrendingUp class="w-5 h-5 text-rose-500" />
               <h2 class="text-xl font-medium text-gray-900">인기 투표</h2>
               <span class="text-sm text-gray-500">가장 많은 관심을 받고 있는 주제들</span>
             </div>
@@ -308,7 +290,6 @@
         </div>
       </div>
     </main>
-  </div>
 </template>
 
 <script setup>

@@ -1,317 +1,793 @@
 <template>
-  <header class="main-header">
-    <div class="header-top">
-      <div class="header-left">
-        <button class="menu-button">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+  <header class="bg-white/80 backdrop-blur-md border-b border-slate-200/50 sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex-shrink-0">
+            <div class="text-left">
+              <router-link :to="{ path: '/'}" class="hover:text-gray-600 transition-colors duration-200">
+                <h1 class="text-2xl font-bold text-slate-800 tracking-tight">
+                    Under The Korea
+                  </h1>
+                  <p class="text-xs text-slate-500 -mt-1">
+                    대한민국의 현재, 대한민국의 미래
+                  </p>
+              </router-link>
+            </div>
+          </div>
+        <nav class="hidden md:flex space-x-8">
+          <router-link
+            :to="{ path: '/philosophy', query: { category: '철학' } }"
+            class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
+            :class="{ 'text-gray-600': activeNav === '철학' }"
+            @click="setActiveNav('철학')"
           >
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
-        <button class="search-button-icon">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            철학
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gray-600 transition-all duration-300 group-hover:w-full"
+                  :class="{ 'w-full': activeNav === '철학' }"></span>
+          </router-link>
+          <router-link
+            :to="{ path: '/politics', query: { category: '정치' } }"
+            class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
+            :class="{ 'text-gray-600': activeNav === '정치' }"
+            @click="setActiveNav('정치')"
           >
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-        </button>
+            정치
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gray-600 transition-all duration-300 group-hover:w-full"
+                  :class="{ 'w-full': activeNav === '정치' }"></span>
+          </router-link>
+          <router-link
+            :to="{ path: '/economy', query: { category: '경제' } }"
+            class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
+            :class="{ 'text-gray-600': activeNav === '경제' }"
+            @click="setActiveNav('경제')"
+          >
+            경제
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gray-600 transition-all duration-300 group-hover:w-full"
+                  :class="{ 'w-full': activeNav === '경제' }"></span>
+          </router-link>
+          <router-link
+            :to="{ path: '/social', query: { category: '사회문제' } }"
+            class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
+            :class="{ 'text-gray-600': activeNav === '사회' }"
+            @click="setActiveNav('사회')"
+          >
+            사회
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gray-600 transition-all duration-300 group-hover:w-full"
+                  :class="{ 'w-full': activeNav === '사회' }"></span>
+          </router-link>
+          <router-link
+            :to="{ path: '/BalanceGame', query: { category: '광장' } }"
+            class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
+            :class="{ 'text-gray-600': activeNav === '광장' }"
+            @click="setActiveNav('광장')"
+          >
+            광장
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gray-600 transition-all duration-300 group-hover:w-full"
+                  :class="{ 'w-full': activeNav === '광장' }"></span>
+          </router-link>
+          <router-link
+            :to="{ path: '/motto', query: { category: '좌우명' } }"
+            class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
+            :class="{ 'text-gray-600': activeNav === '좌우명' }"
+            @click="setActiveNav('좌우명')"
+          >
+            이념
+            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gray-600 transition-all duration-300 group-hover:w-full"
+                  :class="{ 'w-full': activeNav === '좌우명' }"></span>
+          </router-link>
+        </nav>
+
+        <div class="flex items-center space-x-4">
+          <div v-if="isLoggedIn" class="flex items-center space-x-4">
+            <p class="text-slate-700 text-sm font-medium">
+              {{ loggedInUser.userName }}님, 환영합니다!
+            </p>
+            <button @click="handleLogout" class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 shadow-md hover:shadow-lg">
+              로그아웃
+            </button>
+          </div>
+          <div v-else class="flex items-center space-x-4">
+            <button @click="openLoginModal" class="text-slate-700 hover:text-gray-600 px-4 py-2 text-sm font-medium transition-colors duration-200">
+              로그인
+            </button>
+            <button @click="openSignupModal" class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 shadow-md hover:shadow-lg">
+              회원가입
+            </button>
+          </div>
+        </div>
+
+        <div class="md:hidden">
+          <button
+            @click="toggleMobileMenu"
+            class="text-slate-700 hover:text-gray-600 p-2"
+          >
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
       </div>
 
-      <div class="header-center">
-        <router-link to="/" class="logo">
-          <span class="logo-main">Under The Korea</span>
-          <span class="logo-sub">대한민국의 현재, 대한민국의 미래</span>
-        </router-link>
-      </div>
-
-      <div class="header-right">
-        <button class="subscribe-button">Subscribe</button>
-        <button class="sign-in-button">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+      <div v-if="mobileMenuOpen" class="md:hidden py-4 border-t border-slate-200">
+        <div class="flex flex-col space-y-2">
+          <router-link
+            :to="{ path: '/philosophy', query: { category: '철학' } }"
+            class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+            @click="setActiveNav('철학')"
           >
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-          Sign In
-        </button>
+            철학
+          </router-link>
+          <router-link
+            :to="{ path: '/politics', query: { category: '정치' } }"
+            class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+            @click="setActiveNav('정치')"
+          >
+            정치
+          </router-link>
+          <router-link
+            :to="{ path: '/economy', query: { category: '경제' } }"
+            class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+            @click="setActiveNav('경제')"
+          >
+            경제
+          </router-link>
+          <router-link
+            :to="{ path: '/social', query: { category: '사회문제' } }"
+            class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+            @click="setActiveNav('사회')"
+          >
+            사회
+          </router-link>
+          <router-link
+            :to="{ path: '/BalanceGame', query: { category: '광장' } }"
+            class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+            @click="setActiveNav('광장')"
+          >
+            광장
+          </router-link>
+          <router-link
+            :to="{ path: '/motto', query: { category: '좌우명' } }"
+            class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+            @click="setActiveNav('좌우명')"
+          >
+            좌우명
+          </router-link>
+          <div v-if="isLoggedIn" class="flex flex-col space-y-2 pt-4 border-t border-slate-200">
+            <p class="text-slate-700 px-3 py-2 text-sm font-medium text-left">
+              {{ loggedInUser.userName }}님, 환영합니다!
+            </p>
+            <button @click="handleLogout" class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-left">
+              로그아웃
+            </button>
+          </div>
+          <div v-else class="flex flex-col space-y-2 pt-4 border-t border-slate-200">
+            <button @click="openLoginModal" class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium text-left">
+              로그인
+            </button>
+            <button @click="openSignupModal" class="bg-gray-600 hover:bg-gray-700 text-white px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-left">
+              회원가입
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-
-    <nav class="header-bottom-nav">
-      <router-link
-        :to="{ path: '/philosophy', query: { category: '철학' } }"
-        class="nav-link"
-        >철학</router-link
-      >
-      <router-link
-        :to="{ path: '/politics', query: { category: '정치' } }"
-        class="nav-link"
-        >정치</router-link
-      >
-      <router-link
-        :to="{ path: '/social', query: { category: '사회문제' } }"
-        class="nav-link"
-        >사회문제</router-link
-      >
-      <router-link
-        :to="{ path: '/BalanceGame', query: { category: '광장' } }"
-        class="nav-link"
-        >광장</router-link
-      >
-      <router-link
-        :to="{ path: '/motto', query: { category: '좌우명' } }"
-        class="nav-link"
-        >좌우명</router-link
-      >
-    </nav>
   </header>
+  <div v-if="showLoginModal" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div
+      @click="closeModals"
+      class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"
+    ></div>
+
+    <div class="relative bg-white/90 backdrop-blur-md max-w-md w-full rounded-2xl shadow-2xl border border-slate-200/50 overflow-hidden animate-modal-in">
+      <div class="relative bg-gradient-to-r from-gray-600 to-slate-700 text-white p-6">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xl font-bold">로그인</h3>
+          <button @click="closeModals" class="text-white/80 hover:text-white transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <p class="text-gray-100 text-sm mt-2">Under The Korea에 오신 것을 환영합니다</p>
+      </div>
+
+      <div class="p-6">
+        <form @submit.prevent="handleLogin" class="space-y-4">
+          <div>
+            <label class="block text-slate-700 text-sm font-medium mb-2">아이디</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                </svg>
+              </div>
+              <input
+                v-model="loginForm.userId"
+                type="text"
+                required
+                class="w-full pl-10 pr-4 py-3 bg-slate-100/70 border border-slate-200 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 focus:outline-none transition-colors"
+                placeholder="user1"
+              >
+            </div>
+            <p v-if="loginMessage" :class="{'text-green-600': isLoginSuccess, 'text-red-600': !isLoginSuccess}" class="mt-2 text-sm">
+              {{ loginMessage }}
+            </p>
+          </div>
+
+          <div>
+            <label class="block text-slate-700 text-sm font-medium mb-2">비밀번호</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <input
+                v-model="loginForm.password"
+                type="password"
+                required
+                class="w-full pl-10 pr-4 py-3 bg-slate-100/70 border border-slate-200 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 focus:outline-none transition-colors"
+                placeholder="????????"
+              >
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <label class="flex items-center">
+              <input
+                v-model="loginForm.rememberMe"
+                type="checkbox"
+                class="rounded text-gray-600 focus:ring-gray-500 border-slate-300"
+              >
+              <span class="ml-2 text-sm text-slate-600">로그인 상태 유지</span>
+            </label>
+            <a href="#" class="text-sm text-gray-600 hover:text-gray-800 transition-colors">
+              비밀번호 찾기
+            </a>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-gray-600 hover:bg-gray-700 text-white py-3 rounded-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg"
+            :disabled="isLoginSubmitting"
+          >
+            로그인
+          </button>
+        </form>
+
+        <div class="mt-6 text-center">
+          <span class="text-sm text-slate-600">계정이 없으신가요? </span>
+          <button @click="openSignupModal" class="text-sm text-gray-600 hover:text-gray-800 font-medium transition-colors">
+            회원가입
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div v-if="showSignupModal" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div
+      @click="closeModals"
+      class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"
+    ></div>
+
+    <div class="relative bg-white/90 backdrop-blur-md max-w-md w-full rounded-2xl shadow-2xl border border-slate-200/50 overflow-hidden animate-modal-in">
+      <div class="relative bg-gradient-to-r from-gray-600 to-slate-700 text-white p-6">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xl font-bold">회원가입</h3>
+          <button @click="closeModals" class="text-white/80 hover:text-white transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <p class="text-gray-100 text-sm mt-2">대한민국의 미래를 함께 그려나가요</p>
+      </div>
+
+      <div class="p-6">
+        <form @submit.prevent="handleSignup" class="space-y-4">
+          <div>
+            <label class="block text-slate-700 text-sm font-medium mb-2">아이디</label>
+            <div class="relative flex">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+              <input
+                v-model="signupForm.userId"
+                type="text"
+                required
+                minlength="4"
+                maxlength="20"
+                class="w-full pl-10 pr-4 py-3 bg-slate-100/70 border border-slate-200 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 focus:outline-none transition-colors"
+                placeholder="user1"
+              >
+              <button
+                type="button"
+                @click="checkUserId"
+                :disabled="isCheckingId"
+                class="ml-2 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg text-sm font-medium transition-colors duration-200"
+              >
+                중복 확인
+              </button>
+            </div>
+            <p v-if="signupErrors.userId" class="text-red-600 mt-2 text-sm">
+              {{ signupErrors.userId }}
+            </p>
+            <p v-if="userIdCheckMessage" :class="{'text-green-600': isUserIdAvailable, 'text-red-600': !isUserIdAvailable}" class="mt-2 text-sm">
+              {{ userIdCheckMessage }}
+            </p>
+          </div>
+
+          <div>
+            <label class="block text-slate-700 text-sm font-medium mb-2">닉네임</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                </svg>
+              </div>
+              <input
+                v-model="signupForm.username"
+                type="text"
+                required
+                maxlength="50"
+                class="w-full pl-10 pr-4 py-3 bg-slate-100/70 border border-slate-200 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 focus:outline-none transition-colors"
+                placeholder="상큼한 길동이"
+              >
+            </div>
+            <p v-if="signupErrors.username" class="text-red-600 mt-2 text-sm">
+              {{ signupErrors.username }}
+            </p>
+          </div>
+
+          <div>
+            <label class="block text-slate-700 text-sm font-medium mb-2">비밀번호</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <input
+                v-model="signupForm.password"
+                type="password"
+                required
+                minlength="8"
+                class="w-full pl-10 pr-4 py-3 bg-slate-100/70 border border-slate-200 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 focus:outline-none transition-colors"
+                placeholder="????????"
+              >
+            </div>
+            <p v-if="signupErrors.password" class="text-red-600 mt-2 text-sm">
+              {{ signupErrors.password }}
+            </p>
+          </div>
+
+          <div>
+            <label class="block text-slate-700 text-sm font-medium mb-2">비밀번호 확인</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <input
+                v-model="signupForm.confirmPassword"
+                type="password"
+                required
+                class="w-full pl-10 pr-4 py-3 bg-slate-100/70 border border-slate-200 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 focus:outline-none transition-colors"
+                placeholder="????????"
+              >
+            </div>
+            <p v-if="signupErrors.confirmPassword" class="text-red-600 mt-2 text-sm">
+              {{ signupErrors.confirmPassword }}
+            </p>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-gray-600 hover:bg-gray-700 text-white py-3 rounded-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg"
+            :disabled="isSignupSubmitting"
+          >
+            회원가입
+          </button>
+          <p v-if="signupMessage" :class="{'text-green-600': isSignupSuccess, 'text-red-600': !isSignupSuccess}" class="mt-2 text-sm">
+            {{ signupMessage }}
+          </p>
+        </form>
+
+        <div class="mt-6 text-center">
+          <span class="text-sm text-slate-600">이미 계정이 있으신가요? </span>
+          <button @click="openLoginModal" class="text-sm text-gray-600 hover:text-gray-800 font-medium transition-colors">
+            로그인
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-// 필요한 경우 여기에 스크립트 로직 추가 (예: 햄버거 메뉴 클릭 이벤트)
+import { ref, reactive, onMounted } from 'vue' //
+import axios from 'axios' //
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const activeNav = ref('') // Added for header navigation highlighting, keep it for header's original functionality
+
+// Modals state
+const showLoginModal = ref(false)
+const showSignupModal = ref(false)
+
+const mobileMenuOpen = ref(false) // Added for mobile menu, keep it for header's original functionality
+
+// --- Transferred from TheSidebar.txt ---
+const isLoggedIn = ref(false) //
+const loggedInUser = ref(null) //
+
+// Login form state
+const loginForm = reactive({
+userId: '', //
+password: '', //
+rememberMe: false //
+})
+const isLoginSubmitting = ref(false) //
+const loginMessage = ref('') //
+const isLoginSuccess = ref(false) //
+
+// Signup form state
+const signupForm = reactive({
+userId: '', //
+username: '', //
+password: '', //
+confirmPassword: '', //
+agreeTerms: false // Not present in provided sidebar code, keeping original header structure
+})
+const signupErrors = reactive({ //
+userId: '', //
+password: '', //
+confirmPassword: '', //
+username: '' //
+})
+const isSignupSubmitting = ref(false) //
+const signupMessage = ref('') //
+const isSignupSuccess = ref(false) //
+
+const isCheckingId = ref(false) //
+const userIdCheckMessage = ref('') //
+const isUserIdAvailable = ref(false) //
+// --- End of transferred state variables ---
+
+
+// Header's original navigation functions
+const setActiveNav = (nav) => {
+activeNav.value = nav
+}
+
+const toggleMobileMenu = () => {
+mobileMenuOpen.value = !mobileMenuOpen.value
+}
+
+// --- Transferred from TheSidebar.txt ---
+const handleLogin = async () => { //
+isLoginSubmitting.value = true; //
+loginMessage.value = ''; //
+isLoginSuccess.value = false; //
+
+if (!loginForm.userId || !loginForm.password) { //
+  loginMessage.value = '아이디와 비밀번호를 모두 입력해주세요.'; //
+  isLoginSubmitting.value = false; //
+  return; //
+}
+
+try {
+  const response = await axios.post('/api/users/login', { //
+    userId: loginForm.userId, //
+    password: loginForm.password, //
+  }); //
+  console.log(response); //
+
+  if (response.data && response.data.userId) { //
+    loginMessage.value = `${response.data.userName}님, 로그인되었습니다.`; //
+    isLoginSuccess.value = true; //
+
+    isLoggedIn.value = true; //
+    loggedInUser.value = response.data; //
+
+    loginForm.userId = ''; //
+    loginForm.password = ''; //
+
+    localStorage.setItem('loggedInUser', JSON.stringify(response.data)); //
+    closeModals() // Close modal on successful login
+  } else {
+    loginMessage.value = '아이디 또는 비밀번호가 일치하지 않습니다.'; //
+    isLoginSuccess.value = false; //
+  }
+} catch (error) {
+  console.error('로그인 실패:', error); //
+  isLoginSuccess.value = false; //
+  if (error.response) { //
+    if (error.response.status === 401) { //
+      loginMessage.value = '아이디 또는 비밀번호가 일치하지 않습니다.'; //
+    } else if (error.response.status === 404) { //
+      loginMessage.value = '존재하지 않는 아이디입니다.'; //
+    } else {
+      loginMessage.value = `로그인 실패: ${error.response.status} 오류가 발생했습니다.`; //
+    }
+  } else if (error.request) { //
+    loginMessage.value =
+      '로그인 요청 중 오류가 발생했습니다. 네트워크 연결을 확인해주세요.'; //
+  } else {
+    loginMessage.value = '로그인 요청을 보내는 중 오류가 발생했습니다.'; //
+  }
+} finally {
+  isLoginSubmitting.value = false; //
+}
+};
+
+const handleLogout = async () => { //
+try {
+  // await axios.post('/api/users/logout'); //
+  console.log('로그아웃 되었습니다.'); //
+} catch (error) {
+  console.error('로그아웃 처리 중 오류 발생:', error); //
+} finally {
+  isLoggedIn.value = false; //
+  loggedInUser.value = null; //
+  loginMessage.value = '로그아웃되었습니다.'; //
+  isLoginSuccess.value = true; //
+
+  localStorage.removeItem('loggedInUser'); //
+  // activeTab.value = 'login'; // // Removed as there are no tabs in header modal
+  // router.push('/'); //
+}
+};
+
+const validateSignupForm = () => { //
+let isValid = true; //
+Object.keys(signupErrors).forEach((key) => (signupErrors[key] = '')); //
+
+if (!signupForm.userId) { //
+  signupErrors.userId = '아이디를 입력해주세요.'; //
+  isValid = false; //
+} else if (signupForm.userId.length < 4 || signupForm.userId.length > 20) { //
+  signupErrors.userId = '아이디는 4자 이상 20자 이하로 입력해주세요.'; //
+  isValid = false; //
+}
+
+if (!signupForm.password) { //
+  signupErrors.password = '비밀번호를 입력해주세요.'; //
+  isValid = false; //
+} else if (signupForm.password.length < 8) { //
+  signupErrors.password = '비밀번호는 최소 8자 이상이어야 합니다.'; //
+  isValid = false; //
+}
+
+if (signupForm.password !== signupForm.confirmPassword) { //
+  signupErrors.confirmPassword = '비밀번호가 일치하지 않습니다.'; //
+  isValid = false; //
+}
+
+if (!signupForm.username) { //
+  signupErrors.username = '사용자 이름을 입력해주세요.'; //
+  isValid = false; //
+} else if (signupForm.username.length > 50) { //
+  signupErrors.username = '사용자 이름은 50자를 초과할 수 없습니다.'; //
+  isValid = false; //
+}
+return isValid; //
+};
+
+const checkUserId = async () => { //
+signupErrors.userId = ''; //
+userIdCheckMessage.value = ''; //
+isUserIdAvailable.value = false; //
+
+if (!signupForm.userId) { //
+  signupErrors.userId = '아이디를 입력해주세요.'; //
+  return; //
+}
+if (signupForm.userId.length < 4 || signupForm.userId.length > 20) { //
+  signupErrors.userId = '아이디는 4자 이상 20자 이하로 입력해주세요.'; //
+  return; //
+}
+
+isCheckingId.value = true; //
+try {
+  const response = await axios.get( //
+    `/api/users/idConfirm?userId=${signupForm.userId}` //
+  ); //
+  console.log(response); //
+
+  if (response.data === 0) { //
+    userIdCheckMessage.value = `사용 가능한 아이디입니다.`; //
+    isUserIdAvailable.value = true; //
+  } else if (response.data !== 0) { //
+    userIdCheckMessage.value = `이미 사용 중인 아이디입니다.`; //
+    isUserIdAvailable.value = false; //
+  } else {
+    userIdCheckMessage.value =
+      '아이디 확인 중 알 수 없는 응답이 발생했습니다.'; //
+    isUserIdAvailable.value = false; //
+  }
+} catch (error) {
+  console.error('아이디 중복 확인 실패:', error); //
+  isUserIdAvailable.value = false; //
+  if (error.response) { //
+    userIdCheckMessage.value = `아이디 확인 실패: ${error.response.status} 오류`; //
+  } else if (error.request) { //
+    userIdCheckMessage.value =
+      '아이디 확인 요청 중 오류가 발생했습니다. 네트워크 연결을 확인해주세요.'; //
+  } else {
+    userIdCheckMessage.value =
+      '아이디 확인 요청을 보내는 중 오류가 발생했습니다.'; //
+  }
+} finally {
+  isCheckingId.value = false; //
+}
+};
+
+const handleSignup = async () => { //
+if (!validateSignupForm()) { //
+  signupMessage.value = '입력값을 확인해주세요.'; //
+  isSignupSuccess.value = false; //
+  return; //
+}
+
+if (!isUserIdAvailable.value) { //
+  signupMessage.value =
+    '아이디 중복 확인을 완료하고 사용 가능한 아이디를 선택해주세요.'; //
+  isSignupSuccess.value = false; //
+  return; //
+}
+
+isSignupSubmitting.value = true; //
+signupMessage.value = ''; //
+userIdCheckMessage.value = ''; //
+isUserIdAvailable.value = false; //
+try {
+  const response = await axios.post('/api/users/register', { //
+    userId: signupForm.userId, //
+    password: signupForm.password, //
+    userName: signupForm.username, //
+  }); //
+  if (response.data === 1) { //
+    signupMessage.value = '회원가입이 완료되었습니다!'; //
+    isSignupSuccess.value = true; //
+    Object.keys(signupForm).forEach((key) => (signupForm[key] = '')); //
+    Object.keys(signupErrors).forEach((key) => (signupErrors[key] = '')); //
+    setTimeout(() => { //
+      // activeTab.value = 'login'; // // Removed as there are no tabs in header modal
+      showSignupModal.value = false; // Close signup modal
+      showLoginModal.value = true; // Open login modal
+      loginMessage.value = '회원가입이 완료되었습니다. 이제 로그인해주세요.'; //
+      isLoginSuccess.value = true; //
+      signupMessage.value = ''; //
+    }, 1500);
+  } else if (response.data === 0) { //
+    signupMessage.value = '회원가입에 실패했습니다. 이미 사용 중인 아이디일 수 있습니다.'; //
+    isSignupSuccess.value = false; //
+  } else {
+    signupMessage.value = '회원가입 중 알 수 없는 응답이 발생했습니다.'; //
+    isSignupSuccess.value = false; //
+  }
+} catch (error) {
+  console.error('회원가입 실패:', error); //
+  isSignupSuccess.value = false; //
+  if (error.response) { //
+    if (error.response.status === 409) { //
+      signupErrors.userId = '이미 사용 중인 아이디입니다.'; //
+      signupMessage.value = '회원가입 실패: 이미 사용 중인 아이디입니다.'; //
+    } else if (error.response.status === 400) { //
+      signupMessage.value = '입력값을 확인해주세요.'; //
+    } else {
+      signupMessage.value = `회원가입 실패: ${error.response.status} 오류가 발생했습니다.`; //
+    }
+  } else if (error.request) { //
+    signupMessage.value = '회원가입 실패: 서버 응답이 없습니다. 네트워크 연결을 확인해주세요.'; //
+  } else {
+    signupMessage.value = '회원가입 실패: 요청을 보내는 중 오류가 발생했습니다.'; //
+  }
+} finally {
+  isSignupSubmitting.value = false; //
+}
+};
+// --- End of transferred functions ---
+
+
+const openLoginModal = () => {
+showLoginModal.value = true
+showSignupModal.value = false
+loginMessage.value = '' // Clear messages when opening modal
+signupMessage.value = '' // Clear messages when opening modal
+Object.keys(loginForm).forEach((key) => { if (key !== 'rememberMe') loginForm[key] = '' }); // Clear login form except rememberMe
+Object.keys(signupForm).forEach((key) => (signupForm[key] = '')); // Clear signup form
+Object.keys(signupErrors).forEach((key) => (signupErrors[key] = '')); // Clear signup errors
+userIdCheckMessage.value = ''; // Clear user ID check message
+isUserIdAvailable.value = false; // Reset user ID availability
+}
+
+const openSignupModal = () => {
+showSignupModal.value = true
+showLoginModal.value = false
+loginMessage.value = '' // Clear messages when opening modal
+signupMessage.value = '' // Clear messages when opening modal
+Object.keys(loginForm).forEach((key) => { if (key !== 'rememberMe') loginForm[key] = '' }); // Clear login form except rememberMe
+Object.keys(signupForm).forEach((key) => (signupForm[key] = '')); // Clear signup form
+Object.keys(signupErrors).forEach((key) => (signupErrors[key] = '')); // Clear signup errors
+userIdCheckMessage.value = ''; // Clear user ID check message
+isUserIdAvailable.value = false; // Reset user ID availability
+}
+
+const closeModals = () => {
+showLoginModal.value = false
+showSignupModal.value = false
+loginMessage.value = '' // Clear messages when closing modal
+signupMessage.value = '' // Clear messages when closing modal
+Object.keys(loginForm).forEach((key) => { if (key !== 'rememberMe') loginForm[key] = '' }); // Clear login form except rememberMe
+Object.keys(signupForm).forEach((key) => (signupForm[key] = '')); // Clear signup form
+Object.keys(signupErrors).forEach((key) => (signupErrors[key] = '')); // Clear signup errors
+userIdCheckMessage.value = ''; // Clear user ID check message
+isUserIdAvailable.value = false; // Reset user ID availability
+}
+
+// --- Transferred from TheSidebar.txt ---
+onMounted(() => { //
+try {
+  const storedUser = localStorage.getItem('loggedInUser'); //
+  if (storedUser) { //
+    const user = JSON.parse(storedUser); //
+    isLoggedIn.value = true; //
+    loggedInUser.value = user; //
+    loginMessage.value = `${user.userName}님, 로그인되었습니다.`; //
+    isLoginSuccess.value = true; //
+  }
+} catch (e) {
+  console.error('Failed to parse user from localStorage', e); //
+  localStorage.removeItem('loggedInUser'); //
+}
+});
+// --- End of transferred onMounted ---
+
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap");
-
-.main-header {
-  display: flex;
-  flex-direction: column; /* 세로로 정렬 */
-  background: #232a33; /* 어두운 배경색 */
-  color: #f7f9fb; /* 텍스트 색상 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+width: 6px;
 }
 
-.header-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2.5rem 1.5rem;
-  height: 56px; /* 고정된 높이 */
+::-webkit-scrollbar-track {
+background: #f1f5f9;
 }
 
-.header-left,
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 1rem; /* 요소 간 간격 */
+::-webkit-scrollbar-thumb {
+background: #cbd5e1;
+border-radius: 3px;
 }
 
-.menu-button,
-.search-button-icon,
-.sign-in-button {
-  background: none;
-  border: none;
-  color: inherit;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  padding: 0.5rem;
-  font-size: 1rem;
+::-webkit-scrollbar-thumb:hover {
+background: #94a3b8;
 }
 
-.menu-button svg,
-.search-button-icon svg,
-.sign-in-button svg {
-  width: 20px;
-  height: 20px;
-  margin-right: 0.25rem;
+/* Modal Animations */
+@keyframes modal-in {
+from {
+  opacity: 0;
+  transform: translateY(-20px) scale(0.95);
+}
+to {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
 }
 
-.subscribe-button {
-  background: #354052; /* 어두운 배경색에 맞는 버튼 색상 */
-  color: #fff;
-  border: 1px solid #4f8cff;
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s ease, border-color 0.3s ease;
+.animate-modal-in {
+animation: modal-in 0.3s ease-out forwards;
 }
 
-.subscribe-button:hover {
-  background: #4f8cff;
-  border-color: #4f8cff;
-}
-
-.header-center {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center; /* 로고 중앙 정렬 */
-}
-
-.logo {
-  text-decoration: none;
-  color: inherit;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.logo-main {
-  font-family: "Pretendard", "Noto Sans KR", sans-serif;
-  font-size: 1.5rem; /* 'Under The Korea' 크기 */
-  font-weight: 700;
-  letter-spacing: -0.05em;
-  line-height: 1.2;
-}
-
-.logo-sub {
-  font-family: "Pretendard", "Noto Sans KR", sans-serif;
-  font-size: 0.75rem; /* '대한민국의 현재, 대한민국의 미래' 크기 */
-  opacity: 0.7;
-}
-
-/* --- 하단 내비게이션 바 스타일 --- */
-.header-bottom-nav {
-  display: flex;
-  justify-content: center; /* 중앙 정렬 */
-  align-items: center;
-  padding: 0.3rem 1.5rem; /* 상하 여백 조정 */
-  background-color: #2b3543; /* 상단 헤더보다 약간 밝은 어두운 배경 */
-  gap: 1.5rem; /* 링크 간 간격 */
-  flex-wrap: wrap; /* 작은 화면에서 줄바꿈 허용 */
-}
-
-.search-button-text svg {
-  width: 20px;
-  height: 20px;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: #f7f9fb;
-  font-weight: 500;
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
-  position: relative; /* 밑줄 효과를 위해 position 설정 */
-  transition: color 0.2s ease;
-  font-family: "Pretendard", "Noto Sans KR", sans-serif;
-  font-size: 0.95rem;
-}
-
-/* 밑줄 효과 */
-.nav-link::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 0;
-  height: 3px; /* 밑줄 두께 */
-  background-color: #4f8cff; /* 밑줄 색상 */
-  transform: translateX(-50%);
-  transition: width 0.3s ease-in-out; /* 너비 애니메이션 */
-}
-
-.nav-link:hover::after,
-.nav-link.router-link-active::after {
-  width: calc(100% - 1rem); /* padding을 고려한 너비 (좌우 0.5rem씩) */
-}
-
-.nav-link:hover {
-  color: #fff; /* hover 시 텍스트 색상 변경 */
-}
-
-/* 현재 활성화된 링크 스타일 (밑줄 포함) */
-.nav-link.router-link-active {
-  color: #4f8cff; /* 활성화된 링크 텍스트 색상 */
-  font-weight: 700;
-}
-
-/* 반응형 디자인 */
-@media (max-width: 1024px) {
-  .header-top {
-    padding: 0.5rem 1rem;
-  }
-  .header-left,
-  .header-right {
-    gap: 0.5rem;
-  }
-  .subscribe-button {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.8rem;
-  }
-  .sign-in-button {
-    font-size: 0.8rem;
-  }
-  .sign-in-button svg {
-    width: 16px;
-    height: 16px;
-  }
-  .logo-main {
-    font-size: 1.2rem;
-  }
-  .logo-sub {
-    font-size: 0.6rem;
-  }
-
-  .header-bottom-nav {
-    justify-content: flex-start; /* 작은 화면에서 왼쪽 정렬 */
-    padding: 0.8rem 1rem;
-    gap: 1rem;
-  }
-  .search-bar-container {
-    flex-grow: 1;
-    margin-right: 0;
-    max-width: none;
-  }
-  .nav-link {
-    padding: 0.4rem 0.6rem;
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 768px) {
-  /* 상단 헤더 아이템 재배치 및 일부 숨기기 */
-  .header-right .subscribe-button {
-    display: none; /* 작은 화면에서 'Subscribe' 버튼 숨기기 */
-  }
-  .header-right .sign-in-button span {
-    display: none; /* 'Sign In' 텍스트 숨기기 */
-  }
-  .sign-in-button svg {
-    margin-right: 0;
-  }
-  .header-left .search-button-icon {
-    display: none; /* 왼쪽 검색 아이콘 숨기기 (하단에 검색 바 있으므로) */
-  }
-  .header-center {
-    justify-content: flex-start; /* 로고를 왼쪽으로 정렬 */
-    margin-left: 0.5rem;
-  }
-
-  /* 하단 내비게이션 바 */
-  .header-bottom-nav {
-    flex-direction: column; /* 검색 바와 링크들을 세로로 정렬 */
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-  .search-bar-container {
-    width: 100%; /* 검색 바 전체 너비 */
-    margin-bottom: 0.5rem;
-  }
-}
+/* Tailwind CSS classes are used for most styling.
+ Ensure Tailwind CSS is properly set up in your project.
+*/
 </style>
