@@ -21,5 +21,6 @@ public class Posts {
 	private String createdAt;
 	private String updatedAt;
 	private int viewCount;
+	private int likeCount;
 	
 }

@@ -60,20 +60,22 @@ const fetchPosts = async (category) => {
     });
     // 받은 데이터를 템플릿이 사용하는 이름으로 매핑합니다.
     posts.value = response.data.map(item => {
-      
+      const videoId = item.videoUrl ? item.videoUrl.split('?')[0] : '';
+      const youtubeTumbnail = videoId ? "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg" : '';
+
       return {
-        id: item.postId, // postid -> post.id (클릭 이벤트 및 key)
-        category: item.category, // category -> post.category
-        time: formatTime(item.createdAt), // createdat -> post.time (포맷팅 적용)
-        title: item.title, // title -> post.title
-        youtube: item.videoUrl, // videourl -> post.youtube (YouTube 비디오 ID만 있다고
-        img: item.imageUrl, // imageurl -> post.img (이미지 경로 조정 필요)
-        body: item.content, // content -> post.body
-        likes: item.likes || 0, // DB에 likes 컬럼이 없으므로 임의로 0, 백엔드에서 전달되면 해당 값 사용
-        comments: item.comments || 0, // DB에 comments 컬럼이 없으므로 임의로 0, 백엔드에서 전달되면 해당 값 사용
-        viewcount: item.viewCount || 0 // viewcount는 기존 컬럼이므로 그대로 사용
+        id: item.postId,
+        category: item.category,
+        time: formatTime(item.createdAt),
+        title: item.title,
+        youtube: item.videoUrl,
+        youtubeTumbnail: youtubeTumbnail, // 수정된 부분
+        img: item.imageUrl,
+        body: item.content,
+        likes: item.likes || 0,
+        comments: item.comments || 0,
+        viewcount: item.viewCount || 0
       };
- 
     });
     console.log('게시물 데이터:', posts.value); // 디버깅용 로그
 
@@ -110,13 +112,8 @@ watch(() => route.query.category, (newCategory, oldCategory) => {
         <span class="time">{{ postItem.time }}</span>
       </div>
       <h1 class="post-title">{{ postItem.title }}</h1>
-      <div v-if="postItem.youtube" class="post-media">
-        <iframe
-          :src="`http://www.youtube.com/embed/${postItem.youtube}`" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          title="YouTube video player"
-        ></iframe>
+      <div v-if="postItem.youtubeTumbnail" class="post-media">
+        <img :src="postItem.youtubeTumbnail" alt="유튜브 썸네일" />
       </div>
       <div v-else-if="postItem.img" class="post-img">
         <img :src="postItem.img" :alt="postItem.title" />

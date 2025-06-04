@@ -3,14 +3,28 @@
     <div class="header-top">
       <div class="header-left">
         <button class="menu-button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
             <line x1="3" y1="12" x2="21" y2="12"></line>
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <line x1="3" y1="18" x2="21" y2="18"></line>
           </svg>
         </button>
         <button class="search-button-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
@@ -27,7 +41,14 @@
       <div class="header-right">
         <button class="subscribe-button">Subscribe</button>
         <button class="sign-in-button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
             <circle cx="12" cy="7" r="4"></circle>
           </svg>
@@ -37,11 +58,31 @@
     </div>
 
     <nav class="header-bottom-nav">
-      <router-link :to="{ path: '/philosophy', query: { category: '철학' } }" class="nav-link">철학</router-link>
-      <router-link :to="{ path: '/politics', query: { category: '정치' } }" class="nav-link">정치</router-link>
-      <router-link :to="{ path: '/social', query: { category: '사회문제' } }" class="nav-link">사회문제</router-link>
-      <router-link :to="{ path: '/suggest', query: { category: '제안' } }" class="nav-link">제안</router-link>
-      <router-link :to="{ path: '/motto', query: { category: '좌우명' } }" class="nav-link">좌우명</router-link>
+      <router-link
+        :to="{ path: '/philosophy', query: { category: '철학' } }"
+        class="nav-link"
+        >철학</router-link
+      >
+      <router-link
+        :to="{ path: '/politics', query: { category: '정치' } }"
+        class="nav-link"
+        >정치</router-link
+      >
+      <router-link
+        :to="{ path: '/social', query: { category: '사회문제' } }"
+        class="nav-link"
+        >사회문제</router-link
+      >
+      <router-link
+        :to="{ path: '/BalanceGame', query: { category: '광장' } }"
+        class="nav-link"
+        >광장</router-link
+      >
+      <router-link
+        :to="{ path: '/motto', query: { category: '좌우명' } }"
+        class="nav-link"
+        >좌우명</router-link
+      >
     </nav>
   </header>
 </template>
@@ -51,7 +92,7 @@
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap");
 
 .main-header {
   display: flex;
@@ -131,7 +172,7 @@
 }
 
 .logo-main {
-  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
   font-size: 1.5rem; /* 'Under The Korea' 크기 */
   font-weight: 700;
   letter-spacing: -0.05em;
@@ -139,7 +180,7 @@
 }
 
 .logo-sub {
-  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
   font-size: 0.75rem; /* '대한민국의 현재, 대한민국의 미래' 크기 */
   opacity: 0.7;
 }
@@ -168,13 +209,13 @@
   border-radius: 4px;
   position: relative; /* 밑줄 효과를 위해 position 설정 */
   transition: color 0.2s ease;
-  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
   font-size: 0.95rem;
 }
 
 /* 밑줄 효과 */
 .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   bottom: 0;
@@ -200,13 +241,13 @@
   font-weight: 700;
 }
 
-
 /* 반응형 디자인 */
 @media (max-width: 1024px) {
   .header-top {
     padding: 0.5rem 1rem;
   }
-  .header-left, .header-right {
+  .header-left,
+  .header-right {
     gap: 0.5rem;
   }
   .subscribe-button {

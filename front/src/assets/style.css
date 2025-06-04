@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+:root {
+  /* 베이스 컬러 (70% - 배경, 넓은 영역) */
+  --color-base-light: #f7f9fb; /* 아주 밝은 회색, 거의 흰색 */
+  --color-base-medium: #eef2f6; /* 약간 더 진한 회색 */
+  --color-base-dark: #dbe2e9; /* 테두리, 구분선 등 */
+
+  /* 메인 컬러 (25% - 주요 콘텐츠 배경, 카드, 폰트 등) */
+  --color-main-bg: #ffffff; /* 카드 배경, 주요 콘텐츠 영역 */
+  --color-main-text: #2c3e50; /* 기본 텍스트 색상 (짙은 회색/남색) */
+  --color-main-heading: #1a242f; /* 제목 텍스트 색상 */
+  --color-main-subtle-text: #6c7a89; /* 보조 텍스트, 설명 */
+
+  /* 포인트 컬러 (5% - 액션 버튼, 링크, 강조 요소) */
+  --color-point-primary: #4a90e2; /* 파란색 계열, 주요 액션 버튼 */
+  --color-point-secondary: #2ecc71; /* 초록색 계열, 긍정적 액션 */
+  --color-point-accent: #e74c3c; /* 빨간색 계열, 부정적 액션 또는 경고 */
+
+  /* 추가적인 중립 색상 (회색조) */
+  --color-grey-light: #f0f0f0;
+  --color-grey-medium: #cccccc;
+  --color-grey-dark: #888888;
+}

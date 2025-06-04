@@ -6,7 +6,7 @@ const routes = [
   {path: '/philosophy', name: 'philosophy', component: () => import('../views/PhilosophyView.vue')},
   {path: '/politics', name: 'politics', component: () => import('../views/PoliticsView.vue')},
   {path: '/social', name: 'social', component: () => import('../views/SocialView.vue')},
-  {path: '/suggest', name: 'suggest', component: () => import('../views/SuggestView.vue')},
+  {path: '/BalanceGame', name: 'BalanceGame', component: () => import('../views/BalanceGame.vue')},
   {path: '/motto', name: 'motto', component: () => import('../views/MottoView.vue')},
   {path: '/register', name: 'Register', component: () => import('../views/RegisterPage.vue')},
 ]

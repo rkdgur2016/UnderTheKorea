@@ -3,19 +3,29 @@
 <mapper namespace="com.UnderTheKorea.web.mapper.PostMapper">
 	
 	<select id="loadPosts" parameterType="String" resultType="Posts">
-        select post_id as postId,
-				author_id as authorId,
-				title as title,
-				category as category,
-				content as content,
-				image_url as imageUrl,
-				video_url as videoUrl,
-				created_at as createdAt,
-				updated_at as updatedAt,
-				view_count as viewCount
-		from posts
-		where category = #{category}
-		limit 10;
+        SELECT
+		    p.post_id AS postId,
+		    p.author_id AS authorId,
+		    p.title AS title,
+		    p.category AS category,
+		    p.content AS content,
+		    p.image_url AS imageUrl,
+		    p.video_url AS videoUrl,
+		    p.created_at AS createdAt,
+		    p.updated_at AS updatedAt,
+		    p.view_count AS viewCount,
+		    COUNT(l.user_id) AS likeCount
+		FROM
+		    posts p
+		LEFT JOIN
+		    likes l ON p.post_id = l.target_id
+		WHERE
+		    p.category = '#{category}'
+		GROUP BY
+		    p.post_id, p.author_id, p.title, p.category, p.content, p.image_url, p.video_url, p.created_at, p.updated_at, p.view_count
+		ORDER BY
+		    p.created_at DESC
+		LIMIT 10;
     </select>
 	
 </mapper>

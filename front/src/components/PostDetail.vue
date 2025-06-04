@@ -1,3 +1,163 @@
+// PostDetail.txt (수정된 내용)
+<script setup>
+import { ref, watch, defineProps, defineEmits, computed } from 'vue'; // computed 추가
+
+const props = defineProps({
+  // postId는 댓글을 위한 데이터 fetching에 필요할 수 있습니다.
+  postId: {
+    type: Number,
+    default: null
+  },
+  // PostView에서 넘겨받을 게시물 데이터 (핵심)
+  post: {
+    type: Object,
+    default: null
+  }
+});
+
+const emit = defineEmits(['close']);
+
+const post = ref(props.post);
+const comments = ref([]);
+const showDetail = ref(false);
+
+// 투표 관련 상태 추가
+const showVoteCreation = ref(false); // 투표 생성 폼 표시 여부
+const voteOptions = ref({ // 투표 옵션 (찬성/반대 소제목)
+  agreeTitle: '',
+  disagreeTitle: ''
+});
+const currentVote = ref(null); // 현재 진행 중인 투표 데이터 { agree: N, disagree: M, agreeTitle: '...', disagreeTitle: '...' }
+
+// 투표 총 개수 계산
+const totalVotes = computed(() => {
+  return (currentVote.value?.agree || 0) + (currentVote.value?.disagree || 0);
+});
+
+// 찬성 비율 계산 (bar 그래프에 사용)
+const agreePercentage = computed(() => {
+  if (totalVotes.value === 0) return 50; // 투표가 없으면 50%로 초기화 또는 0%로 설정
+  return (currentVote.value.agree / totalVotes.value) * 100;
+});
+
+// 반대 비율 계산
+const disagreePercentage = computed(() => {
+  if (totalVotes.value === 0) return 50;
+  return (currentVote.value.disagree / totalVotes.value) * 100;
+});
+
+const fetchCommentsForPost = async (id) => {
+  // 실제 API 호출 로직을 여기에 구현합니다.
+  // 여기서는 postId에 맞는 더미 댓글 데이터를 사용합니다.
+  if (id === 1) {
+    comments.value = [
+      {
+        id: 1,
+        author: '익명1',
+        time: '5분 전',
+        body: '정말 중요한 내용이네요. 시청 잘 했습니다.',
+        likes: 15,
+        replies: [
+          { id: 1.1, author: '관리자', time: '2분 전', body: '관심 가져주셔서 감사합니다.', likes: 3 }
+        ]
+      },
+      {
+        id: 2,
+        author: '궁금러',
+        time: '10분 전',
+        body: '다음 논의는 언제쯤 진행될까요?',
+        likes: 8,
+        replies: []
+      }
+    ];
+  } else if (id === 2) {
+    comments.value = [
+      {
+        id: 3,
+        author: '시민123',
+        time: '1시간 전',
+        body: '정책 방향이 명확해서 좋네요.',
+        likes: 22,
+        replies: []
+      }
+    ];
+  } else {
+    comments.value = [];
+  }
+};
+
+const closeDetail = () => {
+  showDetail.value = false;
+  setTimeout(() => {
+    emit('close');
+  }, 300); // 애니메이션 시간과 맞춰서 컴포넌트 언마운트
+};
+
+// 투표 생성 폼 열기
+const startVote = () => {
+  showVoteCreation.value = true;
+};
+
+// 투표 생성 제출
+const createVote = () => {
+  if (!voteOptions.value.agreeTitle || !voteOptions.value.disagreeTitle) {
+    alert('찬성과 반대 소제목을 모두 입력해주세요.');
+    return;
+  }
+  // 실제로는 여기서 백엔드로 투표 생성 요청을 보냅니다.
+  // 여기서는 프론트엔드에서 더미 데이터로 투표를 시작합니다.
+  currentVote.value = {
+    agree: 0,
+    disagree: 0,
+    agreeTitle: voteOptions.value.agreeTitle,
+    disagreeTitle: voteOptions.value.disagreeTitle,
+    isVoted: false // 사용자가 이 투표에 참여했는지 여부 (더미)
+  };
+  showVoteCreation.value = false; // 폼 닫기
+  // voteOptions 초기화
+  voteOptions.value = { agreeTitle: '', disagreeTitle: '' };
+};
+
+// 투표하기
+const castVote = (type) => {
+  if (!currentVote.value) return;
+  if (currentVote.value.isVoted) {
+    alert('이미 투표하셨습니다.');
+    return;
+  }
+
+  if (type === 'agree') {
+    currentVote.value.agree++;
+  } else if (type === 'disagree') {
+    currentVote.value.disagree++;
+  }
+  currentVote.value.isVoted = true; // 투표 완료 처리 (더미)
+  // 실제로는 백엔드로 투표 요청을 보내고, 결과를 업데이트합니다.
+};
+
+// props.post가 변경될 때 post.value를 업데이트하고 애니메이션 시작
+watch(() => props.post, (newPost) => {
+  post.value = newPost;
+  if (newPost) {
+    // 게시물 데이터가 있을 때만 댓글을 가져오고 애니메이션 시작
+    fetchCommentsForPost(newPost.id); // 게시물 ID로 댓글 가져오기
+    setTimeout(() => {
+      showDetail.value = true;
+    }, 50);
+    // 새 게시물이 로드될 때 기존 투표 정보 초기화 (필요시)
+    currentVote.value = null;
+    showVoteCreation.value = false;
+  } else {
+    // 게시물 데이터가 null이 되면 댓글도 초기화하고 애니메이션 비활성화
+    comments.value = [];
+    showDetail.value = false;
+    currentVote.value = null;
+    showVoteCreation.value = false;
+  }
+}, { immediate: true });
+// 컴포넌트가 처음 마운트될 때도 실행
+</script>
+
 <template>
   <div class="post-detail-overlay" @click.self="closeDetail">
     <div class="post-detail-card" :class="{ 'slide-in': showDetail }">
@@ -9,9 +169,10 @@
           <span class="time">{{ post.time }}</span>
         </div>
         <h1 class="post-title">{{ post.title }}</h1>
+      
         <div v-if="post.youtube" class="post-media">
           <iframe
-            :src="`http://www.youtube.com/embed/${post.youtube}`" frameborder="0"
+            :src="`https://www.youtube.com/embed/${post.youtube}`" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
             title="YouTube video player"
@@ -23,7 +184,45 @@
         <div class="post-body">{{ post.body }}</div>
         <div class="post-actions">
           <button class="action-btn">👍 {{ post.likes }}</button>
-          <button class="action-btn">💬 {{ post.commentsCount }}</button> <button class="action-btn">🔗 공유</button>
+          <button class="action-btn">💬 {{ post.commentsCount }}</button>
+          <button class="action-btn">🔗 공유</button>
+          <button v-if="!currentVote" class="action-btn vote-start-btn" @click="startVote">
+            💬 투표 시작하기
+          </button>
+        </div>
+
+        <div v-if="showVoteCreation" class="vote-creation-section">
+          <h2>새로운 투표 시작</h2>
+          <p>게시물 제목: **{{ post.title }}**</p>
+          <div class="input-group">
+            <label for="agreeTitle">찬성 입장 소제목:</label>
+            <input type="text" id="agreeTitle" v-model="voteOptions.agreeTitle" placeholder="예: 법안 발의에 찬성하는 입장" />
+          </div>
+          <div class="input-group">
+            <label for="disagreeTitle">반대 입장 소제목:</label>
+            <input type="text" id="disagreeTitle" v-model="voteOptions.disagreeTitle" placeholder="예: 법안 발의에 반대하는 입장" />
+          </div>
+          <button class="create-vote-btn" @click="createVote">투표 생성</button>
+        </div>
+
+        <div v-if="currentVote" class="vote-section">
+          <h2>토론 투표: {{ post.title }}</h2>
+          <div class="vote-bar-container">
+            <div class="vote-bar-fill agree-fill" :style="{ width: agreePercentage + '%' }"></div>
+          </div>
+          <div class="vote-counts">
+            <span class="agree-count">{{ currentVote.agreeTitle }}: {{ currentVote.agree }}표</span>
+            <span class="disagree-count">{{ currentVote.disagreeTitle }}: {{ currentVote.disagree }}표</span>
+          </div>
+          <div class="vote-buttons">
+            <button class="vote-btn agree-btn" @click="castVote('agree')" :disabled="currentVote.isVoted">
+              {{ currentVote.agreeTitle }} ({{ agreePercentage.toFixed(1) }}%)
+            </button>
+            <button class="vote-btn disagree-btn" @click="castVote('disagree')" :disabled="currentVote.isVoted">
+              {{ currentVote.disagreeTitle }} ({{ disagreePercentage.toFixed(1) }}%)
+            </button>
+          </div>
+          <p v-if="currentVote.isVoted" class="vote-status-message">이미 투표에 참여하셨습니다.</p>
         </div>
 
         <div class="comments-section">
@@ -64,99 +263,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref, watch, defineProps, defineEmits } from 'vue';
-
-const props = defineProps({
-  // postId는 댓글을 위한 데이터 fetching에 필요할 수 있습니다.
-  postId: {
-    type: Number,
-    default: null
-  },
-  // PostView에서 넘겨받을 게시물 데이터 (핵심)
-  post: {
-    type: Object,
-    default: null
-  }
-});
-
-const emit = defineEmits(['close']);
-
-// 이제 post ref는 props.post를 직접 참조하거나 초기화합니다.
-const post = ref(props.post); 
-const comments = ref([]);
-const showDetail = ref(false);
-
-const fetchCommentsForPost = async (id) => {
-  // 실제 API 호출 로직을 여기에 구현합니다.
-  // 여기서는 postId에 맞는 더미 댓글 데이터를 사용합니다.
-  // 실제 백엔드에서는 해당 ID의 게시물 댓글만 가져오도록 구현합니다.
-  // 예: const response = await fetch(`/api/posts/${id}/comments`);
-  // const data = await response.json();
-  // comments.value = data.comments;
-
-  if (id === 1) { // 예시: postId가 1일 때의 댓글
-    comments.value = [
-      {
-        id: 1,
-        author: '익명1',
-        time: '5분 전',
-        body: '정말 중요한 내용이네요. 시청 잘 했습니다.',
-        likes: 15,
-        replies: [
-          { id: 1.1, author: '관리자', time: '2분 전', body: '관심 가져주셔서 감사합니다.', likes: 3 }
-        ]
-      },
-      {
-        id: 2,
-        author: '궁금러',
-        time: '10분 전',
-        body: '다음 논의는 언제쯤 진행될까요?',
-        likes: 8,
-        replies: []
-      }
-    ];
-  } else if (id === 2) { // 예시: postId가 2일 때의 댓글
-    comments.value = [
-      {
-        id: 3,
-        author: '시민123',
-        time: '1시간 전',
-        body: '정책 방향이 명확해서 좋네요.',
-        likes: 22,
-        replies: []
-      }
-    ];
-  } else {
-    comments.value = [];
-  }
-};
-
-const closeDetail = () => {
-  showDetail.value = false;
-  setTimeout(() => {
-    emit('close');
-  }, 300); // 애니메이션 시간과 맞춰서 컴포넌트 언마운트
-};
-
-// props.post가 변경될 때 post.value를 업데이트하고 애니메이션 시작
-watch(() => props.post, (newPost) => {
-  post.value = newPost;
-  if (newPost) {
-    // 게시물 데이터가 있을 때만 댓글을 가져오고 애니메이션 시작
-    fetchCommentsForPost(newPost.id); // 게시물 ID로 댓글 가져오기
-    setTimeout(() => {
-      showDetail.value = true;
-    }, 50);
-  } else {
-    // 게시물 데이터가 null이 되면 댓글도 초기화하고 애니메이션 비활성화
-    comments.value = [];
-    showDetail.value = false;
-  }
-}, { immediate: true }); // 컴포넌트가 처음 마운트될 때도 실행
-</script>
-
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap');
@@ -437,4 +543,178 @@ watch(() => props.post, (newPost) => {
     padding: 1.5rem 1rem;
   }
 }
+
+
+.post-actions {
+  /* 기존 스타일 유지 */
+  display: flex;
+  justify-content: flex-end; /* 버튼을 오른쪽으로 정렬 */
+  align-items: center;
+  gap: 0.53em;
+  margin-top: 0.11em;
+  padding-top: 1rem; /* 댓글 섹션과 분리 */
+  border-top: 1px solid #eee; /* 구분선 추가 */
+  margin-top: 1rem;
+}
+
+.vote-start-btn {
+  background: #28a745; /* 투표 시작 버튼 색상 */
+  color: #fff;
+  border: 1px solid #28a745;
+  padding: 0.5em 1em;
+  border-radius: 0.3em;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+.vote-start-btn:hover {
+  background: #218838;
+}
+
+.vote-creation-section,
+.vote-section {
+  background: #fdfdfd;
+  border: 1px solid #f0f2f5;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.vote-creation-section h2,
+.vote-section h2 {
+  font-size: 1.2rem;
+  color: #232a33;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.vote-creation-section p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #354052;
+}
+
+.input-group input[type="text"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+}
+
+.create-vote-btn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.create-vote-btn:hover {
+  background: #0056b3;
+}
+
+.vote-bar-container {
+  width: 100%;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  display: flex; /* 찬성/반대 바를 나란히 배치 */
+}
+
+.vote-bar-fill {
+  height: 100%;
+  transition: width 0.5s ease-in-out;
+  flex-shrink: 0; /* 내용이 줄어들 때 줄어들지 않도록 */
+}
+
+.agree-fill {
+  background-color: #4CAF50; /* 찬성 색상 */
+}
+
+/* 반대 바는 따로 flex item으로 만들지 않고, 찬성 바가 채우고 남은 공간이 자동으로 반대 영역이 되도록 합니다. */
+/* 또는 아래처럼 명시적으로 반대 바를 추가할 수도 있습니다. */
+/* .disagree-fill {
+  background-color: #f44336; /* 반대 색상 
+} */
+
+
+.vote-counts {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.vote-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.vote-btn {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  font-weight: 600;
+}
+
+.vote-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.agree-btn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.agree-btn:hover:not(:disabled) {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.disagree-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.disagree-btn:hover:not(:disabled) {
+  background-color: #da190b;
+  transform: translateY(-2px);
+}
+
+.vote-status-message {
+  text-align: center;
+  margin-top: 1rem;
+  color: #666;
+  font-style: italic;
+}
+
 </style>
