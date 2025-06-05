@@ -1,11 +1,30 @@
 <template>
   <div class="bg-slate-50 min-h-screen">
-    <!-- 헤더 영역 -->
+    <!-- View에 있는 헤더 영역 -->
     <div class="bg-white border-b border-slate-200 sticky top-0 z-10">
-      <div class="max-w-7xl mx-auto px-4 lg:px-8">
-        <div class="py-4">
-          <h1 class="text-2xl font-bold text-slate-800">{{ currentCategory }}</h1>
-          <p class="text-sm text-slate-500 mt-1">{{ categoryDescription }}</p>
+      <div class="max-w-7xl mx-auto px-4 lg:px-8 py-3">
+        <div class="flex justify-between items-center mb-2"> <h1 class="text-xl font-bold text-slate-800">{{ currentCategory }}</h1>
+          <button  @click="goToPostCreate" class="flex-shrink-0 bg-gray-600 hover:bg-gray-700 text-white px-5 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 shadow-md hover:shadow-lg">
+            게시물 등록
+          </button>
+        </div>
+
+        <div class="flex flex-col sm:flex-row justify-end items-center gap-3"> <p class="text-sm text-slate-500 mt-0.5 sm:mr-auto"> {{ categoryDescription }}
+          </p>
+
+          <div class="relative w-full sm:w-1/3 md:w-1/4 lg:w-1/5"> <input type="text" placeholder="검색어를 입력하세요..." class="w-full pl-9 pr-3 py-1.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-700 text-sm" />
+            <svg class="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-slate-400" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </div>
+
+          <div class="relative w-full sm:w-1/6 md:w-1/8 lg:w-1/12"> <select class="block appearance-none w-full bg-white border border-slate-300 text-slate-700 py-1.5 px-3 pr-7 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 text-sm">
+              <option>최신순</option>
+              <option>인기순</option>
+              <option>오래된순</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1.5 text-slate-700">
+              <svg class="fill-current h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 6.757 7.586 5.343 9z"/></svg>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -75,7 +94,7 @@
           <!-- 게시물 내용 -->
           <div class="p-4">
             <h3 class="font-medium text-lg text-slate-800 line-clamp-2">{{ post.title }}</h3>
-            <p class="mt-2 text-sm text-slate-600 line-clamp-2">{{ post.body }}</p>
+            <p class="mt-2 text-sm text-slate-600 line-clamp-2 white-space:pre-line">{{ post.body }}</p>
             
             <!-- 투표 결과 (있는 경우) -->
             <div v-if="post.votes && post.votes.length > 0" class="mt-3 bg-slate-50 p-3 rounded-md">
@@ -132,6 +151,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { defineEmits } from 'vue';
 import axios from 'axios';
 
+
 const route = useRoute();
 const router = useRouter();
 const posts = ref([]);
@@ -148,6 +168,10 @@ const emit = defineEmits(['open-detail']);
 
 const openDetail = (postItem) => {
   emit('open-detail', postItem);
+};
+
+const goToPostCreate = () => {
+  router.push({ name: 'PostCreate' });
 };
 
 // 시간 포맷팅 함수 (템플릿의 post.time에 매핑)

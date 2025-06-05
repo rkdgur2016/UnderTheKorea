@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.UnderTheKorea.web.domain.Users;
 import com.UnderTheKorea.web.service.UserServiceImpl;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @RestController // RESTful API 컨트롤러임을 나타냅니다.
@@ -21,10 +23,14 @@ public class UserController {
 	private final UserServiceImpl userServiceImpl;// UserService 주입 (생성자 주입)
     
 	@PostMapping("/login")
-    public Users login(@RequestBody Users loginRequest) {
+    public Users login(@RequestBody Users loginRequest, HttpSession session) {
         // loginRequest DTO는 userId와 password만 가질 수 있도록 별도로 정의하는 것이 좋습니다.
         Users outVO = userServiceImpl.login(loginRequest.getUserId(),
         										loginRequest.getPassword());
+        
+        session.setAttribute("user", outVO);
+        session.setMaxInactiveInterval(600);
+        
         return outVO;
     }
 	

@@ -409,58 +409,57 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue' //
-import axios from 'axios' //
+import { ref, reactive, onMounted } from 'vue' 
+import axios from 'axios' 
 import { useRouter } from 'vue-router'
+import { loginStore } from '@/js/loginStore.js'
 
 const router = useRouter()
-const activeNav = ref('') // Added for header navigation highlighting, keep it for header's original functionality
+const activeNav = ref('') 
 
 // Modals state
 const showLoginModal = ref(false)
 const showSignupModal = ref(false)
 
-const mobileMenuOpen = ref(false) // Added for mobile menu, keep it for header's original functionality
+const mobileMenuOpen = ref(false) 
 
-// --- Transferred from TheSidebar.txt ---
-const isLoggedIn = ref(false) //
-const loggedInUser = ref(null) //
+const isLoggedIn = ref(false) 
+const loggedInUser = ref(null) 
 
-// Login form state
+// 반응형 객체 공유 : reactive를 사용해서 전역적으로 공유되는 반응형 객체를 생성할 수 있음.
 const loginForm = reactive({
-userId: '', //
-password: '', //
-rememberMe: false //
-})
-const isLoginSubmitting = ref(false) //
-const loginMessage = ref('') //
-const isLoginSuccess = ref(false) //
+userId: '',
+username: '', 
+password: '', 
+rememberMe: false,
+});
+const isLoginSubmitting = ref(false) 
+const loginMessage = ref('') 
+const isLoginSuccess = ref(false) 
 
 // Signup form state
 const signupForm = reactive({
-userId: '', //
-username: '', //
-password: '', //
-confirmPassword: '', //
-agreeTerms: false // Not present in provided sidebar code, keeping original header structure
+userId: '', 
+username: '', 
+password: '', 
+confirmPassword: '', 
+agreeTerms: false 
 })
-const signupErrors = reactive({ //
-userId: '', //
-password: '', //
-confirmPassword: '', //
-username: '' //
+const signupErrors = reactive({ 
+userId: '', 
+password: '', 
+confirmPassword: '', 
+username: '' 
 })
-const isSignupSubmitting = ref(false) //
-const signupMessage = ref('') //
-const isSignupSuccess = ref(false) //
+const isSignupSubmitting = ref(false) 
+const signupMessage = ref('') 
+const isSignupSuccess = ref(false) 
 
-const isCheckingId = ref(false) //
-const userIdCheckMessage = ref('') //
-const isUserIdAvailable = ref(false) //
-// --- End of transferred state variables ---
+const isCheckingId = ref(false) 
+const userIdCheckMessage = ref('') 
+const isUserIdAvailable = ref(false) 
 
 
-// Header's original navigation functions
 const setActiveNav = (nav) => {
 activeNav.value = nav
 }
@@ -469,61 +468,59 @@ const toggleMobileMenu = () => {
 mobileMenuOpen.value = !mobileMenuOpen.value
 }
 
-// --- Transferred from TheSidebar.txt ---
-const handleLogin = async () => { //
-isLoginSubmitting.value = true; //
-loginMessage.value = ''; //
-isLoginSuccess.value = false; //
+const handleLogin = async () => { 
+  isLoginSubmitting.value = true; 
+  loginMessage.value = ''; 
+  isLoginSuccess.value = false; 
 
-if (!loginForm.userId || !loginForm.password) { //
-  loginMessage.value = '아이디와 비밀번호를 모두 입력해주세요.'; //
-  isLoginSubmitting.value = false; //
-  return; //
-}
-
-try {
-  const response = await axios.post('/api/users/login', { //
-    userId: loginForm.userId, //
-    password: loginForm.password, //
-  }); //
-  console.log(response); //
-
-  if (response.data && response.data.userId) { //
-    loginMessage.value = `${response.data.userName}님, 로그인되었습니다.`; //
-    isLoginSuccess.value = true; //
-
-    isLoggedIn.value = true; //
-    loggedInUser.value = response.data; //
-
-    loginForm.userId = ''; //
-    loginForm.password = ''; //
-
-    localStorage.setItem('loggedInUser', JSON.stringify(response.data)); //
-    closeModals() // Close modal on successful login
-  } else {
-    loginMessage.value = '아이디 또는 비밀번호가 일치하지 않습니다.'; //
-    isLoginSuccess.value = false; //
+  if (!loginForm.userId || !loginForm.password) { 
+    loginMessage.value = '아이디와 비밀번호를 모두 입력해주세요.'; 
+    isLoginSubmitting.value = false; 
+    return; 
   }
-} catch (error) {
-  console.error('로그인 실패:', error); //
-  isLoginSuccess.value = false; //
-  if (error.response) { //
-    if (error.response.status === 401) { //
-      loginMessage.value = '아이디 또는 비밀번호가 일치하지 않습니다.'; //
-    } else if (error.response.status === 404) { //
-      loginMessage.value = '존재하지 않는 아이디입니다.'; //
+
+  try {
+    const response = await axios.post('/api/users/login', { 
+      userId: loginForm.userId, 
+      password: loginForm.password, 
+    }); 
+    console.log(response); 
+
+    if (response.data && response.data.userId) { //
+      loginMessage.value = `${response.data.userName}님, 로그인되었습니다.`; //
+      isLoginSuccess.value = true; //
+
+      isLoggedIn.value = true; //
+      loggedInUser.value = response.data; //
+
+      loginForm.userId = ''; //
+      loginForm.password = ''; //
+      localStorage.setItem('user', JSON.stringify(response.data)); 
+      closeModals() // Close modal on successful login
     } else {
-      loginMessage.value = `로그인 실패: ${error.response.status} 오류가 발생했습니다.`; //
+      loginMessage.value = '아이디 또는 비밀번호가 일치하지 않습니다.'; //
+      isLoginSuccess.value = false; //
     }
-  } else if (error.request) { //
-    loginMessage.value =
-      '로그인 요청 중 오류가 발생했습니다. 네트워크 연결을 확인해주세요.'; //
-  } else {
-    loginMessage.value = '로그인 요청을 보내는 중 오류가 발생했습니다.'; //
+  } catch (error) {
+    console.error('로그인 실패:', error); //
+    isLoginSuccess.value = false; //
+    if (error.response) { //
+      if (error.response.status === 401) { //
+        loginMessage.value = '아이디 또는 비밀번호가 일치하지 않습니다.'; //
+      } else if (error.response.status === 404) { //
+        loginMessage.value = '존재하지 않는 아이디입니다.'; //
+      } else {
+        loginMessage.value = `로그인 실패: ${error.response.status} 오류가 발생했습니다.`; //
+      }
+    } else if (error.request) { //
+      loginMessage.value =
+        '로그인 요청 중 오류가 발생했습니다. 네트워크 연결을 확인해주세요.'; //
+    } else {
+      loginMessage.value = '로그인 요청을 보내는 중 오류가 발생했습니다.'; //
+    }
+  } finally {
+    isLoginSubmitting.value = false; //
   }
-} finally {
-  isLoginSubmitting.value = false; //
-}
 };
 
 const handleLogout = async () => { //
