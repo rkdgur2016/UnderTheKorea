@@ -5,7 +5,7 @@ import { ref, computed } from "vue";
 export const useLoginStore = defineStore("login", () => {
   // 상태 (State)
   const isLoggedIn = ref(false);
-  const loggedInUser = ref(null); // { userId: '...', userName: '...' } 형태
+  const loggedInUser = ref(null); 
 
   // 액션 (Actions)
   // TheHeader에서 데이터를 직접 받아와서 업데이트하는 액션 추가
@@ -44,8 +44,13 @@ export const useLoginStore = defineStore("login", () => {
   // 게터 (Getters)
   const getIsLoggedIn = computed(() => isLoggedIn.value);
   const getLoggedInUser = computed(() => loggedInUser.value);
+  
   const getUserName = computed(() =>
     loggedInUser.value ? loggedInUser.value.userName : "게스트"
+  );
+
+  const getUserId = computed(() =>
+  loggedInUser.value ? loggedInUser.value.userId : null
   );
 
   // 스토어 반환
@@ -57,5 +62,6 @@ export const useLoginStore = defineStore("login", () => {
     getIsLoggedIn,
     getLoggedInUser,
     getUserName,
+    getUserId,
   };
 });

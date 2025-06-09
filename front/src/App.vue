@@ -4,9 +4,17 @@ import { useRoute } from 'vue-router';
 
 import TheHeader from '@/layout/TheHeader.vue'; 
 import PostDetail from '@/components/PostDetail.vue'; 
+import LoginModal from "@/components/LoginModal.vue";
+import SignupModal from "@/components/SignupModal.vue";
+import { useLoginStore } from "@/stores/LoginStore";
+import { useModalStore } from "@/stores/modalStore";
+import { onMounted } from 'vue';
 
 const selectedPostId = ref(null); 
 const selectedPost = ref(null);  // Add this line to store the entire post object
+
+const loginStore = useLoginStore(); 
+const modalStore = useModalStore();
 
 const openPostDetail = (postItem) => {
   selectedPostId.value = postItem.id; 
@@ -28,11 +36,26 @@ watch(() => route.path, () => {
     console.log("App.vue: Router path changed, PostDetail closed."); 
   }
 });
+
+onMounted(() => {
+  loginStore.initializeAuth(); 
+});
 </script> 
 
 <template>
   <div class="flex flex-col min-h-screen font-pretendard">
     <TheHeader></TheHeader>
+    <LoginModal
+      :show-login-modal="modalStore.showLoginModal"
+      @close="modalStore.closeAll"
+      @open-signup="modalStore.openSignup"
+    />
+    <SignupModal
+      :show-signup-modal="modalStore.showSignupModal"
+      @close="modalStore.closeAll"
+      @open-login="modalStore.openLogin"
+      @signup-success-and-open-login="modalStore.signupSuccessAndOpenLogin"
+    />
     <div
       class="flex flex-1 w-full gap-6 pr-6 bg-[#f7f9fb] relative
              transition-all duration-300 ease-in-out

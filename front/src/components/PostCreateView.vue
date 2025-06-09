@@ -81,7 +81,7 @@
                 >작성자</label
               >
               <input
-                :value="userInfo.getUserId"
+                :value="loginStore.getUserId"
                 readonly
                 class="w-full px-4 py-3 bg-slate-100 border border-slate-300 rounded-lg text-slate-600"
               />
@@ -359,9 +359,12 @@
 import { ref, computed, watch, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useLoginStore } from "@/stores/loginStore.js";
+import { useModalStore } from "@/stores/modalStore";
+import axios from "axios";
 
 const router = useRouter();
 const loginStore = useLoginStore();
+const modalStore = useModalStore();
 
 // 폼 데이터
 const formData = ref({
@@ -375,7 +378,16 @@ const formData = ref({
 const userInfo = computed(() => loginStore.getLoggedInUser);
 
 onMounted(() => {
-  loginStore.initializeAuth();
+  console.log("PostCreate: onMounted started.");
+  loginStore.initializeAuth(); // initializeAuth가 비동기 함수가 아니라면 await 제거
+  console.log("PostCreate: initializeAuth completed. Checking login state.");
+  console.log("PostCreate: current isLoggedIn value:", userInfo.value);
+  console.log("PostCreate: current isLoggedIn value:", loginStore.getUserId);
+
+  if (!userInfo.value) {
+    alert("게시물을 작성하려면 로그인이 필요합니다. 로그인 페이지로 이동합니다.");
+    modalStore.openLogin();
+  }
 });
 
 // 상태 관리
@@ -460,21 +472,21 @@ const submitPost = async () => {
   isSubmitting.value = true;
 
   try {
-    // 실제 API 호출
+    
     const postData = {
-      author_id: currentUser.value.id,
+      authorId: loginStore.getUserId,
       title: formData.value.title.trim(),
       category: formData.value.category,
       content: formData.value.content.trim(),
-      image_url: formData.value.imageUrl || null,
-      video_url: formData.value.videoUrl || null,
-      created_at: new Date().toISOString(),
+      imageUrl: formData.value.imageUrl || null,
+      videoUrl: formData.value.videoUrl || null,
+      //createdAt: new Date().toISOString(),
     };
 
-    // 여기서 실제 API 호출
-    // const response = await axios.post('/api/posts', postData)
+    const response = await axios.post("/post/savePosts", postData)
 
     console.log("게시물 데이터:", postData);
+    console.log("서버 응답:", response.data);
 
     // 성공 시 임시저장 데이터 삭제
     localStorage.removeItem("postDraft");

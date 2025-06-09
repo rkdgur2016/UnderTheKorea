@@ -216,13 +216,13 @@
         
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <router-link 
-            to="/philosophy" 
+            to="/philosophy?category=철학" 
             class="bg-white text-slate-800 px-8 py-4 rounded-lg font-semibold hover:bg-slate-100 transition-colors shadow-lg"
           >
             철학 토론 참여하기
           </router-link>
           <router-link 
-            to="/politics" 
+            to="/politics?category=정치" 
             class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-slate-800 transition-all"
           >
             정치 현안 살펴보기

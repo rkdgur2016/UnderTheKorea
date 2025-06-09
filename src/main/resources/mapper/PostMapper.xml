@@ -20,12 +20,19 @@
 		LEFT JOIN
 		    likes l ON p.post_id = l.post_id
 		WHERE
-		    p.category = '${category}'
+		    p.category = #{category}
 		GROUP BY
 		    p.post_id, p.author_id, p.title, p.category, p.content, p.image_url, p.video_url, p.created_at, p.updated_at, p.view_count
 		ORDER BY
 		    p.created_at DESC
 		LIMIT 10;
     </select>
+    
+    <insert id="doSave" parameterType="Posts">
+    	INSERT INTO posts 
+    		(author_id, title, category, content, image_url, video_url) 
+    	VALUES
+    		(#{authorId}, #{title}, #{category}, #{content}, #{imageUrl}, #{videoUrl})
+    </insert>
 	
 </mapper>
