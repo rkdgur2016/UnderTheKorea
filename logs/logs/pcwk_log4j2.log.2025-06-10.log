@@ -1,0 +1,1117 @@
+(StartupInfoLogger.java:53) - Starting UnderTheKoreaApplication using Java 17.0.12 with PID 40772 (C:\Users\windows10\git\UnderTheKorea\bin\main started by windows10 in C:\Users\windows10\git\UnderTheKorea)
+(StartupInfoLogger.java:54) - Running with Spring Boot v3.4.5, Spring v6.2.6
+(SpringApplication.java:652) - No active profile set, falling back to 1 default profile: "default"
+(TomcatWebServer.java:111) - Tomcat initialized with port 80 (http)
+(DirectJDKLog.java:168) - Initializing ProtocolHandler ["http-nio-80"]
+(DirectJDKLog.java:168) - Starting service [Tomcat]
+(DirectJDKLog.java:168) - Starting Servlet engine: [Apache Tomcat/10.1.40]
+(DirectJDKLog.java:168) - Initializing Spring embedded WebApplicationContext
+(ServletWebServerApplicationContext.java:301) - Root WebApplicationContext: initialization completed in 496 ms
+(WelcomePageHandlerMapping.java:59) - Adding welcome page: class path resource [static/index.html]
+(DirectJDKLog.java:168) - Starting ProtocolHandler ["http-nio-80"]
+(TomcatWebServer.java:243) - Tomcat started on port 80 (http) with context path '/'
+(StartupInfoLogger.java:59) - Started UnderTheKoreaApplication in 1.023 seconds (process running for 1.493)
+(DirectJDKLog.java:168) - Initializing Spring DispatcherServlet 'dispatcherServlet'
+(FrameworkServlet.java:532) - Initializing Servlet 'dispatcherServlet'
+(FrameworkServlet.java:554) - Completed initialization in 1 ms
+(PostController.java:30) - category : 철학
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 철학
+(HikariDataSource.java:109) - HikariPool-1 - Starting...
+(HikariPool.java:554) - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@53681de4
+(HikariDataSource.java:122) - HikariPool-1 - Start completed.
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@3b43c235 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2b0936ec - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@74b613 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@57067e56 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@72715ce9 - 성공(1)/실패(0)
+(UserServiceImpl.java:54) - ┌───────────────────────────────────
+(UserServiceImpl.java:55) - │ UserServiceImpl() : login 
+(UserServiceImpl.java:56) - └───────────────────────────────────
+(UserServiceImpl.java:58) - ┌ 1. id : 1
+(UserServiceImpl.java:59) - │ 2. pw : 1
+(UserServiceImpl.java:62) - └ 3. outVO : com.UnderTheKorea.web.domain.Users@432bc892
+(UserController.java:37) - (쿠키) 로그인 상태 유지: 세션 만료 시간 30일로 설정.
+(SpringApplicationAdminMXBeanRegistrar.java:159) - Application shutdown requested.
+(GracefulShutdown.java:54) - Commencing graceful shutdown. Waiting for active requests to complete
+(DirectJDKLog.java:168) - Pausing ProtocolHandler ["http-nio-80"]
+(GracefulShutdown.java:76) - Graceful shutdown complete
+(DirectJDKLog.java:168) - Stopping ProtocolHandler ["http-nio-80"]
+(HikariDataSource.java:349) - HikariPool-1 - Shutdown initiated...
+(HikariDataSource.java:351) - HikariPool-1 - Shutdown completed.
+(StartupInfoLogger.java:53) - Starting UnderTheKoreaApplication using Java 17.0.12 with PID 34300 (C:\Users\windows10\git\UnderTheKorea\bin\main started by windows10 in C:\Users\windows10\git\UnderTheKorea)
+(StartupInfoLogger.java:54) - Running with Spring Boot v3.4.5, Spring v6.2.6
+(SpringApplication.java:652) - No active profile set, falling back to 1 default profile: "default"
+(TomcatWebServer.java:111) - Tomcat initialized with port 80 (http)
+(DirectJDKLog.java:168) - Initializing ProtocolHandler ["http-nio-80"]
+(DirectJDKLog.java:168) - Starting service [Tomcat]
+(DirectJDKLog.java:168) - Starting Servlet engine: [Apache Tomcat/10.1.40]
+(DirectJDKLog.java:168) - Initializing Spring embedded WebApplicationContext
+(ServletWebServerApplicationContext.java:301) - Root WebApplicationContext: initialization completed in 497 ms
+(WelcomePageHandlerMapping.java:59) - Adding welcome page: class path resource [static/index.html]
+(DirectJDKLog.java:168) - Starting ProtocolHandler ["http-nio-80"]
+(TomcatWebServer.java:243) - Tomcat started on port 80 (http) with context path '/'
+(StartupInfoLogger.java:59) - Started UnderTheKoreaApplication in 1.021 seconds (process running for 1.497)
+(DirectJDKLog.java:168) - Initializing Spring DispatcherServlet 'dispatcherServlet'
+(FrameworkServlet.java:532) - Initializing Servlet 'dispatcherServlet'
+(FrameworkServlet.java:554) - Completed initialization in 0 ms
+(PostController.java:30) - category : 철학
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 철학
+(HikariDataSource.java:109) - HikariPool-1 - Starting...
+(HikariPool.java:554) - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1acd1e61
+(HikariDataSource.java:122) - HikariPool-1 - Start completed.
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@fa5e038 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5918b1c7 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@e205f51 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@293472ab - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@9b0f395 - 성공(1)/실패(0)
+(PostController.java:30) - category : 경제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 경제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@56c77ff7 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7c04d889 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@752b24d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@cc0d85d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@611526f5 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@3b8f6ace - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@29dd6728 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@23d5507e - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6bbff87f - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2ba636dc - 성공(1)/실패(0)
+(UserController.java:30) - loginRequest : 1
+(UserServiceImpl.java:54) - ┌───────────────────────────────────
+(UserServiceImpl.java:55) - │ UserServiceImpl() : login 
+(UserServiceImpl.java:56) - └───────────────────────────────────
+(UserServiceImpl.java:58) - ┌ 1. id : 1
+(UserServiceImpl.java:59) - │ 2. pw : 1
+(UserServiceImpl.java:62) - └ 3. outVO : com.UnderTheKorea.web.domain.Users@29e05349
+(UserController.java:43) - (세션) 일반 로그인: 세션 만료 시간 30분으로 설정.
+(UserController.java:30) - loginRequest : 1
+(UserServiceImpl.java:54) - ┌───────────────────────────────────
+(UserServiceImpl.java:55) - │ UserServiceImpl() : login 
+(UserServiceImpl.java:56) - └───────────────────────────────────
+(UserServiceImpl.java:58) - ┌ 1. id : 1
+(UserServiceImpl.java:59) - │ 2. pw : 1
+(UserServiceImpl.java:62) - └ 3. outVO : com.UnderTheKorea.web.domain.Users@3b614dca
+(UserController.java:39) - (쿠키) 로그인 상태 유지: 세션 만료 시간 30일로 설정.
+(SpringApplicationAdminMXBeanRegistrar.java:159) - Application shutdown requested.
+(GracefulShutdown.java:54) - Commencing graceful shutdown. Waiting for active requests to complete
+(DirectJDKLog.java:168) - Pausing ProtocolHandler ["http-nio-80"]
+(GracefulShutdown.java:76) - Graceful shutdown complete
+(DirectJDKLog.java:168) - Stopping ProtocolHandler ["http-nio-80"]
+(HikariDataSource.java:349) - HikariPool-1 - Shutdown initiated...
+(HikariDataSource.java:351) - HikariPool-1 - Shutdown completed.
+(StartupInfoLogger.java:53) - Starting UnderTheKoreaApplication using Java 17.0.12 with PID 50820 (C:\Users\windows10\git\UnderTheKorea\bin\main started by windows10 in C:\Users\windows10\git\UnderTheKorea)
+(StartupInfoLogger.java:54) - Running with Spring Boot v3.4.5, Spring v6.2.6
+(SpringApplication.java:652) - No active profile set, falling back to 1 default profile: "default"
+(TomcatWebServer.java:111) - Tomcat initialized with port 80 (http)
+(DirectJDKLog.java:168) - Initializing ProtocolHandler ["http-nio-80"]
+(DirectJDKLog.java:168) - Starting service [Tomcat]
+(DirectJDKLog.java:168) - Starting Servlet engine: [Apache Tomcat/10.1.40]
+(DirectJDKLog.java:168) - Initializing Spring embedded WebApplicationContext
+(ServletWebServerApplicationContext.java:301) - Root WebApplicationContext: initialization completed in 517 ms
+(WelcomePageHandlerMapping.java:59) - Adding welcome page: class path resource [static/index.html]
+(DirectJDKLog.java:168) - Starting ProtocolHandler ["http-nio-80"]
+(TomcatWebServer.java:243) - Tomcat started on port 80 (http) with context path '/'
+(StartupInfoLogger.java:59) - Started UnderTheKoreaApplication in 1.05 seconds (process running for 1.538)
+(DirectJDKLog.java:168) - Initializing Spring DispatcherServlet 'dispatcherServlet'
+(FrameworkServlet.java:532) - Initializing Servlet 'dispatcherServlet'
+(FrameworkServlet.java:554) - Completed initialization in 1 ms
+(UserController.java:33) - loginRequest : 1
+(UserServiceImpl.java:54) - ┌───────────────────────────────────
+(UserServiceImpl.java:55) - │ UserServiceImpl() : login 
+(UserServiceImpl.java:56) - └───────────────────────────────────
+(UserServiceImpl.java:58) - ┌ 1. id : 1
+(UserServiceImpl.java:59) - │ 2. pw : 1
+(HikariDataSource.java:109) - HikariPool-1 - Starting...
+(HikariPool.java:554) - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2ef9fcb
+(HikariDataSource.java:122) - HikariPool-1 - Start completed.
+(UserServiceImpl.java:62) - └ 3. outVO : com.UnderTheKorea.web.domain.Users@5ad65ac0
+(UserController.java:46) - (세션) 일반 로그인: 세션 만료 시간 30분으로 설정.
+(UserController.java:33) - loginRequest : 1
+(UserServiceImpl.java:54) - ┌───────────────────────────────────
+(UserServiceImpl.java:55) - │ UserServiceImpl() : login 
+(UserServiceImpl.java:56) - └───────────────────────────────────
+(UserServiceImpl.java:58) - ┌ 1. id : 1
+(UserServiceImpl.java:59) - │ 2. pw : 1
+(UserServiceImpl.java:62) - └ 3. outVO : com.UnderTheKorea.web.domain.Users@5471493
+(UserController.java:42) - (쿠키) 로그인 상태 유지: 세션 만료 시간 30일로 설정.
+(UserController.java:33) - loginRequest : 1
+(UserServiceImpl.java:54) - ┌───────────────────────────────────
+(UserServiceImpl.java:55) - │ UserServiceImpl() : login 
+(UserServiceImpl.java:56) - └───────────────────────────────────
+(UserServiceImpl.java:58) - ┌ 1. id : 1
+(UserServiceImpl.java:59) - │ 2. pw : 1
+(UserServiceImpl.java:62) - └ 3. outVO : com.UnderTheKorea.web.domain.Users@4ed93503
+(UserController.java:42) - (쿠키) 로그인 상태 유지: 세션 만료 시간 30일로 설정.
+(SpringApplicationAdminMXBeanRegistrar.java:159) - Application shutdown requested.
+(GracefulShutdown.java:54) - Commencing graceful shutdown. Waiting for active requests to complete
+(DirectJDKLog.java:168) - Pausing ProtocolHandler ["http-nio-80"]
+(GracefulShutdown.java:76) - Graceful shutdown complete
+(DirectJDKLog.java:168) - Stopping ProtocolHandler ["http-nio-80"]
+(HikariDataSource.java:349) - HikariPool-1 - Shutdown initiated...
+(HikariDataSource.java:351) - HikariPool-1 - Shutdown completed.
+(StartupInfoLogger.java:53) - Starting UnderTheKoreaApplication using Java 17.0.12 with PID 25968 (C:\Users\windows10\git\UnderTheKorea\bin\main started by windows10 in C:\Users\windows10\git\UnderTheKorea)
+(StartupInfoLogger.java:54) - Running with Spring Boot v3.4.5, Spring v6.2.6
+(SpringApplication.java:652) - No active profile set, falling back to 1 default profile: "default"
+(TomcatWebServer.java:111) - Tomcat initialized with port 80 (http)
+(DirectJDKLog.java:168) - Initializing ProtocolHandler ["http-nio-80"]
+(DirectJDKLog.java:168) - Starting service [Tomcat]
+(DirectJDKLog.java:168) - Starting Servlet engine: [Apache Tomcat/10.1.40]
+(DirectJDKLog.java:168) - Initializing Spring embedded WebApplicationContext
+(ServletWebServerApplicationContext.java:301) - Root WebApplicationContext: initialization completed in 516 ms
+(WelcomePageHandlerMapping.java:59) - Adding welcome page: class path resource [static/index.html]
+(DirectJDKLog.java:168) - Starting ProtocolHandler ["http-nio-80"]
+(TomcatWebServer.java:243) - Tomcat started on port 80 (http) with context path '/'
+(StartupInfoLogger.java:59) - Started UnderTheKoreaApplication in 1.06 seconds (process running for 1.542)
+(DirectJDKLog.java:168) - Initializing Spring DispatcherServlet 'dispatcherServlet'
+(FrameworkServlet.java:532) - Initializing Servlet 'dispatcherServlet'
+(FrameworkServlet.java:554) - Completed initialization in 0 ms
+(UserController.java:33) - loginRequest : 1
+(UserServiceImpl.java:54) - ┌───────────────────────────────────
+(UserServiceImpl.java:55) - │ UserServiceImpl() : login 
+(UserServiceImpl.java:56) - └───────────────────────────────────
+(UserServiceImpl.java:58) - ┌ 1. id : 1
+(UserServiceImpl.java:59) - │ 2. pw : 1
+(HikariDataSource.java:109) - HikariPool-1 - Starting...
+(HikariPool.java:554) - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@10b98d0
+(HikariDataSource.java:122) - HikariPool-1 - Start completed.
+(UserServiceImpl.java:62) - └ 3. outVO : com.UnderTheKorea.web.domain.Users@4a7bf607
+(UserController.java:42) - (쿠키) 로그인 상태 유지: 세션 만료 시간 30일로 설정.
+(SpringApplicationAdminMXBeanRegistrar.java:159) - Application shutdown requested.
+(GracefulShutdown.java:54) - Commencing graceful shutdown. Waiting for active requests to complete
+(DirectJDKLog.java:168) - Pausing ProtocolHandler ["http-nio-80"]
+(GracefulShutdown.java:76) - Graceful shutdown complete
+(DirectJDKLog.java:168) - Stopping ProtocolHandler ["http-nio-80"]
+(HikariDataSource.java:349) - HikariPool-1 - Shutdown initiated...
+(HikariDataSource.java:351) - HikariPool-1 - Shutdown completed.
+(StartupInfoLogger.java:53) - Starting UnderTheKoreaApplication using Java 17.0.12 with PID 33600 (C:\Users\windows10\git\UnderTheKorea\bin\main started by windows10 in C:\Users\windows10\git\UnderTheKorea)
+(StartupInfoLogger.java:54) - Running with Spring Boot v3.4.5, Spring v6.2.6
+(SpringApplication.java:652) - No active profile set, falling back to 1 default profile: "default"
+(TomcatWebServer.java:111) - Tomcat initialized with port 80 (http)
+(DirectJDKLog.java:168) - Initializing ProtocolHandler ["http-nio-80"]
+(DirectJDKLog.java:168) - Starting service [Tomcat]
+(DirectJDKLog.java:168) - Starting Servlet engine: [Apache Tomcat/10.1.40]
+(DirectJDKLog.java:168) - Initializing Spring embedded WebApplicationContext
+(ServletWebServerApplicationContext.java:301) - Root WebApplicationContext: initialization completed in 549 ms
+(WelcomePageHandlerMapping.java:59) - Adding welcome page: class path resource [static/index.html]
+(DirectJDKLog.java:168) - Starting ProtocolHandler ["http-nio-80"]
+(TomcatWebServer.java:243) - Tomcat started on port 80 (http) with context path '/'
+(StartupInfoLogger.java:59) - Started UnderTheKoreaApplication in 1.111 seconds (process running for 1.626)
+(DirectJDKLog.java:168) - Initializing Spring DispatcherServlet 'dispatcherServlet'
+(FrameworkServlet.java:532) - Initializing Servlet 'dispatcherServlet'
+(FrameworkServlet.java:554) - Completed initialization in 1 ms
+(UserController.java:33) - loginRequest : 1
+(UserServiceImpl.java:54) - ┌───────────────────────────────────
+(UserServiceImpl.java:55) - │ UserServiceImpl() : login 
+(UserServiceImpl.java:56) - └───────────────────────────────────
+(UserServiceImpl.java:58) - ┌ 1. id : 1
+(UserServiceImpl.java:59) - │ 2. pw : 1
+(HikariDataSource.java:109) - HikariPool-1 - Starting...
+(HikariPool.java:554) - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4d8851b6
+(HikariDataSource.java:122) - HikariPool-1 - Start completed.
+(UserServiceImpl.java:62) - └ 3. outVO : com.UnderTheKorea.web.domain.Users@6e4df4a3
+(UserController.java:42) - (쿠키) 로그인 상태 유지: 세션 만료 시간 30일로 설정.
+(UserController.java:33) - loginRequest : 1
+(UserServiceImpl.java:54) - ┌───────────────────────────────────
+(UserServiceImpl.java:55) - │ UserServiceImpl() : login 
+(UserServiceImpl.java:56) - └───────────────────────────────────
+(UserServiceImpl.java:58) - ┌ 1. id : 1
+(UserServiceImpl.java:59) - │ 2. pw : 1
+(UserServiceImpl.java:62) - └ 3. outVO : com.UnderTheKorea.web.domain.Users@59f4ecdd
+(UserController.java:42) - (쿠키) 로그인 상태 유지: 세션 만료 시간 30일로 설정.
+(UserController.java:33) - loginRequest : 1
+(UserServiceImpl.java:54) - ┌───────────────────────────────────
+(UserServiceImpl.java:55) - │ UserServiceImpl() : login 
+(UserServiceImpl.java:56) - └───────────────────────────────────
+(UserServiceImpl.java:58) - ┌ 1. id : 1
+(UserServiceImpl.java:59) - │ 2. pw : 1
+(UserServiceImpl.java:62) - └ 3. outVO : com.UnderTheKorea.web.domain.Users@62386385
+(UserController.java:42) - (쿠키) 로그인 상태 유지: 세션 만료 시간 30일로 설정.
+(UserController.java:33) - loginRequest : 1
+(UserServiceImpl.java:54) - ┌───────────────────────────────────
+(UserServiceImpl.java:55) - │ UserServiceImpl() : login 
+(UserServiceImpl.java:56) - └───────────────────────────────────
+(UserServiceImpl.java:58) - ┌ 1. id : 1
+(UserServiceImpl.java:59) - │ 2. pw : 1
+(UserServiceImpl.java:62) - └ 3. outVO : com.UnderTheKorea.web.domain.Users@50cf74a7
+(UserController.java:46) - (세션) 일반 로그인: 세션 만료 시간 30분으로 설정.
+(SpringApplicationAdminMXBeanRegistrar.java:159) - Application shutdown requested.
+(GracefulShutdown.java:54) - Commencing graceful shutdown. Waiting for active requests to complete
+(DirectJDKLog.java:168) - Pausing ProtocolHandler ["http-nio-80"]
+(GracefulShutdown.java:76) - Graceful shutdown complete
+(DirectJDKLog.java:168) - Stopping ProtocolHandler ["http-nio-80"]
+(HikariDataSource.java:349) - HikariPool-1 - Shutdown initiated...
+(HikariDataSource.java:351) - HikariPool-1 - Shutdown completed.
+(StartupInfoLogger.java:53) - Starting UnderTheKoreaApplication using Java 17.0.12 with PID 13064 (C:\Users\windows10\git\UnderTheKorea\bin\main started by windows10 in C:\Users\windows10\git\UnderTheKorea)
+(StartupInfoLogger.java:54) - Running with Spring Boot v3.4.5, Spring v6.2.6
+(SpringApplication.java:652) - No active profile set, falling back to 1 default profile: "default"
+(TomcatWebServer.java:111) - Tomcat initialized with port 80 (http)
+(DirectJDKLog.java:168) - Initializing ProtocolHandler ["http-nio-80"]
+(DirectJDKLog.java:168) - Starting service [Tomcat]
+(DirectJDKLog.java:168) - Starting Servlet engine: [Apache Tomcat/10.1.40]
+(DirectJDKLog.java:168) - Initializing Spring embedded WebApplicationContext
+(ServletWebServerApplicationContext.java:301) - Root WebApplicationContext: initialization completed in 536 ms
+(WelcomePageHandlerMapping.java:59) - Adding welcome page: class path resource [static/index.html]
+(DirectJDKLog.java:168) - Starting ProtocolHandler ["http-nio-80"]
+(TomcatWebServer.java:243) - Tomcat started on port 80 (http) with context path '/'
+(StartupInfoLogger.java:59) - Started UnderTheKoreaApplication in 1.089 seconds (process running for 1.579)
+(DirectJDKLog.java:168) - Initializing Spring DispatcherServlet 'dispatcherServlet'
+(FrameworkServlet.java:532) - Initializing Servlet 'dispatcherServlet'
+(FrameworkServlet.java:554) - Completed initialization in 1 ms
+(UserController.java:33) - loginRequest : 1
+(UserServiceImpl.java:54) - ┌───────────────────────────────────
+(UserServiceImpl.java:55) - │ UserServiceImpl() : login 
+(UserServiceImpl.java:56) - └───────────────────────────────────
+(UserServiceImpl.java:58) - ┌ 1. id : 1
+(UserServiceImpl.java:59) - │ 2. pw : 1
+(HikariDataSource.java:109) - HikariPool-1 - Starting...
+(HikariPool.java:554) - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@156aa74e
+(HikariDataSource.java:122) - HikariPool-1 - Start completed.
+(UserServiceImpl.java:62) - └ 3. outVO : com.UnderTheKorea.web.domain.Users@4d2ce0b8
+(UserController.java:46) - (세션) 일반 로그인: 세션 만료 시간 30분으로 설정.
+(UserController.java:33) - loginRequest : 1
+(UserServiceImpl.java:54) - ┌───────────────────────────────────
+(UserServiceImpl.java:55) - │ UserServiceImpl() : login 
+(UserServiceImpl.java:56) - └───────────────────────────────────
+(UserServiceImpl.java:58) - ┌ 1. id : 1
+(UserServiceImpl.java:59) - │ 2. pw : 1
+(UserServiceImpl.java:62) - └ 3. outVO : com.UnderTheKorea.web.domain.Users@24383613
+(UserController.java:46) - (세션) 일반 로그인: 세션 만료 시간 30분으로 설정.
+(UserController.java:93) - 세션이 무효화되었습니다.
+(UserController.java:110) - 인증 쿠키 'JSESSIONID'가 제거되었습니다.
+(PostController.java:30) - category : 경제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 경제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@700faeda - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1c0ef14b - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@16168bee - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@30dc035c - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@3d2812e3 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@564738a4 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@742c9079 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@24baab43 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@59780a3d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@36158bae - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회문제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회문제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@ba3374f - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@74ef20bd - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@31474ead - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@234befbc - 성공(1)/실패(0)
+(PostController.java:30) - category : 정치
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 정치
+(PostController.java:30) - category : 경제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 경제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@410800f0 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6a1da62b - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@47cb8008 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@15c65c04 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1448c1cc - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@13631190 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@8b31834 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2f32435a - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7d26b1d1 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@76c2d074 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@759bf367 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5af06ff7 - 성공(1)/실패(0)
+(PostController.java:30) - category : 정치
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 정치
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2083018e - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@24e3d738 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회문제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회문제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2e253e9a - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5aad99f1 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@505a547f - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@32e68f1c - 성공(1)/실패(0)
+(PostController.java:30) - category : 정치
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 정치
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@379e8a87 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4b54a5c7 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회문제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회문제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@11553bf - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@22fccf3a - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7af60916 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2e7808c0 - 성공(1)/실패(0)
+(PostController.java:30) - category : 정치
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 정치
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@260bd8f0 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@574fe3e3 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회문제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회문제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@53fbd7d6 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@16f953cd - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@52db3b38 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@27a5c37c - 성공(1)/실패(0)
+(UserController.java:33) - loginRequest : 1
+(UserServiceImpl.java:54) - ┌───────────────────────────────────
+(UserServiceImpl.java:55) - │ UserServiceImpl() : login 
+(UserServiceImpl.java:56) - └───────────────────────────────────
+(UserServiceImpl.java:58) - ┌ 1. id : 1
+(UserServiceImpl.java:59) - │ 2. pw : 1
+(UserServiceImpl.java:62) - └ 3. outVO : com.UnderTheKorea.web.domain.Users@6c7f7023
+(UserController.java:46) - (세션) 일반 로그인: 세션 만료 시간 30분으로 설정.
+(PostController.java:36) - posts : com.UnderTheKorea.web.domain.Posts@739feaaa
+(PostServiceImpl.java:35) - ┌───────────────────────────────────
+(PostServiceImpl.java:36) - │ 게시물 service() : 게시물 저장 
+(PostServiceImpl.java:37) - └───────────────────────────────────
+(PostServiceImpl.java:40) - └ flag : 1 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회문제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회문제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@39495de6 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2de37856 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@532ba890 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@42e185a5 - 성공(1)/실패(0)
+(PostController.java:30) - category : 경제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 경제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@f77b5af - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6ab4745 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@51638773 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@66992e03 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@547135b2 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@8bcc116 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@45a9876d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6aef50ed - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@37ee34a7 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@59b4f73d - 성공(1)/실패(0)
+(PostController.java:30) - category : 정치
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 정치
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6736ec0b - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2ea327db - 성공(1)/실패(0)
+(PostController.java:30) - category : 철학
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 철학
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@ff826c3 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1891b177 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@104790ee - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7e8ee072 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@308e0f5e - 성공(1)/실패(0)
+(PostController.java:30) - category : 경제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 경제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1bed8c36 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@274eb0cf - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@c4a8944 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@44ee0c7f - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@3395a4e8 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@610fa29d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@39d70751 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@dee69e0 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@13c23e51 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@fc57dfe - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회문제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회문제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@c48f4a4 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2dba206b - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1225423d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@61a72995 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회문제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회문제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@e9d2b0 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@405dd90c - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6d2013a4 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@dd941c9 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회문제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회문제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6e484cdd - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@367b2b00 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@14bede9a - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@644e9447 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회문제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회문제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@37b6f05f - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@12ecda08 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6fb88ff6 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@53bf2603 - 성공(1)/실패(0)
+(SpringApplicationAdminMXBeanRegistrar.java:159) - Application shutdown requested.
+(GracefulShutdown.java:54) - Commencing graceful shutdown. Waiting for active requests to complete
+(DirectJDKLog.java:168) - Pausing ProtocolHandler ["http-nio-80"]
+(GracefulShutdown.java:76) - Graceful shutdown complete
+(DirectJDKLog.java:168) - Stopping ProtocolHandler ["http-nio-80"]
+(HikariDataSource.java:349) - HikariPool-1 - Shutdown initiated...
+(HikariDataSource.java:351) - HikariPool-1 - Shutdown completed.
+(StartupInfoLogger.java:53) - Starting UnderTheKoreaApplication using Java 17.0.12 with PID 45160 (C:\Users\windows10\git\UnderTheKorea\bin\main started by windows10 in C:\Users\windows10\git\UnderTheKorea)
+(StartupInfoLogger.java:54) - Running with Spring Boot v3.4.5, Spring v6.2.6
+(SpringApplication.java:652) - No active profile set, falling back to 1 default profile: "default"
+(TomcatWebServer.java:111) - Tomcat initialized with port 80 (http)
+(DirectJDKLog.java:168) - Initializing ProtocolHandler ["http-nio-80"]
+(DirectJDKLog.java:168) - Starting service [Tomcat]
+(DirectJDKLog.java:168) - Starting Servlet engine: [Apache Tomcat/10.1.40]
+(DirectJDKLog.java:168) - Initializing Spring embedded WebApplicationContext
+(ServletWebServerApplicationContext.java:301) - Root WebApplicationContext: initialization completed in 564 ms
+(WelcomePageHandlerMapping.java:59) - Adding welcome page: class path resource [static/index.html]
+(DirectJDKLog.java:168) - Starting ProtocolHandler ["http-nio-80"]
+(TomcatWebServer.java:243) - Tomcat started on port 80 (http) with context path '/'
+(StartupInfoLogger.java:59) - Started UnderTheKoreaApplication in 1.122 seconds (process running for 1.631)
+(DirectJDKLog.java:168) - Initializing Spring DispatcherServlet 'dispatcherServlet'
+(FrameworkServlet.java:532) - Initializing Servlet 'dispatcherServlet'
+(FrameworkServlet.java:554) - Completed initialization in 1 ms
+(PostController.java:30) - category : 사회문제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회문제
+(HikariDataSource.java:109) - HikariPool-1 - Starting...
+(HikariPool.java:554) - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1bdcdc53
+(HikariDataSource.java:122) - HikariPool-1 - Start completed.
+(PostController.java:30) - category : 경제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 경제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@a9d39db - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@ae0f5c3 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@703924e - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@692ab7f4 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@a1a08eb - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@759aa86 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1c53d9c1 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@20fa48a8 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7a7d510c - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@30bac95f - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회문제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회문제
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@243b53b5 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6c635149 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@ee3e7f6 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1bf29133 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@65aacf03 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@69ff5c9b - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5bdb6c79 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7c46d5c - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4a37a501 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@59bf3358 - 성공(1)/실패(0)
+(PostController.java:30) - category : 철학
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 철학
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@636cb2fd - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@364b0bef - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@3d180c2e - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5a4c902c - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5cb13ac2 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@d8cd844 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@3eedcc21 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4fd7209 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@43136985 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@28b6d75b - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4fefcebf - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@51fdc416 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7d6e3b4b - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2cc32a02 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1d688313 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@3c424d98 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@166fadcd - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@669bde15 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@704bb8f6 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5ecb05ea - 성공(1)/실패(0)
+(StartupInfoLogger.java:53) - Starting UnderTheKoreaApplication using Java 17.0.12 with PID 21520 (C:\Users\windows10\git\UnderTheKorea\bin\main started by windows10 in C:\Users\windows10\git\UnderTheKorea)
+(StartupInfoLogger.java:54) - Running with Spring Boot v3.4.5, Spring v6.2.6
+(SpringApplication.java:652) - No active profile set, falling back to 1 default profile: "default"
+(SpringApplicationAdminMXBeanRegistrar.java:159) - Application shutdown requested.
+(GracefulShutdown.java:54) - Commencing graceful shutdown. Waiting for active requests to complete
+(DirectJDKLog.java:168) - Pausing ProtocolHandler ["http-nio-80"]
+(GracefulShutdown.java:76) - Graceful shutdown complete
+(DirectJDKLog.java:168) - Stopping ProtocolHandler ["http-nio-80"]
+(HikariDataSource.java:349) - HikariPool-1 - Shutdown initiated...
+(HikariDataSource.java:351) - HikariPool-1 - Shutdown completed.
+(TomcatWebServer.java:111) - Tomcat initialized with port 80 (http)
+(DirectJDKLog.java:168) - Initializing ProtocolHandler ["http-nio-80"]
+(DirectJDKLog.java:168) - Starting service [Tomcat]
+(DirectJDKLog.java:168) - Starting Servlet engine: [Apache Tomcat/10.1.40]
+(DirectJDKLog.java:168) - Initializing Spring embedded WebApplicationContext
+(ServletWebServerApplicationContext.java:301) - Root WebApplicationContext: initialization completed in 609 ms
+(WelcomePageHandlerMapping.java:59) - Adding welcome page: class path resource [static/index.html]
+(StartupInfoLogger.java:53) - Starting UnderTheKoreaApplication using Java 17.0.12 with PID 35536 (C:\Users\windows10\git\UnderTheKorea\bin\main started by windows10 in C:\Users\windows10\git\UnderTheKorea)
+(StartupInfoLogger.java:54) - Running with Spring Boot v3.4.5, Spring v6.2.6
+(SpringApplication.java:652) - No active profile set, falling back to 1 default profile: "default"
+(TomcatWebServer.java:111) - Tomcat initialized with port 80 (http)
+(DirectJDKLog.java:168) - Initializing ProtocolHandler ["http-nio-80"]
+(DirectJDKLog.java:168) - Starting service [Tomcat]
+(DirectJDKLog.java:168) - Starting Servlet engine: [Apache Tomcat/10.1.40]
+(DirectJDKLog.java:168) - Initializing Spring embedded WebApplicationContext
+(ServletWebServerApplicationContext.java:301) - Root WebApplicationContext: initialization completed in 538 ms
+(WelcomePageHandlerMapping.java:59) - Adding welcome page: class path resource [static/index.html]
+(DirectJDKLog.java:168) - Starting ProtocolHandler ["http-nio-80"]
+(TomcatWebServer.java:243) - Tomcat started on port 80 (http) with context path '/'
+(StartupInfoLogger.java:59) - Started UnderTheKoreaApplication in 1.108 seconds (process running for 1.66)
+(DirectJDKLog.java:168) - Initializing Spring DispatcherServlet 'dispatcherServlet'
+(FrameworkServlet.java:532) - Initializing Servlet 'dispatcherServlet'
+(FrameworkServlet.java:554) - Completed initialization in 1 ms
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(HikariDataSource.java:109) - HikariPool-1 - Starting...
+(HikariPool.java:554) - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5eb5e9bc
+(HikariDataSource.java:122) - HikariPool-1 - Start completed.
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1673dd29 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@3fd40e1d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@3c9bfd3f - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2b5f161c - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@234d0ccb - 성공(1)/실패(0)
+(PostController.java:30) - category : 철학
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 철학
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4d3ddef1 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@50910863 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@357c24cc - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@11553bf - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@22fccf3a - 성공(1)/실패(0)
+(PostController.java:30) - category : 철학
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 철학
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1609f19c - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@530e2ed2 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@166914b8 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@32f2536b - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6baec1b8 - 성공(1)/실패(0)
+(PostController.java:30) - category : 정치
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 정치
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5e26eb5a - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@14f5020c - 성공(1)/실패(0)
+(PostController.java:30) - category : 경제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 경제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4db7c91c - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6ac7fd44 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1caeac8f - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@57b77c2e - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@243ba0ed - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@71c354f3 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@18e05490 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@745a0dae - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@d9fe700 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@66104e8c - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@42cf57b - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5eeb6b24 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@f44d60c - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1b351888 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7851a1b8 - 성공(1)/실패(0)
+(PostController.java:30) - category : 철학
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 철학
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@3b51098b - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7e538085 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4178b0e - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4f67da48 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7cc98f7e - 성공(1)/실패(0)
+(PostController.java:30) - category : 정치
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 정치
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@444d3445 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4643cac0 - 성공(1)/실패(0)
+(PostController.java:30) - category : 경제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 경제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5644d882 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6e484cdd - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@367b2b00 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@14bede9a - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@644e9447 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@484c12b7 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@27001395 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@45a853e1 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@55540bbf - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7da56208 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@14c37bbb - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@ea1527f - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7083c1bb - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@214a0e54 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2edba765 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@3a8b882e - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7f89011b - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@50cf74a7 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4ebc9895 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2810b394 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@28d2dc92 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7eb14ea2 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5653512c - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7abafbf8 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@44329e71 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PoolBase.java:180) - HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@5eb5e9bc (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+(PoolBase.java:180) - HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@5d8d6e69 (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+(PoolBase.java:180) - HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@36cabd83 (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+(PoolBase.java:180) - HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@7a077e9e (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+(PoolBase.java:180) - HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@688a4b4d (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+(PoolBase.java:180) - HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@5ec28e13 (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+(PoolBase.java:180) - HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@3d8706ed (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+(PoolBase.java:180) - HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@7cb57c4d (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+(PoolBase.java:180) - HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@46df90b5 (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+(PoolBase.java:180) - HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@c273c6b (This connection has been closed.). Possibly consider using a shorter maxLifetime value.
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4f946406 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4c56e6a - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@768746a2 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@3c68c117 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@503026c8 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@354426ff - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@46574fbd - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@52a0b7e - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2c4ada47 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@382d72ef - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1a328517 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@620612f9 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4a7ea5a1 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@449d2d99 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4a091220 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7cc23e1e - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5f3c338d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@b321a16 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@29e5b6d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6f41a7ee - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@86026b2 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4262bfbc - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@503cfe32 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@f77b5af - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6ab4745 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@515cb047 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@14d6d0b - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@218fcb7d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7a48129b - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4e224b1d - 성공(1)/실패(0)
+(PostController.java:30) - category : 철학
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 철학
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6b3d1264 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@38d4bfe6 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@23f36c74 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4991ca5a - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4a3c5f3e - 성공(1)/실패(0)
+(PostController.java:30) - category : 철학
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 철학
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@55b2e1b - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@411aa495 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@beeab19 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@653e9cac - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@39495de6 - 성공(1)/실패(0)
+(PostController.java:30) - category : 철학
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 철학
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@402fd692 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@56c6fce3 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@38e86bdd - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7c4e05d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@39612d71 - 성공(1)/실패(0)
+(PostController.java:30) - category : 정치
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 정치
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1eb59572 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@33141923 - 성공(1)/실패(0)
+(PostController.java:30) - category : 경제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 경제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4100b809 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1da67997 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5312fabe - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1db30e69 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@59b72d26 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@77f38d46 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@33f04e0c - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@3635de5d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@560b0ba0 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@3d79259a - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@282660ed - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4b0f78 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@d1f713 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7a2b0bac - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@61112d0c - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5dc76d92 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@51a6c933 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7bb9bfd2 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6dbafdd7 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@b77b60f - 성공(1)/실패(0)
+(PostController.java:30) - category : 경제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 경제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@38a1b38 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@3330b49d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@643cd68e - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@211d6f58 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@721de398 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@44bf251a - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@463503a5 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@c98c394 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1104f0bc - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2c2e9073 - 성공(1)/실패(0)
+(PostController.java:30) - category : 정치
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 정치
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@23f321a2 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@303de9fe - 성공(1)/실패(0)
+(PostController.java:30) - category : 정치
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 정치
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@3a136c5d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@588fd226 - 성공(1)/실패(0)
+(PostController.java:30) - category : 철학
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 철학
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1a4f33cc - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6e6e80ea - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@268e9114 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@9513174 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6a63b2c1 - 성공(1)/실패(0)
+(PostController.java:30) - category : 정치
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 정치
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@42e185a5 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@31b44672 - 성공(1)/실패(0)
+(PostController.java:30) - category : 경제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 경제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@14cbc4ce - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7c5ae216 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@b20f612 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@438909b3 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@9ae58b8 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@224f51c9 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2ed3a3f4 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@251cf30c - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5e8c048f - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@615c78e - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@3e91f97a - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@66e45bd3 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6039da31 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5b6a571d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6a813f23 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@229e603d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@559c3b15 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2549babf - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@26f239b9 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@773c3ad2 - 성공(1)/실패(0)
+(PostController.java:30) - category : 경제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 경제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@47409ea6 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@54d4d7ea - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4e23c9c3 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@500b28cf - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@137d29c6 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6164c7c4 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@315977fa - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@389d6c4e - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@42545182 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@549e4eb - 성공(1)/실패(0)
+(PostController.java:30) - category : 정치
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 정치
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@606076b2 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5691737f - 성공(1)/실패(0)
+(PostController.java:30) - category : 철학
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 철학
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@493ac39f - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@613b5481 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4f137dd - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1306168b - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@cbf194f - 성공(1)/실패(0)
+(PostController.java:30) - category : 정치
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 정치
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2a08ccbc - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4e08835f - 성공(1)/실패(0)
+(PostController.java:30) - category : 경제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 경제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@9e2197a - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6af94742 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@3a8dbdad - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7159392f - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6869d7b7 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@480a4eaf - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1f3de2d6 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2715205f - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1e79f65 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1b02d6c0 - 성공(1)/실패(0)
+(PostController.java:30) - category : 철학
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 철학
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@399062d4 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@66bd1e01 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2ed6b921 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@84dd403 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@32f1911c - 성공(1)/실패(0)
+(PostController.java:30) - category : 정치
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 정치
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@494d508f - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@181a2908 - 성공(1)/실패(0)
+(PostController.java:30) - category : 경제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 경제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@547135b2 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@8bcc116 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@45a9876d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6aef50ed - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@37ee34a7 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@59b4f73d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@502f9189 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@40d7db59 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6da94e8 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@78a98611 - 성공(1)/실패(0)
+(PostController.java:30) - category : 철학
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 철학
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2863a44b - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@e5b5d83 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@53ba9997 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@409fc5a4 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@75eb7000 - 성공(1)/실패(0)
+(PostController.java:30) - category : 정치
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 정치
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@1cb0fe08 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@a4cade6 - 성공(1)/실패(0)
+(PostController.java:30) - category : 경제
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 경제
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@4cc1d5fb - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@6e50e34 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@54ca2eaa - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@329871f5 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@70b41450 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5e0e20dc - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5bb4eac9 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@2a522f93 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@7a94b81d - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@55b37f53 - 성공(1)/실패(0)
+(PostController.java:30) - category : 사회
+(PostServiceImpl.java:53) - ┌───────────────────────────────────
+(PostServiceImpl.java:54) - │ 게시물 service() : 포스팅 불러오기 
+(PostServiceImpl.java:55) - └───────────────────────────────────
+(PostServiceImpl.java:57) - ┌ 1. 카테고리 : 사회
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@84070d6 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5597f02a - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5881200 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@5cd03de3 - 성공(1)/실패(0)
+(PostServiceImpl.java:61) - └ outVO : com.UnderTheKorea.web.domain.Posts@571d206f - 성공(1)/실패(0)
+(SpringApplicationAdminMXBeanRegistrar.java:159) - Application shutdown requested.
+(GracefulShutdown.java:54) - Commencing graceful shutdown. Waiting for active requests to complete
+(DirectJDKLog.java:168) - Pausing ProtocolHandler ["http-nio-80"]
+(GracefulShutdown.java:76) - Graceful shutdown complete
+(DirectJDKLog.java:168) - Stopping ProtocolHandler ["http-nio-80"]
+(HikariDataSource.java:349) - HikariPool-1 - Shutdown initiated...
+(HikariDataSource.java:351) - HikariPool-1 - Shutdown completed.

@@ -33,7 +33,7 @@ public class PostServiceImpl implements PostService, Logging {
 	@Override
 	public int doSave(Posts inVO) throws SQLException {
 		log.debug("┌───────────────────────────────────");
-		log.debug("│ 게시물 service() : 게시물 저장 ");
+		log.debug("│ 게시물 service : 게시물 저장 ");
 		log.debug("└───────────────────────────────────");
 		
 		int flag = postMapper.doSave(inVO);
@@ -51,7 +51,7 @@ public class PostServiceImpl implements PostService, Logging {
 	@Override
 	public List<Posts> loadPosts(@Param("category") String category) throws SQLException {
 		log.debug("┌───────────────────────────────────");
-		log.debug("│ 게시물 service() : 포스팅 불러오기 ");
+		log.debug("│ 게시물 service : 포스팅 불러오기 ");
 		log.debug("└───────────────────────────────────");
 		
 		log.debug("┌ 1. 카테고리 : " + category);

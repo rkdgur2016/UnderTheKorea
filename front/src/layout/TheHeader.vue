@@ -57,7 +57,7 @@
             ></span>
           </router-link>
           <router-link
-            :to="{ path: '/social', query: { category: '사회문제' } }"
+            :to="{ path: '/social', query: { category: '사회' } }"
             class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
             :class="{ 'text-gray-600': activeNav === '사회' }"
             @click="setActiveNav('사회')"
@@ -103,7 +103,7 @@
               {{ loginStore.getUserName }}님, 환영합니다!
             </p>
             <button
-              @click="handleLogout"
+              @click="loginStore.logout()"
               class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 shadow-md hover:shadow-lg"
             >
               로그아웃
@@ -181,18 +181,27 @@
             사회
           </router-link>
           <router-link
-            :to="{ path: '/BalanceGame', query: { category: '광장' } }"
-            class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+            :to="{ path: '/BalanceGame' }" class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
+            :class="{ 'text-gray-600': activeNav === '광장' }"
             @click="setActiveNav('광장')"
           >
             광장
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-gray-600 transition-all duration-300 group-hover:w-full"
+              :class="{ 'w-full': activeNav === '광장' }"
+            ></span>
           </router-link>
           <router-link
             :to="{ path: '/motto', query: { category: '좌우명' } }"
-            class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+            class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
+            :class="{ 'text-gray-600': activeNav === '좌우명' }"
             @click="setActiveNav('좌우명')"
           >
-            좌우명
+            이념
+            <span
+              class="absolute bottom-0 left-0 w-0 h-0.5 bg-gray-600 transition-all duration-300 group-hover:w-full"
+              :class="{ 'w-full': activeNav === '좌우명' }"
+            ></span>
           </router-link>
           <div
             v-if="loginStore.getIsLoggedIn"
@@ -202,7 +211,7 @@
               {{ loginStore.getUserName }}님, 환영합니다!
             </p>
             <button
-              @click="handleLogout"
+              @click="loginStore.logout()"
               class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-left"
             >
               로그아웃
@@ -252,16 +261,6 @@ const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value;
 };
 
-const handleLogout = async () => {
-  try {
-    // await axios.post('/api/users/logout');
-    console.log("로그아웃 되었습니다.");
-  } catch (error) {
-    console.error("로그아웃 처리 중 오류 발생:", error);
-  } finally {
-    loginStore.setLoginState(null); // Pinia 스토어 초기화
-  }
-};
 </script>
 
 <style scoped>

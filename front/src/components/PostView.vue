@@ -206,8 +206,10 @@ const fetchPosts = async (category) => {
     });
     // 받은 데이터를 템플릿이 사용하는 이름으로 매핑합니다.
     posts.value = response.data.map(item => {
-      const videoId = item.videoUrl ? item.videoUrl.split('?')[0] : '';
+      const videoId = item.videoUrl ? item.videoUrl.split('=')[1] : '';
+      console.log(videoId);
       const youtubeTumbnail = videoId ? "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg" : '';
+      console.log(youtubeTumbnail);
 
       // 예시 투표 데이터 (실제로는 백엔드에서 받아와야 함)
       const sampleVotes = item.votes ? item.votes : (Math.random() > 0.7 ? [
@@ -221,6 +223,7 @@ const fetchPosts = async (category) => {
         time: formatTime(item.createdAt),
         title: item.title,
         youtube: item.videoUrl,
+        youtubeId : videoId,
         youtubeTumbnail: youtubeTumbnail,
         img: item.imageUrl,
         body: item.content,
@@ -245,7 +248,7 @@ const categories = [
   { name: '철학', query: '철학' },
   { name: '정치', query: '정치' },
   { name: '경제', query: '경제' },
-  { name: '사회', query: '사회문제' },
+  { name: '사회', query: '사회' },
   { name: '광장', query: '광장' },
   { name: '좌우명', query: '좌우명' }
 ];
@@ -256,7 +259,7 @@ const categoryDescription = computed(() => {
     case '철학': return '인간과 세계에 대한 깊이 있는 사유와 토론';
     case '정치': return '대한민국의 정치 현안과 미래 방향에 대한 논의';
     case '경제': return '경제 정책과 시장 동향에 대한 분석과 전망';
-    case '사회문제': return '우리 사회가 직면한 다양한 문제들에 대한 고찰';
+    case '사회': return '우리 사회가 직면한 다양한 문제들에 대한 고찰';
     case '광장': return '자유로운 의견 교환과 토론의 장';
     case '좌우명': return '삶의 방향을 제시하는 가치관과 원칙';
     default: return '다양한 주제에 대한 의견을 나누는 공간';
@@ -274,18 +277,16 @@ const getVoteColor = (index) => {
   return colors[index % colors.length];
 };
 
-onMounted(() => {
-  const initialCategory = route.query.category || '철학';
-  fetchPosts(initialCategory);
-});
-
 watch(() => route.query.category, (newCategory, oldCategory) => {
-  if (newCategory && newCategory !== oldCategory) {
-    fetchPosts(newCategory);
-  } else if (!newCategory && oldCategory) {
-    fetchPosts('철학');
-  }
-}, { immediate: true });
+    // newCategory가 null/undefined일 때 '철학'으로 기본 설정
+    const categoryToFetch = newCategory || '철학';
+
+    // 새로운 카테고리가 이전 카테고리와 다르거나 (실제 변경),
+    // 초기 로드 시 (newCategory가 있고 oldCategory가 undefined일 때)
+    if (categoryToFetch !== oldCategory || (newCategory && oldCategory === undefined)) {
+        fetchPosts(categoryToFetch);
+    }
+}, { immediate: true }); 
 </script>
 
 <style scoped>

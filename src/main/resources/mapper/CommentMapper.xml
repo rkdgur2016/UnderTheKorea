@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.UnderTheKorea.web.mapper.CommentMapper">
+
+	<select id="loadComments" parameterType="int" resultType="Comments">
+			WITH RECURSIVE CommentHierarchy AS (
+		    SELECT
+		        comment_id,
+		        post_id,
+		        author_id,
+		        parent_comment_id,
+		        content,
+		        created_at,
+		        updated_at,
+		        1 AS level, 
+		        CAST(comment_id AS TEXT) AS path 
+		    FROM
+		        comments
+		    WHERE
+		        parent_comment_id IS NULL
+				 AND post_id = #{postId}
+		    UNION ALL
+		
+		    SELECT
+		        c.comment_id,
+		        c.post_id,
+		        c.author_id,
+		        c.parent_comment_id,
+		        c.content,
+		        c.created_at,
+		        c.updated_at,
+		        ch.level + 1 AS level,
+		        CAST(ch.path || '.' || c.comment_id AS TEXT) AS path 
+		    FROM
+		        comments c
+		    JOIN
+		        CommentHierarchy ch ON c.parent_comment_id = ch.comment_id
+		)
+		SELECT
+		    comment_id as CommentId,
+		    post_id as postId,
+		    author_id as authorId,
+		    parent_comment_id as parentCommentId,
+		    content,
+		    level,
+		    path,
+		    created_at as createdAt,
+		    updated_at as updatedAt
+		FROM
+		    CommentHierarchy
+		ORDER BY
+		    createdAt DESC;
+    </select>
+    
+    <insert id="doSave" parameterType="Comments">
+    	INSERT INTO comments (post_id, author_id, content) 
+    	values (#{postId}, #{authorId}, #{content})
+    </insert>
+</mapper>

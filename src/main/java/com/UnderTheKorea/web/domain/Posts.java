@@ -23,4 +23,12 @@ public class Posts {
 	private int viewCount;
 	private int likeCount;
 	
+	@Override
+	public String toString() {
+		return "Posts [postId=" + postId + ", authorId=" + authorId + ", title=" + title + ", category=" + category
+				+ ", content=" + content + ", imageUrl=" + imageUrl + ", videoUrl=" + videoUrl + ", createdAt="
+				+ createdAt + ", updatedAt=" + updatedAt + ", viewCount=" + viewCount + ", likeCount=" + likeCount
+				+ ", toString()=" + super.toString() + "]";
+	}
+	
 }

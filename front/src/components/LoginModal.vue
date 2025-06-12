@@ -186,6 +186,7 @@
       const response = await axios.post("/api/users/login", {
         userId: loginForm.userId,
         password: loginForm.password,
+        rememberMe: loginForm.rememberMe,
       });
   
       if (response.data && response.data.userId) {
