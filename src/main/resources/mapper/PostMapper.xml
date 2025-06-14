@@ -14,7 +14,8 @@
 		    p.created_at AS createdAt,
 		    p.updated_at AS updatedAt,
 		    p.view_count AS viewCount,
-		    COUNT(l.user_id) AS likeCount
+		    COUNT(l.user_id) AS likeCount,
+		    p.short_url AS shortUrl
 		FROM
 		    posts p
 		LEFT JOIN
@@ -22,7 +23,7 @@
 		WHERE
 		    p.category = #{category}
 		GROUP BY
-		    p.post_id, p.author_id, p.title, p.category, p.content, p.image_url, p.video_url, p.created_at, p.updated_at, p.view_count
+		    p.post_id, p.author_id, p.title, p.category, p.content, p.image_url, p.video_url, p.created_at, p.updated_at, p.view_count, p.short_url
 		ORDER BY
 		    p.created_at DESC
 		LIMIT 10;
@@ -30,9 +31,9 @@
     
     <insert id="doSave" parameterType="Posts">
     	INSERT INTO posts 
-    		(author_id, title, category, content, image_url, video_url) 
+    		(author_id, title, category, content, image_url, video_url, short_url) 
     	VALUES
-    		(#{authorId}, #{title}, #{category}, #{content}, #{imageUrl}, #{videoUrl})
+    		(#{authorId}, #{title}, #{category}, #{content}, #{imageUrl}, #{videoUrl}, #{shortUrl})
     </insert>
 	
 </mapper>

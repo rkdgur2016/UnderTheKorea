@@ -1,0 +1,1 @@
+import{P as t}from"./PostView-C4Kq1q1Z.js";import{_ as p,c as i,o as a}from"./index-DtvBg1HP.js";const n={__name:"PhilosophyView",emits:["open-detail"],setup(r,{emit:l}){return(o,e)=>(a(),i(t,{posts:o.philosophyPosts,onOpenDetail:e[0]||(e[0]=s=>o.$emit("open-detail",s))},null,8,["posts"]))}},d=p(n,[["__scopeId","data-v-ad6efbad"]]);export{d as default};

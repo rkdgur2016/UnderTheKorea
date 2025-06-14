@@ -197,11 +197,20 @@
                     accept="image/*"
                     @change="handleFileUpload"
                     class="hidden"
+                    :disabled="isAnyMediaFieldPopulated && !imagePreview"
                   />
                   <div
                     v-if="!imagePreview"
-                    @click="$refs.fileInput.click()"
-                    class="cursor-pointer"
+                    @click="
+                      (!isAnyMediaFieldPopulated || !imagePreview) &&
+                        $refs.fileInput.click()
+                    "
+                    :class="{
+                      'cursor-pointer':
+                        !isAnyMediaFieldPopulated || !imagePreview,
+                      'cursor-not-allowed opacity-50':
+                        isAnyMediaFieldPopulated && !imagePreview,
+                    }"
                   >
                     <svg
                       class="mx-auto h-12 w-12 text-slate-400"
@@ -262,6 +271,9 @@
                   type="url"
                   placeholder="https://example.com/image.jpg"
                   class="w-full px-3 py-2 text-sm border border-slate-300 rounded-md focus:ring-2 focus:ring-slate-500 focus:border-slate-500 transition-colors"
+                  :disabled="
+                    isAnyMediaFieldPopulated && formData.imageUrl.trim() === ''
+                  "
                 />
               </div>
             </div>
@@ -276,6 +288,9 @@
                 type="url"
                 placeholder="https://www.youtube.com/watch?v=..."
                 class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500 transition-colors"
+                :disabled="
+                  isAnyMediaFieldPopulated && formData.videoUrl.trim() === ''
+                "
               />
               <p class="text-xs text-slate-500 mt-1">
                 유튜브 동영상 URL을 입력하세요
@@ -291,6 +306,37 @@
                     class="w-full h-full"
                     allowfullscreen
                   ></iframe>
+                </div>
+              </div>
+              <div class="mt-6">
+                <label class="block text-sm font-medium text-slate-700 mb-2"
+                  >유튜브 쇼츠</label
+                >
+                <input
+                  v-model="formData.shortsUrl"
+                  type="url"
+                  placeholder="https://www.youtube.com/shorts/..."
+                  class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500 transition-colors"
+                  :disabled="
+                    isAnyMediaFieldPopulated && formData.shortsUrl.trim() === ''
+                  "
+                />
+                <p class="text-xs text-slate-500 mt-1">
+                  유튜브 쇼츠 URL을 입력하세요
+                </p>
+
+                <div v-if="youtubeShortsPreview" class="mt-4">
+                  <div
+                    class="aspect-video bg-slate-100 rounded-lg overflow-hidden"
+                  >
+                    <iframe
+                      :src="youtubeShortsPreview"
+                      class="w-full h-full"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
                 </div>
               </div>
             </div>
@@ -373,6 +419,7 @@ const formData = ref({
   content: "",
   imageUrl: "",
   videoUrl: "",
+  shortsUrl: "",
 });
 
 const userInfo = computed(() => loginStore.getLoggedInUser);
@@ -385,7 +432,9 @@ onMounted(() => {
   console.log("PostCreate: current isLoggedIn value:", loginStore.getUserId);
 
   if (!userInfo.value) {
-    alert("게시물을 작성하려면 로그인이 필요합니다. 로그인 페이지로 이동합니다.");
+    alert(
+      "게시물을 작성하려면 로그인이 필요합니다. 로그인 페이지로 이동합니다."
+    );
     modalStore.openLogin();
   }
 });
@@ -417,6 +466,20 @@ const youtubePreview = computed(() => {
   return "";
 });
 
+// 유튜브 쇼츠 미리보기 URL 생성
+const youtubeShortsPreview = computed(() => {
+  if (!formData.value.shortsUrl) return "";
+
+  // YouTube Shorts URL 패턴: youtube.com/shorts/{videoId} 또는 youtu.be/{videoId}
+  const shortsRegex = /(?:youtube\.com\/shorts\/|youtu\.be\/)([a-zA-Z0-9_-]+)/;
+  const match = formData.value.shortsUrl.match(shortsRegex);
+
+  if (match) {
+    // YouTube Shorts 임베드 URL은 일반 동영상과 동일하게 embed 사용 가능
+    return `https://www.youtube.com/embed/${match[1]}`;
+  }
+  return "";
+});
 // 파일 업로드 처리
 const handleFileUpload = (event) => {
   const file = event.target.files[0];
@@ -425,6 +488,11 @@ const handleFileUpload = (event) => {
   // 파일 크기 체크 (5MB)
   if (file.size > 5 * 1024 * 1024) {
     alert("파일 크기는 5MB 이하여야 합니다.");
+    // 파일 입력 초기화
+    if (fileInput.value) {
+      fileInput.value.value = "";
+    }
+    imagePreview.value = "";
     return;
   }
 
@@ -435,8 +503,8 @@ const handleFileUpload = (event) => {
   };
   reader.readAsDataURL(file);
 
-  // 실제로는 여기서 서버에 파일을 업로드하고 URL을 받아옴
-  // formData.value.imageUrl = uploadedImageUrl
+  // 파일이 선택되면 이미지 URL 필드를 비활성화
+  formData.value.imageUrl = ""; // 이미지 파일 선택 시 URL 필드 초기화
 };
 
 // 이미지 제거
@@ -465,6 +533,16 @@ const loadDraft = () => {
   }
 };
 
+// 미디어 입력 필드 중 하나라도 값이 있는지 확인하는 computed 속성
+const isAnyMediaFieldPopulated = computed(() => {
+  return (
+    imagePreview.value !== "" || // 이미지 파일이 선택된 경우
+    formData.value.imageUrl.trim() !== "" ||
+    formData.value.videoUrl.trim() !== "" ||
+    formData.value.shortsUrl.trim() !== ""
+  );
+});
+
 // 게시물 제출
 const submitPost = async () => {
   if (!isFormValid.value) return;
@@ -472,7 +550,6 @@ const submitPost = async () => {
   isSubmitting.value = true;
 
   try {
-    
     const postData = {
       authorId: loginStore.getUserId,
       title: formData.value.title.trim(),
@@ -480,10 +557,11 @@ const submitPost = async () => {
       content: formData.value.content.trim(),
       imageUrl: formData.value.imageUrl || null,
       videoUrl: formData.value.videoUrl || null,
+      shortsUrl: formData.value.shortsUrl || null,
       //createdAt: new Date().toISOString(),
     };
 
-    const response = await axios.post("/post/savePosts", postData)
+    const response = await axios.post("/post/savePosts", postData);
 
     console.log("게시물 데이터:", postData);
     console.log("서버 응답:", response.data);
@@ -503,6 +581,53 @@ const submitPost = async () => {
 
 // 컴포넌트 마운트 시 임시저장 데이터 확인
 loadDraft();
+
+// 미디어 필드 값 변경 감지 및 다른 필드 초기화
+watch(
+  () => formData.value.imageUrl,
+  (newValue, oldValue) => {
+    if (newValue && newValue.trim() !== "") {
+      formData.value.videoUrl = "";
+      formData.value.shortsUrl = "";
+      imagePreview.value = ""; // URL 입력 시 파일 미리보기 제거
+      if (fileInput.value) fileInput.value.value = ""; // 파일 입력 초기화
+    }
+  }
+);
+
+watch(
+  () => formData.value.videoUrl,
+  (newValue, oldValue) => {
+    if (newValue && newValue.trim() !== "") {
+      formData.value.imageUrl = "";
+      formData.value.shortsUrl = "";
+      imagePreview.value = "";
+      if (fileInput.value) fileInput.value.value = "";
+    }
+  }
+);
+
+watch(
+  () => formData.value.shortsUrl,
+  (newValue, oldValue) => {
+    if (newValue && newValue.trim() !== "") {
+      formData.value.imageUrl = "";
+      formData.value.videoUrl = "";
+      imagePreview.value = "";
+      if (fileInput.value) fileInput.value.value = "";
+    }
+  }
+);
+
+// `imagePreview` (파일 업로드) 변경 감지
+watch(imagePreview, (newValue, oldValue) => {
+  if (newValue !== "") {
+    // 이미지가 업로드되면
+    formData.value.imageUrl = ""; // URL 입력 필드 초기화
+    formData.value.videoUrl = "";
+    formData.value.shortsUrl = "";
+  }
+});
 </script>
 
 <style scoped>

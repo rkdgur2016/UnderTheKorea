@@ -18,6 +18,7 @@ public class Posts {
 	private String content;
 	private String imageUrl;
 	private String videoUrl;
+	private String shortUrl;
 	private String createdAt;
 	private String updatedAt;
 	private int viewCount;
@@ -26,9 +27,9 @@ public class Posts {
 	@Override
 	public String toString() {
 		return "Posts [postId=" + postId + ", authorId=" + authorId + ", title=" + title + ", category=" + category
-				+ ", content=" + content + ", imageUrl=" + imageUrl + ", videoUrl=" + videoUrl + ", createdAt="
-				+ createdAt + ", updatedAt=" + updatedAt + ", viewCount=" + viewCount + ", likeCount=" + likeCount
-				+ ", toString()=" + super.toString() + "]";
+				+ ", content=" + content + ", imageUrl=" + imageUrl + ", videoUrl=" + videoUrl + ", shortUrl="
+				+ shortUrl + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", viewCount=" + viewCount
+				+ ", likeCount=" + likeCount + ", toString()=" + super.toString() + "]";
 	}
 	
 }
