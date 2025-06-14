@@ -80,6 +80,7 @@
               >
                 투표 시작하기
               </button>
+              
             </div>
 
             <div v-if="showVoteCreation" class="mb-8 p-6 bg-blue-50 border border-blue-200 rounded-lg">
@@ -126,11 +127,17 @@
                   취소
                 </button>
                 <button
-                  @click="createVote"
+                  @click="handleCreateVote"
                   class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
                 >
                   투표 생성
                 </button>
+              </div>
+              <div v-if="showCreateVoteSuccessMessage" class="mt-4 p-3 bg-green-100 text-green-700 rounded-md text-sm">
+                {{ showCreateVoteSuccessMessage }}
+              </div>
+              <div v-if="showCreateVoteErrorMessage" class="mt-4 p-3 bg-red-100 text-red-700 rounded-md text-sm">
+                {{ showCreateVoteErrorMessage }}
               </div>
             </div>
 
@@ -155,7 +162,14 @@
                 >
                   {{ currentVote.disagreeTitle }}
                 </button>
+                <div v-if="showCreateVoteSuccessMessage" class="mt-4 p-3 bg-green-100 text-green-700 rounded-md text-sm">
+                {{ showCreateVoteSuccessMessage }}
               </div>
+              <div v-if="showCreateVoteErrorMessage" class="mt-4 p-3 bg-red-100 text-red-700 rounded-md text-sm">
+                {{ showCreateVoteErrorMessage }}
+              </div>
+              </div>
+              
 
               <div v-else class="space-y-4">
                 <div class="space-y-2">
@@ -191,6 +205,13 @@
                 </div>
               </div>
             </div>
+            <div v-if="showNoPollMessage" class="text-center py-10 mb-8 p-6 bg-slate-50 border border-slate-200 rounded-lg">
+                  <svg class="mx-auto h-12 w-12 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                  <h3 class="mt-2 text-sm font-medium text-slate-900">투표가 없습니다</h3>
+                  <p class="mt-1 text-sm text-slate-500">새로운 투표를 시작해보세요.</p>
+              </div>
           </div>
 
           <div class="w-96 p-6 bg-slate-50">
@@ -268,8 +289,8 @@
 import { ref, watch, defineProps, defineEmits, computed, onMounted, onUpdated } from 'vue';
 import { useComments } from '@/util/PostDetail/useComments';
 import { useAddComment } from '@/util/PostDetail/useAddComment';
-import { useVote } from '@/util/PostDetail/useVote';
-import { useLoginStore } from '@/stores/loginStore';
+import { useVote } from '@/util/PostDetail/useVote'; // useVote 훅 임포트
+import { useLoginStore } from '@/stores/loginStore'; // useLoginStore 임포트
 
 const props = defineProps({
   postId: {
@@ -288,19 +309,19 @@ const showDetail = ref(false);
 
 const newCommentText = ref('');
 
+// useLoginStore를 PostDetail에서만 호출하고, computed로 currentUserId를 정의합니다.
 const loginStore = useLoginStore();
-const currentUserId = computed(() => loginStore.getUserId); 
+const currentUserId = computed(() => loginStore.getUserId);
 
 const {
   comments,
   isLoading: commentsLoading,
   error: commentsError,
-  fetchCommentsForPost // useComments에서 댓글 목록 새로고침 함수 임포트
+  fetchCommentsForPost
 } = useComments(
   computed(() => props.postId || props.post?.id)
 );
 
-// 날짜 포맷팅 헬퍼 함수
 const formatDateTime = (isoString) => {
   if (!isoString) return '';
   try {
@@ -313,10 +334,11 @@ const formatDateTime = (isoString) => {
     return `${year}-${month}-${day} ${hours}:${minutes}`;
   } catch (e) {
     console.error("날짜 포맷팅 오류:", e);
-    return isoString; // 오류 발생 시 원본 문자열 반환
+    return isoString;
   }
 };
 
+// useVote 훅 사용 시 currentUserId를 두 번째 인자로 전달합니다.
 const {
   showVoteCreation,
   voteOptions,
@@ -325,10 +347,30 @@ const {
   agreePercentage,
   disagreePercentage,
   startVote,
-  createVote,
-  castVote,
-  resetVote
-} = useVote();
+  createVote: useVoteCreateVote,
+  castVote: useVoteCastVote,
+  resetVote,
+  fetchVoteStatusByPostId,
+  showNoPollMessage,
+  showVoteErrorMessage,
+  showCreateVoteSuccessMessage,
+  showCreateVoteErrorMessage, 
+} = useVote(
+  computed(() => props.postId || props.post?.id),
+  currentUserId // <-- 여기에 currentUserId (computed ref)를 전달합니다.
+);
+
+const handleStartVoteClick = () => {
+  startVote();
+};
+
+const handleCreateVote = () => {
+  useVoteCreateVote(props.post.title);
+};
+
+const castVote = (optionType) => {
+  useVoteCastVote(optionType);
+};
 
 const {
   isSubmitting,
@@ -337,41 +379,36 @@ const {
   addComment
 } = useAddComment();
 
-// 댓글 작성 핸들러
 const handleCommentSubmit = async () => {
   const postId = props.postId || post.value?.id;
-  const authorId = currentUserId.value; 
-  const content = newCommentText.value; 
+  const authorId = currentUserId.value;
+  const content = newCommentText.value;
 
   if (!postId) {
     submitError.value = "게시물 ID를 찾을 수 없습니다.";
     return;
   }
-  if (!authorId) { // userId가 없는 경우 처리
+  if (!authorId) {
     submitError.value = "로그인된 사용자만 댓글을 작성할 수 있습니다.";
-    isSubmitting.value = false; // 제출 상태 초기화
+    isSubmitting.value = false;
     return;
   }
-  if (!content.trim()) { // 댓글 내용이 비어있는 경우 처리
+  if (!content.trim()) {
     submitError.value = "댓글 내용을 입력해주세요.";
-    isSubmitting.value = false; // 제출 상태 초기화
+    isSubmitting.value = false;
     return;
   }
   
-  // addComment 함수에 postId, content, userId 전달
   await addComment(postId, content, authorId);
-
   if (submitSuccess.value) {
-    newCommentText.value = ''; // 댓글 작성 성공 시 입력 필드 초기화
-    submitError.value = null; // 성공 시 기존 에러 메시지 초기화
-    // 댓글 목록 새로고침
-    await fetchCommentsForPost(currentPostId);
+    newCommentText.value = '';
+    submitError.value = null;
+    await fetchCommentsForPost(postId);
   }
 };
 
 const youtubeEmbedUrl = computed(() => {
   if (post.value && post.value.youtubeId) {
-    // 올바른 유튜브 임베드 URL 형식
     return `https://www.youtube-nocookie.com/embed/${post.value.youtubeId}`;
   }
   return '';

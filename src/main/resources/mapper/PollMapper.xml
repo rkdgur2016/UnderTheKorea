@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.UnderTheKorea.web.mapper.PollMapper">
+
+    <insert id="doSave" parameterType="Polls">
+    	INSERT INTO polls (post_id, user_id, title, option_1, option_2, option_3, option_4)
+		VALUES(#{postId}, #{userId}, #{title}, #{option1}, #{option2}, #{option3}, #{option4});
+    </insert>
+    
+    <select id="loadPoll" parameterType="int" resultType="Polls">
+    	select poll_id as pollId,
+				post_id as postId,
+				user_id as userId,
+				title as title,
+				option_1 as option1,
+				option_2 as option2,
+				option_3 as option3,
+				option_4 as option4,
+				created_at as createdAt,
+				updated_at as updatedAt
+		 from polls
+		 where post_id = #{postId};
+    </select>
+    
+</mapper>

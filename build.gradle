@@ -20,6 +20,7 @@ repositories {
 ext {
 	set('springAiVersion', "1.0.0-M8")
 }
+
 configurations {
     all {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
