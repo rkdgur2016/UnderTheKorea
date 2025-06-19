@@ -27,7 +27,7 @@ public class CommentController implements Logging {
 	
 	@GetMapping("/loadComment/{postId}")
 	public List<Comments> loadComments(@PathVariable("postId")int postId) throws SQLException {
-		//@PathVariable은 URL 경로에 포함된 값을 가져옴
+		//@PathVariable은 URL 경로에 "/" 포함된 값을 가져옴
 		//@RequestParam은 쿼리 문자열 "?"의 뒤에 들어오는 값을 가져옴
 		return this.commentServiceImpl.loadComments(postId);
 	}

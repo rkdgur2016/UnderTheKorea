@@ -56,4 +56,5 @@
     	INSERT INTO comments (post_id, author_id, content) 
     	values (#{postId}, #{authorId}, #{content})
     </insert>
+    
 </mapper>

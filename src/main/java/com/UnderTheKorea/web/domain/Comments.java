@@ -26,6 +26,4 @@ public class Comments {
 				+ ", updatedAt=" + updatedAt + ", toString()=" + super.toString() + "]";
 	}
 	
-	
-	
 }
