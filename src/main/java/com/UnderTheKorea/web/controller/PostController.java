@@ -26,9 +26,13 @@ public class PostController implements Logging{
 	private final PostServiceImpl postServiceImpl;
 	
 	@GetMapping("/loadPosts")
-	public List<Posts> loadPosts(@RequestParam("category") String category) throws SQLException {
-		log.debug("category : " + category);
-		return this.postServiceImpl.loadPosts(category);
+	public List<Posts> loadPosts(@RequestParam("category") String category, 
+								@RequestParam("pageNo") int pageNo) throws SQLException {
+		
+		List<Posts> outVO = postServiceImpl.loadPosts(category, pageNo);
+		log.debug("로딩된 포스트 개수 : " + outVO.size());
+		
+		return outVO;
 	}
 	
 	@PostMapping("/savePosts")

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.UnderTheKorea.web.mapper.PostMapper">
 	
-	<select id="loadPosts" parameterType="String" resultType="Posts">
+	<select id="loadPosts" parameterType="map" resultType="Posts">
         SELECT
 		    p.post_id AS postId,
 		    p.author_id AS authorId,
@@ -26,7 +26,8 @@
 		    p.post_id, p.author_id, p.title, p.category, p.content, p.image_url, p.video_url, p.created_at, p.updated_at, p.view_count, p.short_url
 		ORDER BY
 		    p.created_at DESC
-		LIMIT 10;
+		LIMIT 10
+		OFFSET #{pageNo};
     </select>
     
     <insert id="doSave" parameterType="Posts">

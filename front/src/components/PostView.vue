@@ -281,12 +281,18 @@
           </div>
         </div>
       </div>
+      <div v-if="isLoading && hasMorePosts" class="flex justify-center items-center py-8">
+        <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-slate-800"></div>
+      </div>
+      <div v-if="!hasMorePosts && posts.length > 0 && !isLoading" class="text-center text-slate-500 py-8">
+        더 이상 게시물이 없습니다.
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, watch, onMounted, computed } from "vue";
+import { ref, watch, onMounted, computed, onUnmounted } from "vue"; 
 import { useRoute, useRouter } from "vue-router";
 import { defineEmits } from "vue";
 import axios from "axios";
@@ -331,21 +337,29 @@ const formatTime = (isoString) => {
   return `${year}년 ${month}월 ${day}일`;
 };
 
-// 게시물 데이터를 백엔드에서 가져오고 템플릿 형식에 맞게 매핑하는 함수
-const fetchPosts = async (category) => {
-  loading.value = true;
-  error.value = null;
+const offset = ref(0); 
+const limit = 10;
+const isLoading = ref(false); 
+const hasMorePosts = ref(true); 
+
+const fetchPosts = async (category, currentOffset, currentLimit, append = false) => {
+  isLoading.value = true; 
+  if (!append) { 
+    error.value = null; 
+  }
+
   currentCategory.value = category;
 
   try {
     const response = await axios.get("/post/loadPosts", {
       params: {
         category: category,
+        pageNo: currentOffset,
       },
     });
 
     // 받은 데이터를 템플릿이 사용하는 이름으로 매핑합니다.
-    posts.value = response.data.map((item) => {
+    const newPosts  = response.data.map((item) => {
       const videoId = item.videoUrl ? item.videoUrl.split("=")[1] : "";
       const shortsId = item.shortUrl ? item.shortUrl.split("/").pop() : "";
       const youtubeTumbnail = videoId
@@ -391,12 +405,44 @@ const fetchPosts = async (category) => {
         votes: sampleVotes, // 투표 데이터 추가
       };
     });
-    console.log("게시물 데이터:", posts.value);
+    
+    if (append) {
+      posts.value = [...posts.value, ...newPosts]; // 기존 게시물에 새 게시물 추가
+    } else {
+      posts.value = newPosts; // 새로운 카테고리 시 게시물 초기화
+    }
+    offset.value = currentOffset + newPosts.length;
+    
+    hasMorePosts.value = newPosts.length === currentLimit;
+    console.log("게시물 데이터:", posts.value); // 
+
   } catch (err) {
-    console.error("게시물 로드 중 오류 발생:", err);
-    error.value = "게시물을 불러오는데 실패했습니다. 서버 상태를 확인해주세요.";
+    console.error("게시물 로드 중 오류 발생:", err); // 
+    error.value = "게시물을 불러오는데 실패했습니다. 서버 상태를 확인해주세요."; // 
+    hasMorePosts.value = false; // 에러 발생 시 더 이상 로드하지 않음
   } finally {
-    loading.value = false;
+    isLoading.value = false; // 로딩 종료
+  }
+};
+
+// 무한 스크롤 로직 (loadMorePosts 함수)
+const loadMorePosts = () => {
+  // 로딩 중이거나 더 이상 불러올 게시물이 없으면 요청하지 않음
+  if (isLoading.value || !hasMorePosts.value) {
+    return;
+  }
+
+  // 다음 페이지의 게시물을 현재 offset부터 limit만큼 가져오도록 호출
+  fetchPosts(currentCategory.value, offset.value, limit, true); // true는 append 모드
+};
+
+// 스크롤 이벤트 핸들러
+const handleScroll = () => {
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+  // 사용자가 페이지의 맨 아래 (또는 약간 위)에 도달했는지 확인
+  // 100은 바닥에서 100px 위를 의미합니다. 필요에 따라 조절하세요.
+  if (scrollTop + clientHeight >= scrollHeight - 100 && hasMorePosts.value) {
+    loadMorePosts();
   }
 };
 
@@ -441,23 +487,31 @@ const getVoteColor = (index) => {
   return colors[index % colors.length];
 };
 
+// `route.query.category` 변화 감지 (수정)
 watch(
   () => route.query.category,
-  (newCategory, oldCategory) => {
-    // newCategory가 null/undefined일 때 '철학'으로 기본 설정
-    const categoryToFetch = newCategory || "철학";
+  (newCategory) => {
+    const categoryToFetch = newCategory || "철학"; // newCategory가 null/undefined일 때 '철학'으로 기본 설정
 
-    // 새로운 카테고리가 이전 카테고리와 다르거나 (실제 변경),
-    // 초기 로드 시 (newCategory가 있고 oldCategory가 undefined일 때)
-    if (
-      categoryToFetch !== oldCategory ||
-      (newCategory && oldCategory === undefined)
-    ) {
-      fetchPosts(categoryToFetch);
-    }
+    // 카테고리가 변경되면 offset을 0으로 초기화하고, 더 불러올 게시물이 있다고 가정
+    offset.value = 0;
+    hasMorePosts.value = true;
+
+    // 새로운 카테고리로 게시물 로드 시작 (append=false로 posts 초기화)
+    fetchPosts(categoryToFetch, offset.value, limit, false);
   },
-  { immediate: true }
+  { immediate: true } // 컴포넌트 마운트 시 즉시 실행
 );
+
+// 컴포넌트 마운트 시 스크롤 이벤트 리스너 추가
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+// 컴포넌트 언마운트 시 스크롤 이벤트 리스너 제거 (메모리 누수 방지)
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 </script>
 
 <style scoped>

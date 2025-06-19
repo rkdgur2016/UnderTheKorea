@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import org.springframework.stereotype.Service;
 
+import com.UnderTheKorea.web.domain.ResponseVotes;
 import com.UnderTheKorea.web.domain.Votes;
 import com.UnderTheKorea.web.mapper.VoteMapper;
 import com.UnderTheKorea.web.necessary.Logging;
@@ -41,11 +42,13 @@ public class VoteServiceImpl implements VoteService, Logging {
 	}
 
 	@Override
-	public Votes chooseOne(Votes inVO) throws SQLException {
+	public int chooseOne(Votes inVO) throws SQLException {
 		log.debug("┌───────────────────────────────────");
 		log.debug("│ 투표(Vote) service : 투표하기");
+		log.debug("│ 1. inVO : " + inVO);
 		log.debug("└───────────────────────────────────");
-		Votes outVO = voteMapper.chooseOne(inVO);
+		
+		int outVO = voteMapper.chooseOne(inVO);
 		log.debug("outVO : " + outVO);
 		
 		return outVO;
@@ -55,9 +58,12 @@ public class VoteServiceImpl implements VoteService, Logging {
 	public boolean isUserCheck(int pollId, String userId) throws SQLException {
 		log.debug("┌───────────────────────────────────────────");
 		log.debug("│ 투표(Vote) service : 유저의 투표 여부 확인");
+		log.debug("│ 1. pollId : " + pollId);
+		log.debug("│ 2. userId : " + userId);
 		log.debug("└───────────────────────────────────────────");
 		
 		int outVO = voteMapper.isUserCheck(pollId, userId);
+		log.debug("outVO : " + outVO);
 		
 		if(!(outVO  == 0)) {
 			boolean isTrue = true;
@@ -66,6 +72,19 @@ public class VoteServiceImpl implements VoteService, Logging {
 			boolean isTrue = false;
 			return isTrue;
 		}
+	}
+
+	@Override
+	public ResponseVotes loadVote(int pollId) throws SQLException {
+		log.debug("┌───────────────────────────────────────────");
+		log.debug("│ 투표(Vote) service : 유저의 투표 로딩");
+		log.debug("│ 1. pollId : " + pollId);
+		log.debug("└───────────────────────────────────────────");
+		
+		ResponseVotes outVO = voteMapper.loadVote(pollId);
+		log.debug("outVO : " + outVO);
+		
+		return outVO;
 	}
 
 }

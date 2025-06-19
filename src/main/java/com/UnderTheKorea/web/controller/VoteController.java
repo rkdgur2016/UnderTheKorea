@@ -2,6 +2,7 @@ package com.UnderTheKorea.web.controller;
 
 import java.sql.SQLException;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +21,18 @@ public class VoteController implements Logging{
 	
 	private final VoteServiceImpl voteServiceImpl;
 	
-	@PostMapping("/chooseVote")
-	public Votes selectVote(@RequestBody Votes inVO) throws SQLException{
+	@PostMapping("/castVote")
+	public int castVote(@RequestBody Votes inVO) throws SQLException{
 		log.debug("inVO : " + inVO);
 		
-		return  this.voteServiceImpl.chooseOne(inVO);
+		try {
+	        return this.voteServiceImpl.chooseOne(inVO);
+	    } catch (SQLException e) {
+	        log.error("SQL 예외 발생: {}", e.getMessage());
+	    } catch (Exception e) {
+	        log.error("예기치 않은 예외 발생: {}", e.getMessage());
+	    }
+		
+	    return 0;
 	};
 }

@@ -13,7 +13,9 @@
         <typeAlias alias="Posts" type="com.UnderTheKorea.web.domain.Posts"/>
         <typeAlias alias="Comments" type="com.UnderTheKorea.web.domain.Comments"/>
         <typeAlias alias="Polls" type="com.UnderTheKorea.web.domain.Polls"/>
-        <typeAlias alias="Polls" type="com.UnderTheKorea.web.domain.Votes"/>
+        <typeAlias alias="Votes" type="com.UnderTheKorea.web.domain.Votes"/>
+        <typeAlias alias="ResponseVotes" type="com.UnderTheKorea.web.domain.ResponseVotes"/>
+        <typeAlias alias="Likes" type="com.UnderTheKorea.web.domain.Likes"/>
     </typeAliases>
     
 </configuration>

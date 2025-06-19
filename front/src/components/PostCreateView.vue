@@ -557,7 +557,7 @@ const submitPost = async () => {
       content: formData.value.content.trim(),
       imageUrl: formData.value.imageUrl || null,
       videoUrl: formData.value.videoUrl || null,
-      shortsUrl: formData.value.shortsUrl || null,
+      shortUrl: formData.value.shortsUrl || null,
       //createdAt: new Date().toISOString(),
     };
 

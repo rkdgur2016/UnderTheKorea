@@ -9,4 +9,17 @@
           AND user_id = #{userId}
     </select>
     
+    <select id="loadVote" parameterType="int" resultType="ResponseVotes">
+    	SELECT
+		    COUNT(vote_id) as totalCount,
+		    COUNT(CASE WHEN selected_option = 1 THEN 1 END) AS agreeCount,
+		    COUNT(CASE WHEN selected_option = 2 THEN 1 END) AS disagreeCount
+		FROM votes
+		where poll_id = #{pollId};
+    </select>
+    
+    <insert id="chooseOne" parameterType="Votes">
+    	insert into votes (poll_id, user_id, selected_option) 
+    	values (#{pollId}, #{userId}, #{selectedOption});
+    </insert>
 </mapper>	

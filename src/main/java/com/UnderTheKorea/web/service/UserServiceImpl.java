@@ -94,5 +94,4 @@ public class UserServiceImpl implements UserService, Logging{
 		return outVO;
 	}
 
-
 }

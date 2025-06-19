@@ -11,19 +11,15 @@ export function useVote(postIdProp, currentUserIdProp) {
   const currentVote = ref(null); // 투표 데이터가 로드 시 할당
   const currentUserId = currentUserIdProp;
 
-  // 투표 총 개수 계산
-  const totalVotes = computed(() => {
-    return (currentVote.value?.agree || 0) + (currentVote.value?.disagree || 0);
-  });
   // 찬성 비율 계산 (bar 그래프에 사용)
   const agreePercentage = computed(() => {
-    if (totalVotes.value === 0) return 50; // 투표가 0개일 때 기본값
-    return (currentVote.value.agree / totalVotes.value) * 100;
+    if (currentVote.value.totalCount === 0) return 50; // 투표가 0개일 때 기본값
+    return (currentVote.value.agreeCount / currentVote.value.totalCount) * 100;
   });
   // 반대 비율 계산
   const disagreePercentage = computed(() => {
-    if (totalVotes.value === 0) return 50; // 투표가 0개일 때 기본값
-    return (currentVote.value.disagree / totalVotes.value) * 100;
+    if (currentVote.value.totalCount === 0) return 50; // 투표가 0개일 때 기본값
+    return (currentVote.value.disagreeCount / currentVote.value.totalCount) * 100;
   });
 
   // 투표 생성 폼 열기
@@ -36,6 +32,14 @@ export function useVote(postIdProp, currentUserIdProp) {
 
   // 투표 생성 제출
   const createVote = async (postTitle) => {
+
+    console.log('투표 생성 요청 : createVote', {
+      postId: postIdProp.value,
+      userId: currentUserId.value,
+      title: postTitle,
+      option1: voteOptions.value.agreeTitle,
+      option2: voteOptions.value.disagreeTitle
+    }); ;
 
     showCreateVoteSuccessMessage.value = null;
     showCreateVoteErrorMessage.value = null;
@@ -56,16 +60,7 @@ export function useVote(postIdProp, currentUserIdProp) {
       return;
     }
 
-    console.log('전송될 데이터:', {
-      post_id: postId,
-      user_id: currentUserId.value,
-      title: postTitle,
-      option_1: voteOptions.value.agreeTitle,
-      option_2: voteOptions.value.disagreeTitle
-    });
-
     try {
-      // 투표 생성 엔드포인트는 `/poll/createPoll`로 유지
       const response = await axios.post('/poll/createPoll', {
         postId: postId,
         userId: currentUserId.value,
@@ -74,22 +69,13 @@ export function useVote(postIdProp, currentUserIdProp) {
         option2: voteOptions.value.disagreeTitle
       });
 
-      // 생성된 투표 정보를 currnetVote에 저장하기 위한 로직
-      currentVote.value = {
-        agree: 0,
-        disagree: 0,
-        agreeTitle: voteOptions.value.agreeTitle,
-        disagreeTitle: voteOptions.value.disagreeTitle,
-        isVoted: false, // 새로 생성했으니 아직 투표 안함
-        voteTitle: postTitle
-      };
-
       showCreateVoteSuccessMessage.value = '투표가 성공적으로 생성되었습니다!';
       showVoteCreation.value = false; // 폼 닫기
       voteOptions.value = { agreeTitle: '', disagreeTitle: '' }; // 입력 필드 초기화
       showNoPollMessage.value = false; 
       showVoteErrorMessage.value = null; 
 
+      await loadPoll(postId);
 
     } catch (error) {
       console.error('투표 생성 실패:', error);
@@ -98,7 +84,10 @@ export function useVote(postIdProp, currentUserIdProp) {
   };
 
   // 투표하기
-  const castVote = async (selectedOptionType) => {
+  const castVote = async (selectedOptionType, postIdValue) => {
+
+    console.log("castVote 호출 selectedOptionType:", selectedOptionType);
+
     if (!currentVote.value) return; // 투표 정보가 없으면 리턴
     if (currentVote.value.isVoted) {
       showCreateVoteErrorMessage.value = '이미 투표하셨습니다.';
@@ -122,9 +111,8 @@ export function useVote(postIdProp, currentUserIdProp) {
 
     try {
       // 투표 참여 API 호출
-      await axios.post('/vote/chooseVote', {
-        voteId: currentVote.value.vote_id, // 이 값이 정확히 전달되어야 합니다.
-        postId : postIdProp.value,
+      const response = await axios.post('/vote/castVote', {
+        pollId: currentVote.value.vote_id,
         userId: currentUserId.value,
         selectedOption: selectedOptionNumber
       });
@@ -135,32 +123,48 @@ export function useVote(postIdProp, currentUserIdProp) {
       } else if (selectedOptionType === 'disagree') {
         currentVote.value.disagree++;
       }
+      
+      console.log("투표 참여 성공, 응답 데이터:", response.data);
+      console.log("투표 성공(1), 현재 투표 상태:", currentVote.value);
+
       showCreateVoteSuccessMessage.value = '투표가 완료되었습니다!';
-      currentVote.value = response.data;
+      
+      await loadPoll(postIdValue);
+      console.log("투표 성공(2), 현재 투표 상태:", currentVote.value);
       showVoteErrorMessage.value = null; // 성공 시 에러 메시지 초기화
+      
     } catch (error) {
       console.error('투표 참여 실패:', error);
-      if (error.response && error.response.status === 409) { // 409 Conflict는 보통 중복 투표
-        showCreateVoteSuccessMessage.value = '이미 이 투표에 참여하셨습니다.';
+      if (error.response && error.response.status === 409 || (response.data === 0)) { // 409 Conflict는 보통 중복 투표
+        showCreateVoteErrorMessage.value = '이미 이 투표에 참여하셨습니다.';
         currentVote.value.isVoted = true; // 서버에서 이미 투표했다고 알려주면 상태 업데이트
       } else {
-        showCreateVoteSuccessMessage.value = '투표 참여에 실패했습니다. 다시 시도해주세요.';
+        showCreateVoteErrorMessage.value = '투표 참여에 실패했습니다. 다시 시도해주세요.';
       }
     }
   };
 
-  const fetchVoteStatusByPostId = async (postIdValue) => { // 매개변수 이름을 명확히 변경
-    if (!postIdValue) { // postIdProp.value 대신 매개변수 사용
+  const loadPoll = async (postIdValue) => { // 매개변수 이름을 명확히 변경
+    console.log(" loadPoll 호출, postIdValue:", postIdValue);  
+
+    const apiUrl = `/poll/loadPoll?post_id=${postIdValue}`;
+    const fullApiUrl = apiUrl + (currentUserId.value ? `&user_id=${currentUserId.value}` : '');
+
+    if (!postIdValue) { // postIdPro  p.value 대신 매개변수 사용  
         currentVote.value = null;
         return;
     }
-    try {
-        const pollResponse = await axios.get(`/poll/loadPoll?post_id=${postIdValue}`);
 
-        // 응답 상태가 200 OK일 때만 데이터 처리
+    try {
+      const pollResponse = await axios.get(fullApiUrl);
+      
+      console.log('투표 불러오기 성공:', pollResponse.value);
+
         if (pollResponse.status === 200) {
             const pollData = pollResponse.data.poll;
             const hasVotedFromServer = pollResponse.data.hasVoted;
+            const voteData = pollResponse.data.vote;
+            const hasLikedFromServer = pollResponse.data.hasLiked;
 
             if (!pollData) { // 이 부분은 404를 반환하면 필요 없어지지만, 혹시 모를 경우를 대비
                 console.warn('투표 데이터를 찾을 수 없습니다 (응답 데이터에 poll 객체 없음).');
@@ -170,20 +174,29 @@ export function useVote(postIdProp, currentUserIdProp) {
 
             const userIdForCheck = currentUserId.value;
             let hasVoted = false;
+            let hasLiked = false;
+
             if (userIdForCheck) {
-                hasVoted = hasVotedFromServer;
+              hasVoted = hasVotedFromServer;
+              hasLiked = hasLikedFromServer;
             }
+
+            console.log('투표 데이터:', pollData, '사용자 투표 여부:', hasVoted, '사용자 좋아요 여부:', hasLiked);
 
             currentVote.value = {
                 vote_id: pollData.pollId,
-                agree: pollData.option1,
-                disagree: pollData.option2,
-                agreeTitle: '찬성',
-                disagreeTitle: '반대',
+                agreeTitle: pollData.option1,
+                disagreeTitle: pollData.option2,
+                agreeCount: voteData.agreeCount,
+                disagreeCount: voteData.disagreeCount,
+                totalCount : voteData.totalCount,
                 isVoted: hasVoted,
-                voteTitle: pollData.title
+                isLiked : hasLiked,
+                voteTitle: pollData.title,
+                createAt : pollData.createdAt,
             };
-            console.log('투표 불러오기 성공:', currentVote.value);
+
+            
             // 투표가 존재하지 않는다는 메시지를 보여줄 필요가 없으므로 지움
             showNoPollMessage.value = false; 
 
@@ -245,7 +258,7 @@ const resetVote = () => {
   // PostDetail 컴포넌트 마운트 시에도 즉시 실행됩니다.
   watch(postIdProp, async (newPostId) => {
     if (newPostId) {
-      await fetchVoteStatusByPostId(newPostId);
+      await loadPoll(newPostId);
     } else {
       resetVote(); // postId가 없으면 투표 상태 초기화
     }
@@ -256,14 +269,13 @@ const resetVote = () => {
     showVoteCreation,
     voteOptions,
     currentVote,
-    totalVotes,
     agreePercentage,
     disagreePercentage,
     startVote,
     createVote,
     castVote,
     resetVote,
-    fetchVoteStatusByPostId, // PostDetail에서 직접 호출할 함수
+    loadPoll,
     showNoPollMessage,
     showVoteErrorMessage,
     showCreateVoteSuccessMessage, 

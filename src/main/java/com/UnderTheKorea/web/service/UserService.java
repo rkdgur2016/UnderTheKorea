@@ -12,4 +12,6 @@ public interface UserService extends WorkDiv<Users> {
 	public int register(@Param("userId") String userId, @Param("password") String password, @Param("username") String userName);
 	
 	public int idConfirm(@Param("userId") String userId);
+	
 }
+
