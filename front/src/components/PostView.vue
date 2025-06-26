@@ -187,35 +187,6 @@
               {{ post.body }}
             </p>
 
-            <!-- 투표 결과 (있는 경우) -->
-            <div
-              v-if="post.votes && post.votes.length > 0"
-              class="mt-3 bg-slate-50 p-3 rounded-md"
-            >
-              <p class="text-xs font-medium text-slate-700 mb-2">투표 결과</p>
-              <div
-                v-for="(option, index) in post.votes"
-                :key="index"
-                class="mb-2"
-              >
-                <div class="flex justify-between text-xs mb-1">
-                  <span class="text-slate-700">{{ option.text }}</span>
-                  <span class="font-medium text-slate-800"
-                    >{{ option.percentage }}%</span
-                  >
-                </div>
-                <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
-                  <div
-                    class="h-full rounded-full"
-                    :style="{
-                      width: `${option.percentage}%`,
-                      backgroundColor: getVoteColor(index),
-                    }"
-                  ></div>
-                </div>
-              </div>
-            </div>
-
             <!-- 게시물 메타 정보 -->
             <div
               class="mt-4 flex items-center justify-between text-xs text-slate-500"
@@ -259,22 +230,6 @@
                     />
                   </svg>
                   <span>{{ post.likeCount }}</span>
-                </div>
-                <div class="flex items-center">
-                  <svg
-                    class="h-4 w-4 mr-1"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 002-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                  <span>{{ post.comments }}</span>
                 </div>
               </div>
             </div>
@@ -369,24 +324,6 @@ const fetchPosts = async (category, currentOffset, currentLimit, append = false)
         ? `https://i.ytimg.com/vi/${shortsId}/hqdefault.jpg`
         : "";
 
-      // 예시 투표 데이터 (실제로는 백엔드에서 받아와야 함)
-      const sampleVotes = item.votes
-        ? item.votes
-        : Math.random() > 0.7
-        ? [
-            {
-              text: "찬성",
-              count: Math.floor(Math.random() * 100),
-              percentage: Math.floor(Math.random() * 100),
-            },
-            {
-              text: "반대",
-              count: Math.floor(Math.random() * 100),
-              percentage: 100 - Math.floor(Math.random() * 100),
-            },
-          ]
-        : null;
-
       return {
         id: item.postId,
         category: item.category,
@@ -402,7 +339,6 @@ const fetchPosts = async (category, currentOffset, currentLimit, append = false)
         likeCount: item.likeCount || 0,
         comments: item.comments || 0,
         viewcount: item.viewCount || 0,
-        votes: sampleVotes, // 투표 데이터 추가
       };
     });
     

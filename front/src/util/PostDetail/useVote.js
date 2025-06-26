@@ -144,99 +144,80 @@ export function useVote(postIdProp, currentUserIdProp) {
     }
   };
 
-  const loadPoll = async (postIdValue) => { // 매개변수 이름을 명확히 변경
-    console.log(" loadPoll 호출, postIdValue:", postIdValue);  
+  const loadPoll = async (postIdValue) => {
+    console.log("loadPoll 호출, postIdValue:", postIdValue);
 
-    const apiUrl = `/poll/loadPoll?post_id=${postIdValue}`;
-    const fullApiUrl = apiUrl + (currentUserId.value ? `&user_id=${currentUserId.value}` : '');
-
-    if (!postIdValue) { // postIdPro  p.value 대신 매개변수 사용  
-        currentVote.value = null;
-        return;
+    if (!postIdValue) {
+      currentVote.value = null;
+      return;
     }
-
+  
+    const apiUrl = `/poll/loadPoll?post_id=${postIdValue}`;
+    const fullApiUrl = currentUserId.value
+      ? `${apiUrl}&user_id=${currentUserId.value}`
+      : apiUrl;
+  
     try {
       const pollResponse = await axios.get(fullApiUrl);
-      
-      console.log('투표 불러오기 성공:', pollResponse.value);
+      console.log('투표 불러오기 성공:', pollResponse.data);
+  
+      if (pollResponse.status !== 200) {
+        console.warn('예상치 못한 응답 상태 코드:', pollResponse.status);
+        currentVote.value = null;
+        showNoPollMessage.value = true;
+        return;
+      }
+  
+      const pollData = pollResponse.data.poll;
+      const voteData = pollResponse.data.vote || {};
+      const hasVoted = currentUserId.value ? pollResponse.data.hasVoted || false : false;
+      const hasLiked = currentUserId.value ? pollResponse.data.hasLiked || false : false;
 
-        if (pollResponse.status === 200) {
-            const pollData = pollResponse.data.poll;
-            const hasVotedFromServer = pollResponse.data.hasVoted;
-            const voteData = pollResponse.data.vote;
-            const hasLikedFromServer = pollResponse.data.hasLiked;
+      if (!pollData) {
+        console.log('pollData가 없음 : ', pollData);
+        currentVote.value = {
+          isLiked: hasLiked,
+          voteData : null,
+        };
+        
+        showNoPollMessage.value = true;
+        return;
+      }
 
-            if (!pollData) { // 이 부분은 404를 반환하면 필요 없어지지만, 혹시 모를 경우를 대비
-                console.warn('투표 데이터를 찾을 수 없습니다 (응답 데이터에 poll 객체 없음).');
-                currentVote.value = null;
-                return;
-            }
+  
+      currentVote.value = {
+        vote_id: pollData.pollId,
+        agreeTitle: pollData.option1,
+        disagreeTitle: pollData.option2,
+        agreeCount: voteData.agreeCount ?? 0,
+        disagreeCount: voteData.disagreeCount ?? 0,
+        totalCount: voteData.totalCount ?? 0,
+        isVoted: hasVoted,
+        isLiked: hasLiked,
+        voteTitle: pollData.title,
+        createAt: pollData.createdAt,
+      };
 
-            const userIdForCheck = currentUserId.value;
-            let hasVoted = false;
-            let hasLiked = false;
-
-            if (userIdForCheck) {
-              hasVoted = hasVotedFromServer;
-              hasLiked = hasLikedFromServer;
-            }
-
-            console.log('투표 데이터:', pollData, '사용자 투표 여부:', hasVoted, '사용자 좋아요 여부:', hasLiked);
-
-            currentVote.value = {
-                vote_id: pollData.pollId,
-                agreeTitle: pollData.option1,
-                disagreeTitle: pollData.option2,
-                agreeCount: voteData.agreeCount,
-                disagreeCount: voteData.disagreeCount,
-                totalCount : voteData.totalCount,
-                isVoted: hasVoted,
-                isLiked : hasLiked,
-                voteTitle: pollData.title,
-                createAt : pollData.createdAt,
-            };
-
-            
-            // 투표가 존재하지 않는다는 메시지를 보여줄 필요가 없으므로 지움
-            showNoPollMessage.value = false; 
-
-        } else {
-            // 200 OK가 아닌 다른 성공 상태 코드 (예: 204 No Content)가 올 경우의 처리
-            // 현재 백엔드는 200 OK 또는 404/500을 반환하므로 이 부분은 상황에 따라 조정
-            console.warn('예상치 못한 응답 상태 코드:', pollResponse.status);
-            currentVote.value = null;
-            showNoPollMessage.value = true; // 또는 다른 메시지 설정
-        }
-
+      console.log('loadPoll() 함수 return 값:', currentVote.value);
+  
+      showNoPollMessage.value = false;
+  
     } catch (error) {
-        console.error('투표 상태 불러오기 실패:', error);
-        currentVote.value = null; // 실패 시 투표 상태 초기화
-
-        // HTTP 상태 코드에 따른 메시지 처리
-        if (error.response) {
-            // 서버가 응답했지만 상태 코드가 2xx 범위 밖인 경우
-            if (error.response.status === 404) {
-                // 백엔드에서 보낸 메시지를 표시
-                showVoteErrorMessage.value = error.response.data.message;
-                showNoPollMessage.value = true; 
-            } else if (error.response.status === 500) {
-              showVoteErrorMessage.value = error.response.data.message || "투표 정보를 불러오는데 실패했습니다.";
-              showNoPollMessage.value = true; 
-            } else {
-              showVoteErrorMessage.value = error.response.data.message || "투표 정보를 불러오는데 실패했습니다.";
-              showNoPollMessage.value = true;
-            }
-        } else if (error.request) {
-            // 요청이 전송되었으나 응답을 받지 못한 경우 (네트워크 오류 등)
-            showVoteErrorMessage.value = "서버에 연결할 수 없습니다. 네트워크 상태를 확인해주세요.";
-            showNoPollMessage.value = true;
-        } else {
-            // 요청 설정 중 오류 발생
-            showVoteErrorMessage.value = "요청 설정 중 오류가 발생했습니다.";
-            showNoPollMessage.value = true;
-        }
+      console.error('투표 상태 불러오기 실패:', error);
+      currentVote.value = null;
+      showNoPollMessage.value = true;
+  
+      if (error.response) {
+        showVoteErrorMessage.value = error.response.data.message || "투표 정보를 불러오는 중 오류가 발생했습니다.";
+      } else if (error.request) {
+        showVoteErrorMessage.value = "서버에 연결할 수 없습니다. 네트워크 상태를 확인해주세요.";
+      } else {
+        showVoteErrorMessage.value = "요청 설정 중 오류가 발생했습니다.";
+      }
     }
-};
+    console.log("loadPoll() 함수에서 pollData가 없을 때 currentVote : ", currentVote.value);
+  };
+  
 
 // 투표 관련 상태 초기화 함수
 const resetVote = () => {

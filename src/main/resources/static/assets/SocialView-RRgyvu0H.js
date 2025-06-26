@@ -1,1 +1,0 @@
-import{P as s}from"./PostView-BXv7C6qK.js";import{_ as a,c as i,o as p}from"./index-C8I4DoQr.js";const n={__name:"SocialView",emits:["open-detail"],setup(r,{emit:l}){return(e,o)=>(p(),i(s,{posts:e.socialPosts,onOpenDetail:o[0]||(o[0]=t=>e.$emit("open-detail",t))},null,8,["posts"]))}},c=a(n,[["__scopeId","data-v-1d008ed9"]]);export{c as default};

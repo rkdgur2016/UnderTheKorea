@@ -21,7 +21,7 @@ public class Posts {
 	private String shortUrl;
 	private String createdAt;
 	private String updatedAt;
-	private int viewCount;
+	private long  viewCount;
 	private int likeCount;
 	
 	@Override

@@ -66,9 +66,7 @@
           <div
             class="wave-container absolute inset-0 z-0 m-0"
             :style="{
-              // 물결 아래 배경색. 좋아요 상태에 따라 미묘하게 변경될 수 있습니다.
-              // 좋아요를 눌렀을 때는 더 투명한 파란색 오버레이
-              backgroundColor: post?.isLiked ? 'rgba(0, 123, 255, 0.2)' : 'transparent', // <-- 색상 변경: rgba(255, 255, 255, 0.4) -> rgba(0, 123, 255, 0.2)
+              backgroundColor: post?.isLiked ? 'rgba(0, 123, 255, 0.2)' : 'transparent', 
               transition: 'background-color 0.3s ease-in-out',
             }"
           >
@@ -131,7 +129,7 @@
                 </div>
               </div>
 
-              <button v-if="!currentVote" @click="startVote"
+              <button v-if="currentVote && currentVote.voteData === null" @click="startVote"
                 class="px-6 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors font-medium">
                 투표 시작하기
               </button>
@@ -182,7 +180,7 @@
               </div>
             </div>
 
-            <div v-if="currentVote" class="mb-8 p-6 bg-slate-50 border border-slate-200 rounded-lg">
+            <div v-if="currentVote && currentVote.voteData !== null" class="mb-8 p-6 bg-slate-50 border border-slate-200 rounded-lg">
               <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-semibold text-slate-800">투표</h3>
                 <div class="text-sm text-slate-500">
@@ -216,7 +214,7 @@
                     <span class="text-sm font-semibold text-slate-800">{{ agreePercentage.toFixed(1) }}%</span>
                   </div>
                   <div class="h-3 bg-slate-200 rounded-full overflow-hidden">
-                    <div class="h-full bg-blue-500 rounded-full transition-all duration-500"
+                    <div class="h-full bg-gray-700 rounded-full transition-all duration-500"
                       :style="{ width: `${agreePercentage}%` }"></div>
                   </div>
                   <div class="text-xs text-slate-500">
@@ -232,7 +230,7 @@
                     <span class="text-sm font-semibold text-slate-800">{{ disagreePercentage.toFixed(1) }}%</span>
                   </div>
                   <div class="h-3 bg-slate-200 rounded-full overflow-hidden">
-                    <div class="h-full bg-red-500 rounded-full transition-all duration-500"
+                    <div class="h-full bg-gray-500 rounded-full transition-all duration-500"
                       :style="{ width: `${disagreePercentage}%` }"></div>
                   </div>
                   <div class="text-xs text-slate-500">
@@ -464,10 +462,12 @@ const handleToggleLike = async () => {
     return;
   }
 
-  const wasLiked = post.value?.isLiked;
+  const wasLiked = currentVote.value?.isLiked;
+  console.log(" □ PostDetail.vue: 현재 좋아요 상태 : ", currentVote.value.isLiked);
+  console.log(" □ wasLiked : " + wasLiked);
 
   if (wasLiked === undefined || post.value === null) {
-    console.error("게시물의 좋아요 상태를 확인할 수 없습니다.");
+    console.log("게시물의 좋아요 상태를 확인할 수 없습니다.");
     return;
   }
   console.log("PostDetail.vue: 좋아요/싫어요 토글 시도", {
@@ -476,17 +476,13 @@ const handleToggleLike = async () => {
     wasLiked,
   });
 
-  const success = await toggleLike(postId, currentUserId.value, post);
+  const success = await toggleLike(postId, currentUserId.value, post, currentVote.value);
 
   console.log("PostDetail.vue: toggleLike 호출 결과 success:", success);
   console.log("PostDetail.vue: handleToggleLike - post.value (after toggleLike call):", post.value);
   console.log("PostDetail.vue: handleToggleLike - post.value.isLiked (after toggleLike call):", post.value?.isLiked); // !!! 추가 !!!
-
-  if (success) {
-    if (post.value.isLiked && !wasLiked) {
-    } else if (!post.value.isLiked && wasLiked) {
-    }
-  } else {
+  
+  if (!success) {
     console.log("PostDetail.vue: 좋아요/싫어요 토글 실패");
   }
 };
