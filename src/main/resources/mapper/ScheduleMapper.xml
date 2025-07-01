@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.UnderTheKorea.web.mapper.ScheduleMapper">
+
+	<select id="loadSchedule" resultType="Schedule">
+		SELECT schedule_id as scheduleId, 
+				schedule_title as scheduleTitle, 
+				schedule_state as scheduleState, 
+				schedule_date as scheduleDate, 
+				schedule_location as scheduleLocation, 
+				created_at as createdAt, 
+				updated_at as updatedAt
+		FROM schedule
+	</select>
+</mapper>

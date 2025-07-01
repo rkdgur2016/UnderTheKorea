@@ -140,20 +140,17 @@
             <label class="block text-sm font-medium text-slate-700 mb-2">
               본문 <span class="text-red-500">*</span>
             </label>
-            <textarea
+            <quill-editor
+              theme="snow"
               v-model="formData.content"
-              required
-              rows="12"
-              placeholder="게시물 내용을 작성하세요."
-              class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-slate-500 transition-colors resize-none"
-            ></textarea>
+              contentType="delta"
+              class="h-72"
+            />
             <div class="flex justify-between mt-1">
               <p class="text-xs text-slate-500">
                 자유롭게 게시물을 작성해주세요.
               </p>
-              <span class="text-xs text-slate-500"
-                >{{ formData.content.length }}자</span
-              >
+              <span class="text-xs text-slate-500">{{ contentLength }}자</span>
             </div>
           </div>
         </div>
@@ -353,13 +350,6 @@
 
             <div class="flex space-x-4">
               <button
-                type="button"
-                @click="saveDraft"
-                class="px-6 py-3 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors font-medium"
-              >
-                임시저장
-              </button>
-              <button
                 type="submit"
                 :disabled="!isFormValid || isSubmitting"
                 :class="[
@@ -416,7 +406,7 @@ const modalStore = useModalStore();
 const formData = ref({
   title: "",
   category: "",
-  content: "",
+  content: { ops: [{ insert: "\n" }] }, // 초기값은 Quill Delta 형식
   imageUrl: "",
   videoUrl: "",
   shortsUrl: "",
@@ -425,12 +415,7 @@ const formData = ref({
 const userInfo = computed(() => loginStore.getLoggedInUser);
 
 onMounted(() => {
-  console.log("PostCreate: onMounted started.");
-  loginStore.initializeAuth(); // initializeAuth가 비동기 함수가 아니라면 await 제거
-  console.log("PostCreate: initializeAuth completed. Checking login state.");
-  console.log("PostCreate: current isLoggedIn value:", userInfo.value);
-  console.log("PostCreate: current isLoggedIn value:", loginStore.getUserId);
-
+  loginStore.initializeAuth();
   if (!userInfo.value) {
     alert(
       "게시물을 작성하려면 로그인이 필요합니다. 로그인 페이지로 이동합니다."
@@ -446,10 +431,11 @@ const fileInput = ref(null);
 
 // 폼 유효성 검사
 const isFormValid = computed(() => {
+  const contentTextLength = contentLength; // 임시 길이 측정
   return (
     formData.value.title.trim().length > 0 &&
     formData.value.category.trim().length > 0 &&
-    formData.value.content.trim().length >= 50
+    contentTextLength >= 10 // 최소 길이 조건
   );
 });
 
@@ -516,23 +502,6 @@ const removeImage = () => {
   }
 };
 
-// 임시저장
-const saveDraft = () => {
-  localStorage.setItem("postDraft", JSON.stringify(formData.value));
-  alert("임시저장되었습니다.");
-};
-
-// 임시저장된 데이터 불러오기
-const loadDraft = () => {
-  const draft = localStorage.getItem("postDraft");
-  if (draft) {
-    const parsedDraft = JSON.parse(draft);
-    if (confirm("임시저장된 게시물이 있습니다. 불러오시겠습니까?")) {
-      formData.value = parsedDraft;
-    }
-  }
-};
-
 // 미디어 입력 필드 중 하나라도 값이 있는지 확인하는 computed 속성
 const isAnyMediaFieldPopulated = computed(() => {
   return (
@@ -554,7 +523,7 @@ const submitPost = async () => {
       authorId: loginStore.getUserId,
       title: formData.value.title.trim(),
       category: formData.value.category,
-      content: formData.value.content.trim(),
+      content: JSON.stringify(formData.value.content),
       imageUrl: formData.value.imageUrl || null,
       videoUrl: formData.value.videoUrl || null,
       shortUrl: formData.value.shortsUrl || null,
@@ -578,9 +547,6 @@ const submitPost = async () => {
     isSubmitting.value = false;
   }
 };
-
-// 컴포넌트 마운트 시 임시저장 데이터 확인
-loadDraft();
 
 // 미디어 필드 값 변경 감지 및 다른 필드 초기화
 watch(

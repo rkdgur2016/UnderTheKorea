@@ -1,5 +1,7 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+import { quillEditor } from "vue3-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import "@/assets/style.css";
 import App from "./App.vue";
 import router from "@/router";
@@ -9,6 +11,7 @@ const app = createApp(App); // Vue 앱 인스턴스를 먼저 생성
 
 app.use(pinia); // Pinia를 먼저 연결
 app.use(router); // 그 다음 라우터를 연결 (또는 순서 바꿔도 무방, 중요!)
+app.use(quillEditor);
 
 app.directive("focus", {
   mounted(el) {

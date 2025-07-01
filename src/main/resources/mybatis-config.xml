@@ -16,6 +16,7 @@
         <typeAlias alias="Votes" type="com.UnderTheKorea.web.domain.Votes"/>
         <typeAlias alias="ResponseVotes" type="com.UnderTheKorea.web.domain.ResponseVotes"/>
         <typeAlias alias="Likes" type="com.UnderTheKorea.web.domain.Likes"/>
+        <typeAlias alias="Schedule" type="com.UnderTheKorea.web.domain.Schedule"/>
     </typeAliases>
     
 </configuration>

@@ -8,6 +8,9 @@ export default defineConfig({
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
+    optimizeDeps: {
+      include: ["@vueup/vue-quill"], // 이 줄을 추가합니다.
+    },
   },
   build: {
     outDir: "../src/main/resources/static", // 빌드하면 파일 저장되는 경로

@@ -104,21 +104,21 @@
             </p>
             <button
               @click="loginStore.logout()"
-              class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 shadow-md hover:shadow-lg"
+              class="bg-slate-700 hover:bg-slate-900 text-white px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 shadow-md hover:shadow-lg"
             >
               로그아웃
             </button>
           </div>
           <div v-else class="flex items-center space-x-4">
             <button
-              @click=" modalStore.openLogin()"
+              @click="modalStore.openLogin()"
               class="text-slate-700 hover:text-gray-600 px-4 py-2 text-sm font-medium transition-colors duration-200"
             >
               로그인
             </button>
             <button
               @click="modalStore.openSignup()"
-              class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 shadow-md hover:shadow-lg"
+              class="bg-slate-700 hover:bg-slate-900 text-white px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 shadow-md hover:shadow-lg"
             >
               회원가입
             </button>
@@ -181,7 +181,8 @@
             사회
           </router-link>
           <router-link
-            :to="{ path: '/BalanceGame' }" class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
+            :to="{ path: '/BalanceGame' }"
+            class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
             :class="{ 'text-gray-600': activeNav === '광장' }"
             @click="setActiveNav('광장')"
           >
@@ -238,7 +239,7 @@
       </div>
     </div>
   </header>
-  </template>
+</template>
 
 <script setup>
 import { ref, onMounted } from "vue";
@@ -260,7 +261,6 @@ const setActiveNav = (nav) => {
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value;
 };
-
 </script>
 
 <style scoped>
@@ -281,5 +281,4 @@ const toggleMobileMenu = () => {
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
-
 </style>
