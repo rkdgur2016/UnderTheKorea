@@ -1,0 +1,115 @@
+(StartupInfoLogger.java:53) - Starting UnderTheKoreaApplication using Java 17.0.12 with PID 34960 (C:\Web_Dev\Spring_\Spring_workspace\UnderTheKorea\bin\main started by kevin in C:\Web_Dev\Spring_\Spring_workspace\UnderTheKorea)
+(StartupInfoLogger.java:54) - Running with Spring Boot v3.4.5, Spring v6.2.6
+(SpringApplication.java:652) - No active profile set, falling back to 1 default profile: "default"
+(TomcatWebServer.java:111) - Tomcat initialized with port 80 (http)
+(DirectJDKLog.java:168) - Initializing ProtocolHandler ["http-nio-80"]
+(DirectJDKLog.java:168) - Starting service [Tomcat]
+(DirectJDKLog.java:168) - Starting Servlet engine: [Apache Tomcat/10.1.40]
+(DirectJDKLog.java:168) - Initializing Spring embedded WebApplicationContext
+(ServletWebServerApplicationContext.java:301) - Root WebApplicationContext: initialization completed in 709 ms
+(WelcomePageHandlerMapping.java:59) - Adding welcome page: class path resource [static/index.html]
+(DirectJDKLog.java:168) - Starting ProtocolHandler ["http-nio-80"]
+(TomcatWebServer.java:243) - Tomcat started on port 80 (http) with context path '/'
+(StartupInfoLogger.java:59) - Started UnderTheKoreaApplication in 1.496 seconds (process running for 2.714)
+(DirectJDKLog.java:168) - Initializing Spring DispatcherServlet 'dispatcherServlet'
+(FrameworkServlet.java:532) - Initializing Servlet 'dispatcherServlet'
+(FrameworkServlet.java:554) - Completed initialization in 2 ms
+(DirectJDKLog.java:168) - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [193] milliseconds.
+(PostServiceImpl.java:55) - ┌───────────────────────────────────
+(PostServiceImpl.java:56) - │ 게시물 service : 포스팅 불러오기 
+(PostServiceImpl.java:57) - └───────────────────────────────────
+(PostServiceImpl.java:59) - ┌ 1. 카테고리 : 정치
+(PostServiceImpl.java:60) - │ 2. pageNo : 0
+(HikariDataSource.java:109) - HikariPool-1 - Starting...
+(HikariPool.java:554) - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@480b7f25
+(HikariDataSource.java:122) - HikariPool-1 - Start completed.
+(PostServiceImpl.java:64) - └ outVO : Posts [postId=38, authorId=1, title=실체가 하나씩 하나씩 드러납니다, category=정치, content=가만히 생각해보니 정치는 빨강과 파랑이 싸우다가 뒤에서 소주 까면서 오늘 어땠냐는 말이 있는데
+윤석열 진짜 외로웠을 듯... 사실 이지경까지 온 게 국민의 힘 탓도 있음.
+저런 사람이 대통령 됐는데 힘을 안씀. 아마 지들 마음에 안든다고 안도와줬을거임.
+그런데 지금 진짜 큰일날 것 같으니까 말그대로 발등에 불 떨어지니까 그제서야 들고 일어나는거임.
+진짜 민주당이나 국힘이나 둘 다 마음에 안듦.
+윤대통령 국힘도 싫다고 했던 녹취록도 있음., imageUrl=null, videoUrl=https://www.youtube.com/watch?v=wcMyP0sPQ2Q, shortUrl=null, createdAt=2025-06-15 03:44:54.356301+09, updatedAt=2025-06-15 03:44:54.356301+09, viewCount=0, likeCount=1, toString()=com.UnderTheKorea.web.domain.Posts@4163da4a] - 성공(1)/실패(0)
+(PostServiceImpl.java:64) - └ outVO : Posts [postId=35, authorId=dfmaks123, title=검찰청 폐지가 무슨 의미인지 알아?, category=정치, content=검찰청 없애고  중수청(중대범죄수사청) 신설하는데 문제가 있냐 라고 하는데
+눈높이 설명이 있어서 가져와봤다.
+
+교육청 → 검정고시청: 정규교육 시스템(학교, 대학)을 없애고 자격시험만으로 교육을 관리하겠다는 식
+
+과학기술부서 → 이공계부서: 상위 정책 수립·지원 기관을 없애고 단편적 실행 기관만 남기겠다는 식
+
+의학부 → 간호조무사청: 진료 총괄 권한을 의사에서 간호조무사에게 주겠다는 식
+
+교수청 → 교사청: 고등교육을 담당하는 교수조직을 없애고 중등교육 수준에서 전부 관리하겠다는 식
+
+그러니까 고등 기관이 떡하니 있는데 하위기관 신설하고 고등기관 편입시켜서 관리하겠다는거임
+권력 문제가 가장 큼.
+정부 관리하에 있는 기관임.
+검찰청도 정부 관리하에 있는 기관 아니였냐?
+이런 무식한 소리할거면 그냥 말을 말아라..
+
+검찰청은 수사권과 기소권을 가진 기관으로, 법무부 산하에 있지만 어느 정도의 독립성을 보장받으며
+"권력 감시 기능"을 해옴.
+그런데 중수청 신설하면서 검찰은 기소권만을 갖고 중수청이 수사권을 가져감.
+그럼 검찰이 기소(야 여기 사건!)하면 중수청이 (어 이거 수사해볼게) 해야되는데 정부가 마음에 안들면 수사 안할 수도 있는거임. 그러니까 부패가 늘어나겠지.., imageUrl=https://file2.nocutnews.co.kr/newsroom/image/2025/06/12/202506120620421246_0.jpg, videoUrl=null, shortUrl=null, createdAt=2025-06-13 08:07:14.028236+09, updatedAt=2025-06-13 08:07:14.028236+09, viewCount=0, likeCount=1, toString()=com.UnderTheKorea.web.domain.Posts@1d7c892d] - 성공(1)/실패(0)
+(PostServiceImpl.java:64) - └ outVO : Posts [postId=28, authorId=1, title=강유정 대변인 대통령실 브리핑, category=정치, content=아니 너네 질문을 받는 입장이 맞잖아. 
+설사 니네 마음에 안드는 질문 한다고 해도 왜 기자랑 기싸움을 하는거냐?
+좌빨 댓글 그만 봐야겠다 진짜로, imageUrl=null, videoUrl=https://www.youtube.com/watch?v=ZdWv6F_pA1w, shortUrl=null, createdAt=2025-06-11 11:59:22.913702+09, updatedAt=2025-06-11 11:59:22.913702+09, viewCount=0, likeCount=0, toString()=com.UnderTheKorea.web.domain.Posts@322f9784] - 성공(1)/실패(0)
+(PostServiceImpl.java:64) - └ outVO : Posts [postId=27, authorId=1, title=그라운드C 표지 어그로 심하네, category=정치, content=그라운드C 표지 어그로 심하네 라고 생각하고 들어가서 봤다.
+1시간 30분 동안 화만 잔뜩 났다.
+
+1. 언론3법 : 언론탄압(거슬리면 제제 때리겠다)
+
+2. 강유정 대변인 대통령실 브리핑 : 브리핑 나와서 언론이랑 기싸움 러시안 룰렛 갈기는 튼튼한 대변인 (눈썹 위트까지...) 댓글이 더 가관이다.
+
+3. 소비자 탄소세 :
+경제박살(탄소가 발생하는 모든 행위에 세금부과 -> 모든 물품에 가격인상 -> 실질적인 소비하락 -> 화폐가치 하락 -> 수입물가 상승) 
+
+4. 디지털세 : 이게 제일 어이없음. 디지털 플랫폼에서 매출대비 세금을 걷겠다. '좋아요 누르는 행위'를 노동으로 간주한다.
+좋아요 누름 -> 네트워크 효과로 인해 규모가 디지털 플랫폼의 커지고 수익이 늘어남 -> 하지만 그 수익이 노동자(좋아요를 누른 사람)에게는 돌아오지 않음 -> 그걸 나누겠다.
+
+5. 대북송금... 할 말 없다., imageUrl=null, videoUrl=https://www.youtube.com/watch?v=zr1Xjy3ebhQ, shortUrl=null, createdAt=2025-06-11 11:56:23.721361+09, updatedAt=2025-06-11 11:56:23.721361+09, viewCount=0, likeCount=0, toString()=com.UnderTheKorea.web.domain.Posts@7b1a27c5] - 성공(1)/실패(0)
+(PostServiceImpl.java:64) - └ outVO : Posts [postId=2, authorId=1, title=정치 양극화 해소, 소통과 공감의 정치 기대, category=정치, content=현재 한국 사회는 극심한 정치적 양극화로 인해 많은 사회적 비용을 치르고 있습니다. 서로 다른 이념과 가치를 가진 집단들이 대립하며 건설적인 논의가 어려워지고 있습니다. 이제는 이분법적 사고방식에서 벗어나 상호 존중과 이해를 바탕으로 하는 소통의 장이 필요합니다. 국민의 목소리에 귀 기울이고, 사회적 약자를 포용하는 정치, 그리고 미래를 위한 합리적인 대안을 제시하는 정치를 기대합니다. 통합과 화합의 리더십이 절실한 시점입니다. 이를 통해 사회적 갈등을 줄이고, 생산적인 합의를 도출해 나갈 수 있어야 합니다., imageUrl=https://img.hankyung.com/photo/202204/AA.29528645.1.jpg, videoUrl=null, shortUrl=null, createdAt=2025-06-04 13:25:57.201598+09, updatedAt=2025-06-04 13:25:57.201598+09, viewCount=0, likeCount=1, toString()=com.UnderTheKorea.web.domain.Posts@6dcc6743] - 성공(1)/실패(0)
+(PostServiceImpl.java:64) - └ outVO : Posts [postId=7, authorId=1, title=정책 결정 과정의 투명성 강화 방안 제안, category=정치, content=정부의 정책 결정 과정은 국민의 삶에 직접적인 영향을 미치므로, 그 투명성이 매우 중요합니다. 정책 입안 단계부터 시민들의 의견을 적극적으로 수렴하고, 결정 과정과 근거를 명확하게 공개하여 신뢰를 높여야 합니다. 또한, 특정 이해집단의 영향력을 배제하고 공정하고 합리적인 의사결정이 이루어질 수 있도록 제도적 장치를 강화해야 합니다. 투명하고 공정한 정책 결정은 국민의 지지를 얻는 중요한 기반이 됩니다. 이는 정부와 국민 간의 신뢰를 구축하는 데 필수적입니다., imageUrl=null, videoUrl=https://www.youtube.com/watch?v=JSdlqs3fmYs, shortUrl=null, createdAt=2025-06-04 13:25:57.201598+09, updatedAt=2025-06-04 13:25:57.201598+09, viewCount=0, likeCount=1, toString()=com.UnderTheKorea.web.domain.Posts@1400ae36] - 성공(1)/실패(0)
+(PostController.java:33) - 로딩된 포스트 개수 : 6
+(UserController.java:33) - loginRequest : 1
+(UserServiceImpl.java:54) - ┌───────────────────────────────────
+(UserServiceImpl.java:55) - │ UserServiceImpl() : login 
+(UserServiceImpl.java:56) - └───────────────────────────────────
+(UserServiceImpl.java:58) - ┌ 1. id : 1
+(UserServiceImpl.java:59) - │ 2. pw : 1
+(UserServiceImpl.java:62) - └ 3. outVO : Users [serialNo=0, grade=1, userId=1, password=1, userName=관리자, createdAt=2025-06-04 13:25:19.782185+09, updatedAt=2025-06-04 13:25:19.782185+09, rememberMe=false, toString()=com.UnderTheKorea.web.domain.Users@3dce49fd]
+(UserController.java:46) - □ (세션) 일반 로그인: 세션 만료 시간 30분으로 설정.
+(CommentServiceImpl.java:54) - ┌─────────────────────────────────────────
+(CommentServiceImpl.java:55) - │ 댓글 Service :  전체 댓글 불러오기 
+(CommentServiceImpl.java:56) - │ 1. postId : 38
+(CommentServiceImpl.java:57) - └─────────────────────────────────────────
+(PollServiceImpl.java:53) - ┌───────────────────────────────────
+(PollServiceImpl.java:54) - │ 투표 service : 투표 불러오기
+(PollServiceImpl.java:55) - └───────────────────────────────────
+(PollServiceImpl.java:58) - └ outVO : Polls [pollId=48, postId=38, userId=1, title=실체가 하나씩 하나씩 드러납니다, option1=외로웠을 것 같다., option2=그래도 계엄은 심했다., option3=null, option4=null, createdAt=2025-06-17 10:07:49.748897+09, updatedAt=2025-06-17 10:07:49.748897+09, toString()=com.UnderTheKorea.web.domain.Polls@35052473]
+(LikeServiceImpl.java:62) - ┌───────────────────────────────────
+(LikeServiceImpl.java:63) - │ LikeServiceImpl() : isLikedCheck 
+(LikeServiceImpl.java:64) - │ 1. postId : 38
+(LikeServiceImpl.java:65) - │ 2. userId : 1
+(LikeServiceImpl.java:69) - │3. outVO : 1 - 성공(1)/실패(0)
+(LikeServiceImpl.java:70) - └───────────────────────────────────
+(VoteServiceImpl.java:79) - ┌───────────────────────────────────────────
+(VoteServiceImpl.java:80) - │ 투표(Vote) service : 유저의 투표 로딩
+(VoteServiceImpl.java:81) - │ 1. pollId : 48
+(VoteServiceImpl.java:82) - └───────────────────────────────────────────
+(VoteServiceImpl.java:85) - outVO : ResponseVotes [totalCount=8, agreeCount=7, disagreeCount=1, toString()=com.UnderTheKorea.web.domain.ResponseVotes@78f4d2bc]
+(VoteServiceImpl.java:59) - ┌───────────────────────────────────────────
+(VoteServiceImpl.java:60) - │ 투표(Vote) service : 유저의 투표 여부 확인
+(VoteServiceImpl.java:61) - │ 1. pollId : 48
+(VoteServiceImpl.java:62) - │ 2. userId : 1
+(VoteServiceImpl.java:63) - └───────────────────────────────────────────
+(VoteServiceImpl.java:66) - outVO : 1
+(PollController.java:65) - hasVoted : true
+(PollController.java:66) - vote : ResponseVotes [totalCount=8, agreeCount=7, disagreeCount=1, toString()=com.UnderTheKorea.web.domain.ResponseVotes@78f4d2bc]
+(PollController.java:77) - response : {hasVoted=true, hasLiked=true, poll=Polls [pollId=48, postId=38, userId=1, title=실체가 하나씩 하나씩 드러납니다, option1=외로웠을 것 같다., option2=그래도 계엄은 심했다., option3=null, option4=null, createdAt=2025-06-17 10:07:49.748897+09, updatedAt=2025-06-17 10:07:49.748897+09, toString()=com.UnderTheKorea.web.domain.Polls@35052473], vote=ResponseVotes [totalCount=8, agreeCount=7, disagreeCount=1, toString()=com.UnderTheKorea.web.domain.ResponseVotes@78f4d2bc]}
+(SpringApplicationAdminMXBeanRegistrar.java:159) - Application shutdown requested.
+(GracefulShutdown.java:54) - Commencing graceful shutdown. Waiting for active requests to complete
+(DirectJDKLog.java:168) - Pausing ProtocolHandler ["http-nio-80"]
+(GracefulShutdown.java:76) - Graceful shutdown complete
+(DirectJDKLog.java:168) - Stopping ProtocolHandler ["http-nio-80"]
+(HikariDataSource.java:349) - HikariPool-1 - Shutdown initiated...
+(HikariDataSource.java:351) - HikariPool-1 - Shutdown completed.
