@@ -140,7 +140,7 @@
             <label class="block text-sm font-medium text-slate-700 mb-2">
               본문 <span class="text-red-500">*</span>
             </label>
-            <quill-editor
+            <QuillEditor
               ref="quill"
               theme="snow"
               v-model:content="formData.content"
@@ -150,7 +150,7 @@
             <div class="flex justify-between mt-1">
               <p class="text-xs text-slate-500">
                 자유롭게 게시물을 작성해주세요.
-              </p>
+              </p><pre> {{ content }} </pre>
             </div>
           </div>
         </div>
@@ -396,7 +396,8 @@ import { ref, computed, watch, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useLoginStore } from "@/stores/loginStore.js";
 import { useModalStore } from "@/stores/modalStore";
-import { quillEditor } from "vue3-quill";
+import { QuillEditor } from '@vueup/vue-quill';
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import axios from "axios";
 
 const router = useRouter();
@@ -405,11 +406,14 @@ const modalStore = useModalStore();
 
 const quill = ref(null);
 
+const content = ref({
+  ops: [{ insert: '\n' }]
+})
+
 // 폼 데이터
 const formData = ref({
   title: "",
   category: "",
-  content: { ops: [{ insert: "\n" }] }, // 초기값은 Quill Delta 형식
   imageUrl: "",
   videoUrl: "",
   shortsUrl: "",
@@ -544,7 +548,7 @@ const submitPost = async () => {
       authorId: loginStore.getUserId,
       title: formData.value.title.trim(),
       category: formData.value.category,
-      content: JSON.stringify(formData.value.content),
+      content: JSON.stringify(content.value),
       imageUrl: formData.value.imageUrl || null,
       videoUrl: formData.value.videoUrl || null,
       shortUrl: formData.value.shortsUrl || null,
@@ -572,7 +576,7 @@ const submitPost = async () => {
 // 미디어 필드 값 변경 감지 및 다른 필드 초기화
 watch(
   () => formData.value.imageUrl,
-  (newValue, oldValue) => {
+  (newValue) => {
     if (newValue && newValue.trim() !== "") {
       formData.value.videoUrl = "";
       formData.value.shortsUrl = "";
@@ -584,7 +588,7 @@ watch(
 
 watch(
   () => formData.value.videoUrl,
-  (newValue, oldValue) => {
+  (newValue) => {
     if (newValue && newValue.trim() !== "") {
       formData.value.imageUrl = "";
       formData.value.shortsUrl = "";
@@ -596,7 +600,7 @@ watch(
 
 watch(
   () => formData.value.shortsUrl,
-  (newValue, oldValue) => {
+  (newValue) => {
     if (newValue && newValue.trim() !== "") {
       formData.value.imageUrl = "";
       formData.value.videoUrl = "";
@@ -607,7 +611,7 @@ watch(
 );
 
 // `imagePreview` (파일 업로드) 변경 감지
-watch(imagePreview, (newValue, oldValue) => {
+watch(imagePreview, (newValue) => {
   if (newValue !== "") {
     // 이미지가 업로드되면
     formData.value.imageUrl = ""; // URL 입력 필드 초기화
@@ -616,15 +620,11 @@ watch(imagePreview, (newValue, oldValue) => {
   }
 });
 
-watch(
-  () => formData.value.content,
-  (newValue) => {
+watch(() => formData.value.content, (newValue) => {
     console.log("Quill Editor content (Delta):", newValue);
-    // 필요하다면 HTML로 변환하여 출력
-    // const quill = this.$refs.quill.getQuill(); // 'this'는 setup에서는 사용 불가
-    console.log("Quill Editor content (HTML):", quill.root.innerHTML);
-  },
-  { deep: true } // 객체 내부 변경 감지를 위해 deep 옵션 필수
+    content.value = newValue
+    console.log("content : ", content)
+  },{ deep: true } // 객체 내부 변경 감지를 위해 deep 옵션 필수
 );
 </script>
 

@@ -9,7 +9,7 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
     optimizeDeps: {
-      include: ["@vueup/vue-quill"], // 이 줄을 추가합니다.
+      include: ["@vueup/vue-quill"],
     },
   },
   build: {
