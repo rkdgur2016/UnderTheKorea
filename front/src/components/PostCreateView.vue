@@ -150,7 +150,8 @@
             <div class="flex justify-between mt-1">
               <p class="text-xs text-slate-500">
                 자유롭게 게시물을 작성해주세요.
-              </p><pre> {{ content }} </pre>
+              </p>
+              <pre> {{ content }} </pre>
             </div>
           </div>
         </div>
@@ -396,8 +397,8 @@ import { ref, computed, watch, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useLoginStore } from "@/stores/loginStore.js";
 import { useModalStore } from "@/stores/modalStore";
-import { QuillEditor } from '@vueup/vue-quill';
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import axios from "axios";
 
 const router = useRouter();
@@ -407,8 +408,8 @@ const modalStore = useModalStore();
 const quill = ref(null);
 
 const content = ref({
-  ops: [{ insert: '\n' }]
-})
+  ops: [{ insert: "\n" }],
+});
 
 // 폼 데이터
 const formData = ref({
@@ -435,26 +436,6 @@ onMounted(() => {
 const isSubmitting = ref(false);
 const imagePreview = ref("");
 const fileInput = ref(null);
-
-const contentLength = computed(() => {
-  if (formData.value.content && formData.value.content.ops) {
-    // Delta 객체에서 텍스트 내용만 추출합니다.
-    // Quill의 getText()와 유사하게 텍스트 길이를 계산합니다.
-    let text = "";
-    formData.value.content.ops.forEach(op => {
-      if (typeof op.insert === 'string') {
-        text += op.insert;
-      }
-    });
-    // 마지막 개행 문자는 보통 길이에 포함하지 않습니다. (Quill의 getText() 동작과 유사)
-    // 텍스트가 비어있지 않고 마지막이 개행 문자라면 제거
-    if (text.length > 0 && text[text.length - 1] === '\n') {
-      text = text.slice(0, -1);
-    }
-    return text.length;
-  }
-  return 0;
-});
 
 // 폼 유효성 검사
 const isFormValid = computed(() => {
@@ -620,11 +601,14 @@ watch(imagePreview, (newValue) => {
   }
 });
 
-watch(() => formData.value.content, (newValue) => {
+watch(
+  () => formData.value.content,
+  (newValue) => {
     console.log("Quill Editor content (Delta):", newValue);
-    content.value = newValue
-    console.log("content : ", content)
-  },{ deep: true } // 객체 내부 변경 감지를 위해 deep 옵션 필수
+    content.value = newValue;
+    console.log("content : ", content);
+  },
+  { deep: true } // 객체 내부 변경 감지를 위해 deep 옵션 필수
 );
 </script>
 

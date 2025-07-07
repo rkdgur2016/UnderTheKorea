@@ -69,18 +69,6 @@
             ></span>
           </router-link>
           <router-link
-            :to="{ path: '/BalanceGame', query: { category: '광장' } }"
-            class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
-            :class="{ 'text-gray-600': activeNav === '광장' }"
-            @click="setActiveNav('광장')"
-          >
-            광장
-            <span
-              class="absolute bottom-0 left-0 w-0 h-0.5 bg-gray-600 transition-all duration-300 group-hover:w-full"
-              :class="{ 'w-full': activeNav === '광장' }"
-            ></span>
-          </router-link>
-          <router-link
             :to="{ path: '/motto', query: { category: '좌우명' } }"
             class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
             :class="{ 'text-gray-600': activeNav === '좌우명' }"
@@ -179,18 +167,6 @@
             @click="setActiveNav('사회')"
           >
             사회
-          </router-link>
-          <router-link
-            :to="{ path: '/BalanceGame' }"
-            class="text-slate-700 hover:text-gray-600 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
-            :class="{ 'text-gray-600': activeNav === '광장' }"
-            @click="setActiveNav('광장')"
-          >
-            광장
-            <span
-              class="absolute bottom-0 left-0 w-0 h-0.5 bg-gray-600 transition-all duration-300 group-hover:w-full"
-              :class="{ 'w-full': activeNav === '광장' }"
-            ></span>
           </router-link>
           <router-link
             :to="{ path: '/motto', query: { category: '좌우명' } }"

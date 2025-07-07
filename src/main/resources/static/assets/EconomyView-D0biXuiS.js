@@ -1,0 +1,1 @@
+import{P as s}from"./PostView-EDMpbF5U.js";import{_ as p,c as i,o as n}from"./index-2_9adeeu.js";const a={__name:"EconomyView",emits:["open-detail"],setup(m,{emit:r}){return(o,e)=>(n(),i(s,{posts:o.philosophyPosts,onOpenDetail:e[0]||(e[0]=t=>o.$emit("open-detail",t))},null,8,["posts"]))}},c=p(a,[["__scopeId","data-v-4091106b"]]);export{c as default};
