@@ -151,7 +151,7 @@
               <p class="text-xs text-slate-500">
                 자유롭게 게시물을 작성해주세요.
               </p>
-              <pre> {{ content }} </pre>
+              <pre> {{ formData.content }} </pre>
             </div>
           </div>
         </div>
@@ -405,12 +405,6 @@ const router = useRouter();
 const loginStore = useLoginStore();
 const modalStore = useModalStore();
 
-const quill = ref(null);
-
-const content = ref({
-  ops: [{ insert: "\n" }],
-});
-
 // 폼 데이터
 const formData = ref({
   title: "",
@@ -529,7 +523,7 @@ const submitPost = async () => {
       authorId: loginStore.getUserId,
       title: formData.value.title.trim(),
       category: formData.value.category,
-      content: JSON.stringify(content.value),
+      content: JSON.stringify(formData.value.content),
       imageUrl: formData.value.imageUrl || null,
       videoUrl: formData.value.videoUrl || null,
       shortUrl: formData.value.shortsUrl || null,
@@ -600,16 +594,6 @@ watch(imagePreview, (newValue) => {
     formData.value.shortsUrl = "";
   }
 });
-
-watch(
-  () => formData.value.content,
-  (newValue) => {
-    console.log("Quill Editor content (Delta):", newValue);
-    content.value = newValue;
-    console.log("content : ", content);
-  },
-  { deep: true } // 객체 내부 변경 감지를 위해 deep 옵션 필수
-);
 </script>
 
 <style scoped>
